@@ -1,0 +1,12 @@
+/target
+*.class
+Thumbs.db
+.classpath*
+/bin
+*.java.hsp
+.DS_Store
+.springBeans
+.externalToolBuilders
+/src/main/resources/dev/config.properties
+/src/main/resources/dev/log4j.xml
+/src/main/java/rebel.xml
