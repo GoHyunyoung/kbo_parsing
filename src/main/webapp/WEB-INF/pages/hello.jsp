@@ -7,10 +7,12 @@
 	<link rel="stylesheet" href="/resources/assets/bootstrap-3.3.4/css/bootstrap.min.css">
 </head>
 <body>
+dsdsdsds
 	<div class="container">
 		<div class="jumbotron">
 			<h1>${message}</h1>
-			<p>Resize this responsive page to see the effect!</p>
+			<h1>${msg}</h1>
+			<p>Resize!!!~~~~~~~~~~~~ this responsive page to see the effect!</p>
 		</div>
 		<div class="row">
 			<div class="col-sm-4">
