@@ -5,8 +5,10 @@ Thumbs.db
 /bin
 *.java.hsp
 .DS_Store
+.idea
+myspring.iml
 .springBeans
 .externalToolBuilders
-/src/main/resources/dev/config.properties
-/src/main/resources/dev/log4j.xml
-/src/main/java/rebel.xml
+src/main/resources/dev/config.properties
+src/main/resources/dev/log4j.xml
+src/main/resources/rebel.xml

@@ -12,7 +12,7 @@ dsdsdsds
 		<div class="jumbotron">
 			<h1>${message}</h1>
 			<h1>${msg}</h1>
-			<p>Resize!!!~~~~~~~~~~~~ this responsive page to see the effect!</p>
+			<p>Resize!!! tttttttttttthis responsive page to see the effect!</p>
 		</div>
 		<div class="row">
 			<div class="col-sm-4">
