@@ -1,5 +1,8 @@
 package link.springapp.mvc;
 
+import link.springapp.mvc.domain.User;
+import link.springapp.mvc.service.UserService;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,8 +26,11 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
                 "file:src/main/resources/spring.xml"
         }
 )
-public class AppTests {
+public class UserTests {
     private MockMvc mockMvc;
+
+    @Autowired
+    private UserService userService;
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
@@ -36,14 +42,8 @@ public class AppTests {
     }
 
     @Test
-    public void simple() throws Exception {
-        mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("hello"));
-    }
-
-    @Test
     public void mytest() {
-        System.out.println("Hello world");
+        User user = userService.getUser(1);
+        Assert.assertEquals(user.getEmail(), "user1!!!!@example.com");
     }
 }
