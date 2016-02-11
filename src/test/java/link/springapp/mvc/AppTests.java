@@ -1,5 +1,8 @@
 package link.springapp.mvc;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +12,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.io.IOException;
+import java.util.Iterator;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,6 +50,18 @@ public class AppTests {
 
     @Test
     public void mytest() {
-        System.out.println("Hello world");
+//        System.out.println("Hello world");
+        try {
+            Document doc = Jsoup.connect("http://www.koreabaseball.com/Schedule/Game/BoxScore.aspx?leagueId=1&seriesId=0&gameId=20150328NCOB0&gyear=2015").get();
+            Iterator<Element> iterator = doc.select("table#xtable1").get(0).select("tbody tr").iterator();
+//                    .select("table:eq(0)").iterator();
+            while(iterator.hasNext())
+                System.out.println(iterator.next());
+//            String str = doc.select("table#xtable1 tbody tr:eq(0) th.name").toString();
+//            str.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
