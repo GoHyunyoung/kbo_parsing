@@ -12,3 +12,5 @@ myspring.iml
 src/main/resources/dev/config.properties
 src/main/resources/dev/log4j.xml
 src/main/resources/rebel.xml
+.ipynb_checkpoints/UrlParsing-checkpoint.ipynb
+/.ipynb_checkpoints
