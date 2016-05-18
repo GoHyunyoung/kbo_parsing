@@ -1,8 +1,4 @@
-
 # coding: utf-8
-
-# In[1]:
-
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -21,9 +17,6 @@ import random as rd
 import time
 import urllib2
 import sys
-
-
-# In[7]:
 
 class UrlParser:
 #     초기화때 날짜를 입력(박스스코어 확인 날짜)
