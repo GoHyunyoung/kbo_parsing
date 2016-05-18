@@ -1,4 +1,8 @@
+
 # coding: utf-8
+
+# In[1]:
+
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -9,7 +13,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 
-from BoxScoreParser import BoxScoreParser
 import datetime
 import numpy  as np
 import pandas as pd
@@ -17,6 +20,9 @@ import random as rd
 import time
 import urllib2
 import sys
+
+
+# In[1]:
 
 class UrlParser:
 #     초기화때 날짜를 입력(박스스코어 확인 날짜)
@@ -34,7 +40,7 @@ class UrlParser:
 #         print 'back 횟수 : ',backCount
 
             # 크롬창 
-        browser = webdriver.Chrome(executable_path='/home/gohyunyoung98/Documents/Github/kbo_parsing/chromedriver')
+        browser = webdriver.Chrome(executable_path='./chromedriver')
         # 접속
         browser.get('http://www.koreabaseball.com/Schedule/ScoreBoard/ScoreBoard.aspx')
 

@@ -9,20 +9,20 @@
     <meta content="" name="author">
     <!— BEGIN GLOBAL MANDATORY STYLES —>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css">
-    <link href="./assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="./assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css">
-    <link href="./assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="./assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
+    <link href="./metronic_v3.3.0/theme/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="./metronic_v3.3.0/theme/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css">
+    <link href="./metronic_v3.3.0/theme/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="./metronic_v3.3.0/theme/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
     <!— END GLOBAL MANDATORY STYLES —>
     <!— BEGIN PAGE LEVEL STYLES —>
-    <link href="./assets/admin/pages/css/timeline.css" rel="stylesheet" type="text/css">
+    <link href="./metronic_v3.3.0/theme/assets/admin/pages/css/timeline.css" rel="stylesheet" type="text/css">
     <!— END PAGE LEVEL STYLES —>
     <!— BEGIN THEME STYLES —>
-    <link href="./assets/global/css/components.css" rel="stylesheet" type="text/css">
-    <link href="./assets/global/css/plugins.css" rel="stylesheet" type="text/css">
-    <link href="./assets/admin/layout3/css/layout.css" rel="stylesheet" type="text/css">
-    <link href="./assets/admin/layout3/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color">
-    <link href="./assets/admin/layout3/css/custom.css" rel="stylesheet" type="text/css">
+    <link href="./metronic_v3.3.0/theme/assets/global/css/components.css" rel="stylesheet" type="text/css">
+    <link href="./metronic_v3.3.0/theme/assets/global/css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="./metronic_v3.3.0/theme/assets/admin/layout3/css/layout.css" rel="stylesheet" type="text/css">
+    <link href="./metronic_v3.3.0/theme/assets/admin/layout3/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color">
+    <link href="./metronic_v3.3.0/theme/assets/admin/layout3/css/custom.css" rel="stylesheet" type="text/css">
     <!— END THEME STYLES —>
     <link rel="shortcut icon" href="favicon.ico">
 </head>
@@ -49,7 +49,7 @@
                                 경기 큰제목
                             </h2>
                             <div class="timeline-content">
-                                <img class="timeline-img pull-left" src="./assets/admin/pages/media/blog/2.jpg" alt="">
+                                <img class="timeline-img pull-left" src="./metronic_v3.3.0/theme/assets/admin/pages/media/blog/2.jpg" alt="">
                                 Ricebean black-eyed pea maize scallion green bean spinach cabbage jicama bell pepper carrot onion corn plantain garbanzo. Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Parsley amaranth tigernut silver beet maize fennel spinach. Ricebean black-eyed pea maize scallion green bean spinach cabbage jicama bell pepper carrot onion corn plantain garbanzo.
                             </div>
                             <div class="timeline-footer">
@@ -70,7 +70,7 @@
                         <div class="timeline-body">
                             <h2>Management Meeting</h2>
                             <div class="timeline-content">
-                                <img class="timeline-img pull-right" src="./assets/admin/pages/media/blog/1.jpg" alt="">
+                                <img class="timeline-img pull-right" src="./metronic_v3.3.0/theme/assets/admin/pages/media/blog/1.jpg" alt="">
                                 Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi..
                             </div>
                             <div class="timeline-footer">
@@ -91,7 +91,7 @@
                         <div class="timeline-body">
                             <h2>New Project Launch</h2>
                             <div class="timeline-content">
-                                <img class="timeline-img pull-left" src="./assets/admin/pages/media/blog/3.jpg" alt="">
+                                <img class="timeline-img pull-left" src="./metronic_v3.3.0/theme/assets/admin/pages/media/blog/3.jpg" alt="">
                                 Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Pea sprouts wattle seed rutabaga okra yarrow cress avocado grape radish bush tomato ricebean. Pea sprouts wattle seed rutabaga okra yarrow cress avocado grape radish bush tomato ricebean.
                             </div>
                             <div class="timeline-footer">
@@ -114,14 +114,14 @@
                             <div class="timeline-content">
                                 <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 175px;"><div class="scroller" data-height="175px" data-always-visible="1" data-rail-visible1="1" data-initialized="1" style="overflow: hidden; width: auto; height: 175px;">
                                         <p>
-                                            <img class="timeline-img pull-right" src="./assets/admin/pages/media/blog/4.jpg" alt="">
+                                            <img class="timeline-img pull-right" src="./metronic_v3.3.0/theme/assets/admin/pages/media/blog/4.jpg" alt="">
                                             Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi. coriander bitterleaf epazote radicchio shallot winter purslane collard.
                                         </p>
                                         <p>
                                             Coriander bitterleaf epazote radicchio shallot winter purslane collard. Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi.
                                         </p>
                                         <p>
-                                            <img class="timeline-img pull-left" src="./assets/admin/pages/media/blog/6.jpg" alt=""> Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi radicchio shallot winter purslane collard greens spring onion squash lentil.
+                                            <img class="timeline-img pull-left" src="./metronic_v3.3.0/theme/assets/admin/pages/media/blog/6.jpg" alt=""> Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi radicchio shallot winter purslane collard greens spring onion squash lentil.
                                         </p>
                                         <p>
                                             Coriander bitterleaf epazote radicchio shallot winter purslane collard. Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi.
@@ -145,7 +145,7 @@
                         <div class="timeline-body">
                             <h2>Daily Feeds</h2>
                             <div class="timeline-content">
-                                <img class="timeline-img pull-left" src="./assets/admin/pages/media/blog/5.jpg" alt="">
+                                <img class="timeline-img pull-left" src="./metronic_v3.3.0/theme/assets/admin/pages/media/blog/5.jpg" alt="">
                                 Parsley amaranth tigernut silver beet maize fennel spinach. Ricebean black-eyed pea maize scallion green bean spinach cabbage jicama bell pepper carrot onion corn plantain garbanzo. Sierra leone bologi komatsuna celery peanut swiss chard silver beet squash dandelion maize chicory burdock tatsoi dulse radish wakame beetroot.
                             </div>
                             <div class="timeline-footer">
@@ -184,7 +184,7 @@
                         <div class="timeline-body">
                             <h2>Demo Europe 2013</h2>
                             <div class="timeline-content">
-                                <img class="timeline-img pull-left" src="./assets/admin/pages/media/blog/2.jpg" alt="">
+                                <img class="timeline-img pull-left" src="./metronic_v3.3.0/theme/assets/admin/pages/media/blog/2.jpg" alt="">
                                 Parsnip lotus root celery yarrow seakale tomato collard greens tigernut epazote ricebean melon tomatillo soybean chicory broccoli beet greens peanut salad. Lotus root burdock bell pepper chickweed shallot groundnut pea sprouts welsh onion wattle seed pea salsify turnip scallion peanut arugula bamboo shoot onion swiss chard.
                             </div>
                             <div class="timeline-footer">
