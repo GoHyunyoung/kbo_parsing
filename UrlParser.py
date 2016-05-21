@@ -1,8 +1,6 @@
-
 # coding: utf-8
 
 # In[1]:
-
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -21,9 +19,7 @@ import time
 import urllib2
 import sys
 
-
 # In[1]:
-
 class UrlParser:
 #     초기화때 날짜를 입력(박스스코어 확인 날짜)
     def __init__(self,date):
@@ -63,4 +59,3 @@ class UrlParser:
         #         이전일 버튼
                 browser.find_element_by_id('cphContainer_cphContents_btnPreDate').click()
                 time.sleep(1)
-
