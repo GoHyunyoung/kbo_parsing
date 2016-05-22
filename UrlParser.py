@@ -1,6 +1,8 @@
+
 # coding: utf-8
 
 # In[1]:
+
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -19,7 +21,9 @@ import time
 import urllib2
 import sys
 
-# In[1]:
+
+# In[5]:
+
 class UrlParser:
 #     초기화때 날짜를 입력(박스스코어 확인 날짜)
     def __init__(self,date):
@@ -36,7 +40,7 @@ class UrlParser:
 #         print 'back 횟수 : ',backCount
 
             # 크롬창 
-        browser = webdriver.Chrome(executable_path='./chromedriver')
+        browser = webdriver.Chrome(executable_path='/home/gohyunyoung98/apm_home/kbo_parsing/chromedriver')
         # 접속
         browser.get('http://www.koreabaseball.com/Schedule/ScoreBoard/ScoreBoard.aspx')
 
@@ -44,18 +48,16 @@ class UrlParser:
         for i in range(backCount):
         #     이전일 버튼
             browser.find_element_by_id('cphContainer_cphContents_btnPreDate').click()
-            time.sleep(1)
-        time.sleep(1)
-        btnList = browser.find_elements_by_css_selector('a[href^="/Schedule/Game/BoxScore.aspx?"]')
+            time.sleep(0.7)
+            
+            btnList = browser.find_elements_by_css_selector('a[href^="/Schedule/Game/BoxScore.aspx?"]')
+            for i in range(len(btnList)):
+#                 open in new Tab
+                btnList[i].send_keys(Keys.CONTROL+Keys.RETURN)
+                time.sleep(0.7)
+#                 switch window_handle to new Tab
+                browser.switch_to_window(browser.window_handles[1])
+                self.urlList.append(browser.current_url)
+                browser.close()
+                browser.switch_to_window(browser.window_handles[0])
 
-        for i in range(len(btnList)):
-        #     박스스코어 버튼
-            browser.find_elements_by_css_selector('a[href^="/Schedule/Game/BoxScore.aspx?"]')[i].click()
-            self.urlList.append(browser.current_url)
-            time.sleep(1)
-
-            browser.get('http://www.koreabaseball.com/Schedule/ScoreBoard/ScoreBoard.aspx')
-            for i in range(backCount):
-        #         이전일 버튼
-                browser.find_element_by_id('cphContainer_cphContents_btnPreDate').click()
-                time.sleep(1)
