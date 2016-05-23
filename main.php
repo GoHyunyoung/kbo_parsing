@@ -36,8 +36,8 @@
 <!-- BEGIN BODY -->
 <!-- DOC: Apply "page-header-menu-fixed" class to set the mega menu fixed  -->
 <!-- DOC: Apply "page-header-top-fixed" class to set the top menu fixed  -->
-
 <body>
+<script src="metronic_v3.3.0/"
 <?php
 $connect=mysqli_connect('link10th.cjwmbrma7nnv.ap-northeast-2.rds.amazonaws.com:3306','link10th','link1234');
 mysqli_select_db($connect,"link10th");
@@ -46,7 +46,9 @@ mysqli_select_db($connect,"link10th");
     <div class="portlet-body">
         <div class="row">
             <div class="col-md-12">
+
                 <ul class="timeline">
+            
                     <?php
                     $colorArr=array('yellow','red','blue','grey','green');
                     $sql="SELECT * FROM Article";
@@ -110,9 +112,5 @@ mysqli_select_db($connect,"link10th");
         </div>
     </div>
 </div>
-
-
-
-
 </body>
 </html>
