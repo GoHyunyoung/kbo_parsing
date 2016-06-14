@@ -46,65 +46,64 @@ mysqli_select_db($connect,"link10th");
     <div class="portlet-body">
         <div class="row">
             <div class="col-md-12">
-
                 <ul class="timeline">
-
                     <?php
+                    $tmp=0;
                     $colorArr=array('yellow','red','blue','grey','green');
                     $sql="SELECT * FROM Article";
                     $result=mysqli_query($connect,$sql);
                     //                    while_loop begin
                     while($row=mysqli_fetch_array($result)){
-                        if($row[date]==$tmp)
-                            $row[date]=null;
+                        if($row['date']==$tmp)
+                            $row['date']=null;
                         else
-                            $tmp=$row[date];
+                            $tmp=$row['date'];
                         $timeline_color=$colorArr[mt_rand(0,4)];
 
 //                        엠블럼img
-                        if($row[winTeam]=='삼성')
+                        if($row['winTeam']=='삼성')
                             $emblem='SS';
-                        elseif ($row[winTeam]=='한화')
+                        elseif ($row['winTeam']=='한화')
                             $emblem='HH';
-                        elseif ($row[winTeam]=='SK')
+                        elseif ($row['winTeam']=='SK')
                             $emblem='SK';
-                        elseif ($row[winTeam]=='KIA')
+                        elseif ($row['winTeam']=='KIA')
                             $emblem='HT';
-                        elseif ($row[winTeam]=='LG')
+                        elseif ($row['winTeam']=='LG')
                             $emblem='LG';
-                        elseif ($row[winTeam]=='두산')
+                        elseif ($row['winTeam']=='두산')
                             $emblem='OB';
-                        elseif ($row[winTeam]=='롯데')
+                        elseif ($row['winTeam']=='롯데')
                             $emblem='LT';
-                        elseif ($row[winTeam]=='넥센')
+                        elseif ($row['winTeam']=='넥센')
                             $emblem='WO';
-                        elseif ($row[winTeam]=='kt')
+                        elseif ($row['winTeam']=='kt')
                             $emblem='KT';
                         else
                             $emblem='NC';
                         $img_dir="./img/emblemB_".$emblem.".png";
                         echo ("
-                            <li class=timeline-$timeline_color>
+                                <li class=timeline-$timeline_color>
                                 <div class=\"timeline-time\">
-                                    <span class=\"time\" style='color: #303a41'>$row[date]</span>
-                               </div>
-                               <div class=\"timeline-icon\">                            
-                               </div>
-                               <div class=\"timeline-body\">
-                                    <h2>$row[head]</h2>
-                                    <div class=\"timeline-content\">
-                                        <img class=\"timeline-img pull-left\" src=\"./$img_dir\" alt=\"\">
-                                         $row[pre]
-                                    </div>
-                                    <div class=\"timeline-footer\">
-                                        <a href=\"$row[url]\" class=\"nav-link pull-right\">
-                                            해당 경기 상세히 보러가기<i class=\"m-icon-swapright m-icon-white\"></i>
-                                        </a>
-                                    </div>
+                                <span class=\"time\" style='color: #303a41'>$row[date]</span>
                                 </div>
-                            </li>
-                            ");
-                    }
+                                <div class=\"timeline-icon\">                            
+                                </div>
+                                <div class=\"timeline-body\">
+                                <h2>$row[head]</h2>
+                                <div class=\"timeline-content\">
+                                <img class=\"timeline-img pull-left\" src=\"./$img_dir\" alt=\"\">
+                                $row[pre]
+                                </div>
+                                <div class=\"timeline-footer\">
+                                <a href=\"$row[url]\" class=\"nav-link pull-right\">
+                                해당 경기 상세히 보러가기<i class=\"m-icon-swapright m-icon-white\"></i>
+                                </a>
+                                </div>
+                                </div>
+                                </li>
+                                ");
+}
                     //                    while_loop end
                     ?>
                 </ul>
