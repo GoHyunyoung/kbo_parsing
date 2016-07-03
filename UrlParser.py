@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 
 from bs4 import BeautifulSoup
@@ -20,9 +20,10 @@ import random as rd
 import time
 import urllib2
 import sys
+import os
 
 
-# In[3]:
+# In[10]:
 
 class UrlParser:
 #     초기화때 날짜를 입력(박스스코어 확인 날짜)
@@ -40,9 +41,14 @@ class UrlParser:
 #         print 'back 횟수 : ',backCount
 
             # 크롬창 
-        browser = webdriver.Chrome(executable_path='./chromedriver')
+        if os.name=='nt':
+            browser = webdriver.Chrome(executable_path='C:/chromedriver.exe')
+        else:
+            browser = webdriver.Chrome(executable_path='./chromedriver')
         # 접속
+        
         browser.get('http://www.koreabaseball.com/Schedule/ScoreBoard/ScoreBoard.aspx')
+        
 
         # backCount일 전의 경기들의 BoxScore 갯수 btnList에 저장
         for i in range(backCount):
