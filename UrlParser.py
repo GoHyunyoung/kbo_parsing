@@ -42,7 +42,7 @@ class UrlParser:
 
             # 크롬창 
         if os.name=='nt':
-            browser = webdriver.Chrome(executable_path='C:/chromedriver.exe')
+            browser = webdriver.Chrome(executable_path='./chromedriver.exe')
         else:
             browser = webdriver.Chrome(executable_path='./chromedriver')
         # 접속
