@@ -11,7 +11,7 @@ import urllib2
 import re
 
 
-# In[2]:
+# In[1]:
 
 #URL넣어주면 해당 박스스코어 파싱
 class BoxScoreParser:
@@ -117,4 +117,25 @@ class BoxScoreParser:
                 tmp.append(dat)
             data.append(tmp)
         self.h_batRecord = pd.DataFrame(data=data,columns=columns)
+        
+        
+        #WinTeam
+        if self.a_score[12] > self.h_score[12]:
+            self.winTeam = bxsParser.a_team
+            self.winScore = bxsParser.a_score[12]
+            self.winTeam_pitRecord = bxsParser.a_pitRecord
+            self.winTeam_batRecord = bxsParser.a_batRecord        
+            self.loseTeam = bxsParser.h_team        
+            self.loseScore = bxsParser.h_score[12]
+            self.loseTeam_pitRecord = bxsParser.h_pitRecord
+            self.loseTeam_batRecord = bxsParser.h_batRecord
+        else:
+            self.loseTeam= bxsParser.a_team
+            self.loseScore= bxsParser.a_score[12]
+            self.loseTeam_pitRecord = bxsParser.a_pitRecord
+            self.loseTeam_batRecord= bxsParser.a_batRecord        
+            self.winTeam = bxsParser.h_team        
+            self.winScore = bxsParser.h_score[12]
+            self.winTeam_pitRecord= bxsParser.h_pitRecord
+            self.winTeam_batRecord = bxsParser.h_batRecord
 
