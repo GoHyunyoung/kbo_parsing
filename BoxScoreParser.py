@@ -20,7 +20,7 @@ class BoxScoreParser:
         html = BeautifulSoup(data)
         
         #DATE
-        self.date = html.select('div.yearDate span')[0].text
+        self.date = html.select('div.yearDate span')[0].text.replace('.','')
         
         #AWAY팀명
         self.a_team=html.select('table.socreBoard tr:nth-of-type(2) th')[0].text
@@ -121,21 +121,21 @@ class BoxScoreParser:
         
         #WinTeam
         if self.a_score[12] > self.h_score[12]:
-            self.winTeam = bxsParser.a_team
-            self.winScore = bxsParser.a_score[12]
-            self.winTeam_pitRecord = bxsParser.a_pitRecord
-            self.winTeam_batRecord = bxsParser.a_batRecord        
-            self.loseTeam = bxsParser.h_team        
-            self.loseScore = bxsParser.h_score[12]
-            self.loseTeam_pitRecord = bxsParser.h_pitRecord
-            self.loseTeam_batRecord = bxsParser.h_batRecord
+            self.winTeam = self.a_team
+            self.winScore = self.a_score[12]
+            self.winTeam_pitRecord = self.a_pitRecord
+            self.winTeam_batRecord = self.a_batRecord        
+            self.loseTeam = self.h_team        
+            self.loseScore = self.h_score[12]
+            self.loseTeam_pitRecord = self.h_pitRecord
+            self.loseTeam_batRecord = self.h_batRecord
         else:
-            self.loseTeam= bxsParser.a_team
-            self.loseScore= bxsParser.a_score[12]
-            self.loseTeam_pitRecord = bxsParser.a_pitRecord
-            self.loseTeam_batRecord= bxsParser.a_batRecord        
-            self.winTeam = bxsParser.h_team        
-            self.winScore = bxsParser.h_score[12]
-            self.winTeam_pitRecord= bxsParser.h_pitRecord
-            self.winTeam_batRecord = bxsParser.h_batRecord
+            self.loseTeam= self.a_team
+            self.loseScore= self.a_score[12]
+            self.loseTeam_pitRecord = self.a_pitRecord
+            self.loseTeam_batRecord= self.a_batRecord        
+            self.winTeam = self.h_team        
+            self.winScore = self.h_score[12]
+            self.winTeam_pitRecord= self.h_pitRecord
+            self.winTeam_batRecord = self.h_batRecord
 
