@@ -46,6 +46,11 @@ class BoxScoreParser:
             else:
                 self.h_score.append(int(score.text))
         
+        #AWAY_SUM_OF_SCORE
+        self.a_scoreSum = self.a_score[12]
+        #HOME_SUM_OF_SCORE
+        self.h_scoreSum = self.h_score[12]
+        
         #AWAY_STATUS
         self.a_status=html.select('p.results')[0].text
         
