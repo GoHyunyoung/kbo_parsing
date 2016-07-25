@@ -23,6 +23,11 @@
     <link href="/resources/assets/metronic_v3.3.0/theme/assets/admin/layout3/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color">
     <link href="/resources/assets/metronic_v3.3.0/theme/assets/admin/layout3/css/custom.css" rel="stylesheet" type="text/css">
     <!-- END THEME STYLES -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/resources/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="/resources/assets/scollingjs/scrollingjs.js"></script>
 </head>
 
 <body>
@@ -31,10 +36,14 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="timeline">
-                    <c:forEach var="articleMap" items="${articleMap}" varStatus="status">
+                    <c:forEach var="i" begin="1" end="${articleMap.size()}" step="1">
                         <li class=timeline>
                             <div class="timeline-time">
-                                <span class="time" style='color: #303a41'>${articleMap.get(String.valueOf(i)).date}</span>
+                                <c:choose>
+                                    <c:when test="${articleMap.get(String.valueOf(i)).date != articleMap.get(String.valueOf(i-1)).date}">
+                                        <span class="time" style='color: #303a41'>${articleMap.get(String.valueOf(i)).date}</span>
+                                    </c:when>
+                                </c:choose>
                             </div>
                             <div class="timeline-icon">
                             </div>
@@ -43,6 +52,7 @@
                                 <div class="timeline-content">
                                     <img class="timeline-img pull-left" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",articleMap.get(String.valueOf(i)).emblem)} alt="">
                                         ${articleMap.get(String.valueOf(i)).intro}
+                                    <br/><br/>
                                         ${articleMap.get(String.valueOf(i)).main}
                                 </div>
                                 <div class="timeline-footer">
@@ -53,12 +63,14 @@
                             </div>
                         </li>
                     </c:forEach>
+                    <p id="loading">
+                        <img src="images/loading.gif" alt="Loading…" />
+                    </p>
                 </ul>
             </div>
         </div>
     </div>
 </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="/resources/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+
 </html>

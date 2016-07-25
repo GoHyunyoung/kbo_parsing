@@ -14,4 +14,8 @@ public class ArticleService {
         Article article = articleMapper.getArticle(id);
         return article;
     }
+    public int getArticleLength(){
+        int length = articleMapper.getArticleLength();
+        return length;
+    }
 }

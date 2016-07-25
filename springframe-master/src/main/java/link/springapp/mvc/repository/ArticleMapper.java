@@ -7,4 +7,7 @@ import org.apache.ibatis.annotations.Select;
 public interface ArticleMapper {
     @Select("SELECT * FROM Article WHERE id = #{ArticleId}")
     Article getArticle(@Param("ArticleId") int ArticleId);
+
+    @Select("SELECT COUNT(*) FROM Article")
+    int getArticleLength();
 }
