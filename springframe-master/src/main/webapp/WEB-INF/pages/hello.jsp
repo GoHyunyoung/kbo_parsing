@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,7 @@
     <link href="/resources/assets/metronic_v3.3.0/theme/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="/resources/metronic_v3.3.0/theme/assets/admin/pages/css/timeline.css" rel="stylesheet" type="text/css"/>
+    <link href="/resources/assets/metronic_v3.3.0/theme/assets/admin/pages/css/timeline.css" rel="stylesheet" type="text/css"/>
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN THEME STYLES -->
     <link href="/resources/assets/metronic_v3.3.0/theme/assets/global/css/components.css" rel="stylesheet" type="text/css">
@@ -25,38 +26,39 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="jumbotron">
-        <h1>${message.head}</h1>
-        <p>Resize this responsive page to see the effect!</p>
+<div class="portlet light">
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="timeline">
+                    <c:forEach var="articleMap" items="${articleMap}" varStatus="status">
+                        <li class=timeline>
+                            <div class="timeline-time">
+                                <span class="time" style='color: #303a41'>${articleMap.get(String.valueOf(i)).date}</span>
+                            </div>
+                            <div class="timeline-icon">
+                            </div>
+                            <div class="timeline-body" data-name="${articleMap.get(String.valueOf(i)).emblem}">
+                                <h2>${articleMap.get(String.valueOf(i)).head}</h2>
+                                <div class="timeline-content">
+                                    <img class="timeline-img pull-left" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",articleMap.get(String.valueOf(i)).emblem)} alt="">
+                                        ${articleMap.get(String.valueOf(i)).intro}
+                                        ${articleMap.get(String.valueOf(i)).main}
+                                </div>
+                                <div class="timeline-footer">
+                                    <a href="${articleMap.get(String.valueOf(i)).url}" class="nav-link pull-right">
+                                        해당 경기 상세히 보러가기<i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <h3>Column 1</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-        </div>
-        <div class="col-sm-4">
-            <h3>Column 2</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-        </div>
-        <div class="col-sm-4">
-            <h3>Column 3</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-        </div>
-    </div>
-    <br/>
-    <br/>
-    <%--<div class="row">--%>
-    <%--<div class="col-md-12">--%>
-    <%--<a href="/userInfo?id=1">userInfo</a>--%>
-    <%--</div>--%>
-    <%--</div>--%>
 </div>
 </body>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="/resources/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
 </html>
