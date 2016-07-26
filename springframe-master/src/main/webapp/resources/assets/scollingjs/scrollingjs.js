@@ -8,18 +8,7 @@ $(document).ready(function() {
     win.scroll(function() {
         // End of the document reached?
         if ($(document).height() - win.height() == win.scrollTop()) {
-            $('#loading').show();
-
-            // Uncomment this AJAX call to test it
-            $.ajax({
-             url: 'get-post.php',
-             dataType: 'html',
-             success: function(html) {
-             $('#posts').append(html);
-             $('#loading').hide();
-             }
-             });
-            $('li.timeline').append(randomPost());
+            $('li.timeline').append(printOldArticles());
             $('#loading').hide();
         }
     });

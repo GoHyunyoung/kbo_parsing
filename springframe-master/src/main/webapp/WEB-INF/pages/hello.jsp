@@ -36,7 +36,8 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="timeline">
-                    <c:forEach var="i" begin="1" end="${articleMap.size()}" step="1">
+                    <%--<c:forEach var="i" begin="1" end="${articleMap.size()}" step="1">--%>
+                    <c:forEach var="i" begin="1" end="10" step="1">
                         <li class=timeline>
                             <div class="timeline-time">
                                 <c:choose>
@@ -63,9 +64,9 @@
                             </div>
                         </li>
                     </c:forEach>
-                    <p id="loading">
-                        <img src="images/loading.gif" alt="Loading…" />
-                    </p>
+                    <div id="loading" align="center">
+                        <img src="/resources/images/page-loading.gif" alt="Loading..."width="180px"/>
+                    </div>
                 </ul>
             </div>
         </div>
