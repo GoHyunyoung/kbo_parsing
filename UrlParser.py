@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[11]:
+# In[2]:
 
 
 from bs4 import BeautifulSoup
@@ -23,7 +23,7 @@ import sys
 import os
 
 
-# In[52]:
+# In[7]:
 
 class UrlParser:
 #     초기화때 날짜를 입력(박스스코어 확인 날짜)
@@ -77,5 +77,5 @@ class UrlParser:
 #                 browser.switch_to_window(browser.window_handles[0])
             browser.find_element_by_id('cphContainer_cphContents_btnPreDate').click()
             time.sleep(0.7)
-        browser.close()
+        browser.quit()
 
