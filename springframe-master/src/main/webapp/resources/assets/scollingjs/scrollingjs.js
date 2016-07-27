@@ -4,18 +4,20 @@
 
 $(document).ready(function() {
     var win = $(window);
+    var begin=11;
+    console.log(begin);
     // Each time the user scrolls
     win.scroll(function() {
         // End of the document reached?
         if ($(document).height() - win.height() <= win.scrollTop()) {
             $('#loading-img').hide();
-            $('li#getMoreArticle').append(printOldArticles());
+            $('li#getMoreArticle').replaceWith()
             $.ajax({
-                url: '/pages/scroll',
-                type: 'post',
-                dataType: 'html',
-                success: function (da) {
-                    alert('123');
+                url: '/',
+                type: 'get',
+                data:'articleId='+begin,
+                success: function (data) {
+                    begin+=10;
                 }
             });
         }

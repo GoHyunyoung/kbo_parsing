@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:forEach var="i" begin="1" end="10" step="1">
+<c:forEach var="i" begin="${param.articleId}" end="${param.articleId+10}" step="1">
     <li class=timeline>
         <div class="timeline-time">
             <span class="time" style='color: #303a41'>${articleMap.get(String.valueOf(i)).date}</span>

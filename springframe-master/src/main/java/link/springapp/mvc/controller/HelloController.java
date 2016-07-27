@@ -32,10 +32,10 @@ public class HelloController {
         return "hello";
     }
 
-    @RequestMapping(value = "/page/scroll", method = RequestMethod.POST)
-    public String getMoreArticle(ModelMap model, @RequestParam(value = "id")int startId) {
+    @RequestMapping(value = "/scroll", method = RequestMethod.GET)
+    public String getMoreArticle(ModelMap model, @RequestParam(value = "articleId")int startId) {
         HashMap<String, Object> articleMap = new HashMap<>();
-        for (int i = startId; i <= 10; i++) {
+        for (int i = startId; i <= startId+10; i++) {
             Article article = articleService.getArticle(i);
             articleMap.put(String.valueOf(i), article);
         }
