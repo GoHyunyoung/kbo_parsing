@@ -7,9 +7,17 @@ $(document).ready(function() {
     // Each time the user scrolls
     win.scroll(function() {
         // End of the document reached?
-        if ($(document).height() - win.height() == win.scrollTop()) {
-            $('li.timeline').append(printOldArticles());
-            $('#loading').hide();
+        if ($(document).height() - win.height() <= win.scrollTop()) {
+            $('#loading-img').hide();
+            $('li#getMoreArticle').append(printOldArticles());
+            $.ajax({
+                url: '/pages/scroll',
+                type: 'post',
+                dataType: 'html',
+                success: function (da) {
+                    alert('123');
+                }
+            });
         }
     });
 });
