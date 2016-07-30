@@ -11,15 +11,20 @@
 <c:forEach var="i" begin="${param.articleId}" end="${param.articleId+10}" step="1">
     <li class=timeline>
         <div class="timeline-time">
-            <span class="time" style='color: #303a41'>${articleMap.get(String.valueOf(i)).date}</span>
+            <c:choose>
+                <c:when test="${articleMap.get(String.valueOf(i)).date != articleMap.get(String.valueOf(i-1)).date}">
+                    <span class="time" style='color: #303a41'>${articleMap.get(String.valueOf(i)).date}</span>
+                </c:when>
+            </c:choose>
         </div>
         <div class="timeline-icon">
         </div>
         <div class="timeline-body" data-name="${articleMap.get(String.valueOf(i)).emblem}">
             <h2>${articleMap.get(String.valueOf(i)).head}</h2>
             <div class="timeline-content">
-                <img class="timeline-img pull-left" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",articleMap.get(String.valueOf(i)).emblem)} alt="">
+                <img class="timeline-img pull-left" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",articleMap.get(String.valueOf(i)).emblem)} alt="${articleMap.get(String.valueOf(i)).emblem}">
                     ${articleMap.get(String.valueOf(i)).intro}
+                <br/>
                     ${articleMap.get(String.valueOf(i)).main}
             </div>
             <div class="timeline-footer">

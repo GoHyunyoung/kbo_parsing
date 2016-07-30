@@ -53,7 +53,7 @@
                                 <div class="timeline-content">
                                     <img class="timeline-img pull-left" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",articleMap.get(String.valueOf(i)).emblem)} alt="${articleMap.get(String.valueOf(i)).emblem}">
                                         ${articleMap.get(String.valueOf(i)).intro}
-                                    <br/><br/>
+                                    <br/>
                                         ${articleMap.get(String.valueOf(i)).main}
                                 </div>
                                 <div class="timeline-footer">
@@ -65,7 +65,7 @@
                         </li>
                     </c:forEach>
                     <li id="getMoreArticle" align="center">
-                        <img src="/resources/images/page-loading.gif" id="loading-img" alt="Loading" width="180px"/>
+                        <img src="/resources/images/page-loading.gif" id="loading-img" alt="Loading" width="180px" />
                     </li>
                 </ul>
             </div>
