@@ -53,3 +53,10 @@ Rounded Portlets
 .timeline li.timeline .timeline-body[data-name="NC"]{
 	background: #2C5482;
 }
+
+.timeline > li .timeline-body h2, .timeline > li .timeline-content{
+	font-weight: bold;
+}
+.timeline > li .timeline-body img.timeline-img{
+    width:90px;
+}
