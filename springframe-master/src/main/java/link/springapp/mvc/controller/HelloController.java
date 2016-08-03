@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Controller
@@ -22,24 +23,34 @@ public class HelloController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
-        HashMap<String, Object> articleMap = new HashMap<>();
-//        for (int i = 1; i < articleService.getArticleLength(); i++) {
-        for (int i = 1; i <= 10; i++) {
-            Article article = articleService.getArticle(i);
-            articleMap.put(String.valueOf(i), article);
+        Article[] articleList = new Article[10];
+        int articleCount=articleService.getArticleCount();
+        for (int i = 0; i<articleList.length; i++) {
+            articleList[i] = articleService.getArticle(articleCount-i);
         }
-        model.addAttribute("articleMap", articleMap);
-        return "hello";
+
+        model.addAttribute("articleList", articleList);
+        return "index";
     }
 
-    @RequestMapping(value = "/scroll", method = RequestMethod.GET)
+    @RequestMapping(value = "/scroll.jsp", method = RequestMethod.GET)
     public String getMoreArticle(ModelMap model, @RequestParam(value = "articleId")int startId) {
-        HashMap<String, Object> articleMap = new HashMap<>();
-        for (int i = startId; i <= startId+10; i++) {
-            Article article = articleService.getArticle(i);
-            articleMap.put(String.valueOf(i), article);
+        Article[] articleList = new Article[10];
+        for (int i = 0; i < 10; i++) {
+            articleList[i] = articleService.getArticle(startId-i);
         }
-        model.addAttribute("articleMap", articleMap);
+        model.addAttribute("articleList", articleList);
         return "scroll";
+    }
+
+    @RequestMapping(value = "/search.jsp",method = RequestMethod.GET)
+    public String getSearchResult(ModelMap model,
+                                  @RequestParam(value = "searchingYear")String searchingYear,
+                                  @RequestParam(value = "searchingMonth")String searchingMonth,
+                                  @RequestParam(value = "searchingDay")String searchingDay) {
+//        HashMap<String,Object> searchingMap = new HashMap<>();
+//        Article article = articleService.getSearchResult();
+//        }
+        return "search";
     }
 }

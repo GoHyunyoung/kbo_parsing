@@ -9,5 +9,8 @@ public interface ArticleMapper {
     Article getArticle(@Param("ArticleId") int ArticleId);
 
     @Select("SELECT COUNT(*) FROM Article")
-    int getArticleLength();
+    int getArticleCount();
+
+    @Select("SELECT * FROM Article WHERE Article.date LIKE '#{searchYear}_#{searchMonth}_#{searchDay}_%)")
+    Article[] getSearchResult(@Param("searchYear")String searchYear,@Param("searchMonth") String searchMonth,@Param("searchDay") String searchDay);
 }
