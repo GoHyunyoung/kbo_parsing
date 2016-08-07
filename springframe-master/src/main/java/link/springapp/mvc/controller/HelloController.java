@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,7 +21,6 @@ import java.util.HashMap;
 public class HelloController {
     @Autowired
     private ArticleService articleService;
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
         Article[] articleList = new Article[10];
@@ -33,11 +33,13 @@ public class HelloController {
         return "index";
     }
 
-    @RequestMapping(value = "/scroll.jsp", method = RequestMethod.GET)
+    @RequestMapping(value = "/scroll", method = RequestMethod.GET)
     public String getMoreArticle(ModelMap model, @RequestParam(value = "articleId")int startId) {
         Article[] articleList = new Article[10];
-        for (int i = 0; i < 10; i++) {
-            articleList[i] = articleService.getArticle(startId-i);
+        int articleCount=articleService.getArticleCount();
+
+        for (int i = 0; i < articleList.length; i++) {
+            articleList[i] = articleService.getArticle(articleCount-startId-i);
         }
         model.addAttribute("articleList", articleList);
         return "scroll";
