@@ -15,7 +15,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:forEach var="i" begin="${param.articleId}" end="${param.articleId+10}" step="1">
+<c:forEach var="i" begin="0" end="${searchResult.length}" step="1">
     <li class=timeline>
         <div class="timeline-time">
             <c:choose>

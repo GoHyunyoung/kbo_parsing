@@ -881,27 +881,27 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="timeline">
-                                <c:forEach var="i" begin="0" end="9" step="1">
+                                <c:forEach var="article" items="${articleList}">
                                     <li class=timeline>
                                         <div class="timeline-time">
                                             <c:choose>
-                                                <c:when test="${articleList[i].date != articleList[i-1].date}">
-                                                    <span class="time" style='color: #303a41'>${articleList[i].date}</span>
+                                                <c:when test="${article.date != article.date}">
+                                                    <span class="time" style='color: #303a41'>${article.date}</span>
                                                 </c:when>
                                             </c:choose>
                                         </div>
                                         <div class="timeline-icon">
                                         </div>
-                                        <div class="timeline-body" data-name="${articleList[i].emblem}">
-                                            <h2>${articleList[i].head}</h2>
+                                        <div class="timeline-body" data-name="${article.emblem}">
+                                            <h2>${article.head}</h2>
                                             <div class="timeline-content">
-                                                <img class="timeline-img pull-left" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",articleList[i].emblem)} alt="${articleList[i].emblem}">
-                                                    ${articleList[i].intro}
+                                                <img class="timeline-img pull-left" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.emblem)} alt="${article.emblem}">
+                                                    ${article.intro}
                                                 <br/>
-                                                    ${articleList[i].main}
+                                                    ${article.main}
                                             </div>
                                             <div class="timeline-footer">
-                                                <a href="${articleList[i].url}" class="nav-link pull-right">
+                                                <a href="${article.url}" class="nav-link pull-right">
                                                     해당 경기 상세히 보러가기<i class="m-icon-swapright m-icon-white"></i>
                                                 </a>
                                             </div>

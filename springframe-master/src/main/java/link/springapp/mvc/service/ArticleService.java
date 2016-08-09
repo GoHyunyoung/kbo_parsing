@@ -18,12 +18,12 @@ public class ArticleService {
         int count = articleMapper.getArticleCount();
         return count;
     }
-    public int getArticleCount_byDate(String searchYear,String searchMonth,String searchDay){
-        int count = articleMapper.getSearchResult(searchYear,searchMonth,searchDay).length;
+    public int getSearchCount(String searchDate){
+        int count = articleMapper.getSearchResult(searchDate).length;
         return count;
     }
-    public Article[] getSearchResult(String searchYear,String searchMonth,String searchDay){
-        Article[] article =  articleMapper.getSearchResult(searchYear,searchMonth,searchDay);
+    public Article[] getSearchResult(String searchDate){
+        Article[] article =  articleMapper.getSearchResult(searchDate);
         return article;
     }
 }
