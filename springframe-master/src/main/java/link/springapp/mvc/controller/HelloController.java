@@ -2,6 +2,7 @@ package link.springapp.mvc.controller;
 
 import link.springapp.mvc.domain.Article;
 import link.springapp.mvc.service.ArticleService;
+import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,14 +30,20 @@ public class HelloController {
 
     @RequestMapping(value = "/scroll", method = RequestMethod.GET)
     public String getMoreArticle(ModelMap model, @RequestParam(value = "articleId")int startId) {
-        Article[] articleList = new Article[10];
         int articleCount=articleService.getArticleCount();
+        int lastIndex=0;
 
-        for (int i = 0; i < articleList.length; i++) {
+        for (int i = 0; i < 10; i++) {
+//        lastIndex설정
             if(articleService.getArticle(articleCount-startId-i)==null)
                 break;
+            lastIndex++;
+        }
+        Article[] articleList = new Article[lastIndex];
+        for (int i = 0; i < articleList.length; i++) {
             articleList[i] = articleService.getArticle(articleCount-startId-i);
         }
+
         model.addAttribute("articleList", articleList);
         return "scroll";
     }
