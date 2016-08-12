@@ -22,14 +22,15 @@
     <link href="/resources/assets/metronic_v3.3.0/theme/assets/global/css/plugins.css" rel="stylesheet" type="text/css">
     <link href="/resources/assets/metronic_v3.3.0/theme/assets/admin/layout3/css/layout.css" rel="stylesheet" type="text/css">
     <link href="/resources/assets/metronic_v3.3.0/theme/assets/admin/layout3/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color">
-    <link href="/resources/assets/css/custom.css" rel="stylesheet" type="text/css">
+    <link href="/resources/assets/css/index.css" rel="stylesheet" type="text/css">
+    <link href="/resources/assets/css/calendar.css" rel="stylesheet" type="text/css">
     <!-- END THEME STYLES -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="/resources/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <%--BEGIN INDEX_PAGE SCRIPT--%>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/assets/javascript/infinite_scroll.js"></script>
-    <script type="text/javascript" src="/resources/assets/javascript/search.js"></script>
+    <%--END INDEX_PAGE SCRIPT--%>
+
 </head>
 
 <body>
@@ -51,12 +52,17 @@
     <div class="page-header-menu">
         <div class="container">
             <!-- BEGIN HEADER SEARCH BOX -->
-            <form class="search-form" action="search.jsp" method="GET">
-                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
-                    <input type="text" class="form-control" readonly="">
-                    <span class="input-group-btn">
-                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                    </span>
+            <form class="search-form" action="" method="GET">
+                <div class="col-md-3">
+                    <c:choose>
+                        <c:when test="${articleList[0]==null}">
+                            <input class="form-control form-control-inline date-picker" size="16" type="text" placeholder="Search from Date" value="">
+                        </c:when>
+                        <c:otherwise>
+                            <input class="form-control form-control-inline date-picker" size="16" type="text" placeholder="${articleList[0].date.substring(0,4)}-${articleList[0].date.substring(4,6)}-${articleList[0].date.substring(6,articleList[0].date.length())}" value="">
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
             </form>
 
@@ -237,8 +243,8 @@
             <div class="col-md-3 col-sm-6 col-xs-12 footer-block">
                 <h2>Contacts</h2>
                 <address class="margin-bottom-40">
-                    Phone: 800 123 3456<br>
-                    Email: <a href="mailto:info@metronic.com">info@metronic.com</a>
+                    Phone: 010 3660 0908<br>
+                    Email: <a href="mailto:gohyunyoung98@gmail.com">gohyunyoung98@gmail.com</a>
                 </address>
             </div>
         </div>
@@ -261,8 +267,9 @@
 <script src="/resources/assets/metronic_v3.3.0/theme/assets/global/plugins/respond.min.js"></script>
 <script src="/resources/assets/metronic_v3.3.0/theme/assets/global/plugins/excanvas.min.js"></script>
 <![endif]-->
-<script src="/resources/assets/metronic_v3.3.0/theme/assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
-<script src="/resources/assets/metronic_v3.3.0/theme/assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+<%--<script src="/resources/assets/metronic_v3.3.0/theme/assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>--%>
+<%--<script src="/resources/assets/metronic_v3.3.0/theme/assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>--%>
 <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 <script src="/resources/assets/metronic_v3.3.0/theme/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
 <script src="/resources/assets/metronic_v3.3.0/theme/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -281,9 +288,10 @@
 <script src="/resources/assets/metronic_v3.3.0/theme/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
 <script src="/resources/assets/metronic_v3.3.0/theme/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
 <script src="/resources/assets/metronic_v3.3.0/theme/assets/admin/pages/scripts/components-pickers.js"></script>
-<script src="/resources/assets/javascript/index.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
-
+<!-- BEGIN CUSTOM SCRIPTS -->
+<script src="/resources/assets/javascript/index.js"></script>
+<!-- END CUSTOM SCRIPTS -->
 <script>
     jQuery(document).ready(function() {
         // initiate layout and plugins

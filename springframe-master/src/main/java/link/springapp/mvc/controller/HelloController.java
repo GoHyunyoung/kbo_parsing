@@ -50,13 +50,21 @@ public class HelloController {
 
     @RequestMapping(value = "/search",method = RequestMethod.GET)
     public String getSearchResult(ModelMap model,@RequestParam(value = "searchDate")String searchDate){
-        Article[] searchResult = new Article[10];
         int searchResultCount=articleService.getSearchCount(searchDate);
-        for(int i=0;i<searchResult.length;i++) {
-            if(articleService.getSearchResult(searchDate)[searchResultCount - i]!=null)
-                searchResult[i] = articleService.getSearchResult(searchDate)[searchResultCount - i];
+        int lastIndex=0;
+        for (int i = 0; i < 10; i++) {
+//        lastIndex설정
+            if(articleService.getArticle(searchResultCount-i)==null)
+                break;
+            lastIndex++;
         }
-        model.addAttribute("searchResult",searchResult);
+        Article[] searchResult = new Article[lastIndex];
+
+        for (int i = 0; i < searchResult.length; i++) {
+            searchResult[i] = articleService.getArticle(searchResultCount-i);
+        }
+
+        model.addAttribute("searchResult", searchResult);
 
         return "search";
     }
