@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
   User: gohyunyoung98
@@ -6,11 +7,11 @@
   Time: 오후 5:19
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:forEach var="article" items="${articleList}">
-    <li class=timeline>
+<c:forEach var="article" items="${articleArrayList}">
+    <li class=timeline id="${article.id}" hidden>
         <div class="timeline-time">
+                <%--<c:out value="안녕하세요"></c:out>--%>
             <c:choose>
                 <c:when test="${date==article.date}">
                     <c:set var="date" value="${article.date}"></c:set>
@@ -20,14 +21,14 @@
                 </c:otherwise>
             </c:choose>
             <c:set var="date" value="${article.date}"></c:set>
-
         </div>
         <div class="timeline-icon">
         </div>
         <div class="timeline-body" data-name="${article.emblem}">
             <h2>${article.head}</h2>
             <div class="timeline-content">
-                <img class="timeline-img pull-left" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.emblem)} alt="${article.emblem}">
+                <img class="timeline-img pull-left"
+                     src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.emblem)} alt="${article.emblem}">
                     ${article.intro}
                 <br/>
                     ${article.main}
@@ -40,3 +41,5 @@
         </div>
     </li>
 </c:forEach>
+</body>
+</html>

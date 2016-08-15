@@ -1,62 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-	xmlns:task="http://www.springframework.org/schema/task"
-    xmlns:websocket="http://www.springframework.org/schema/websocket"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-						http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+
 						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 						http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 						http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
 						http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-						http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+
 						http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
-	<context:property-placeholder location="classpath:config.properties" />
-	<context:component-scan base-package="link.springapp.mvc"/>
+    <context:property-placeholder location="classpath:config.properties"/>
+    <context:component-scan base-package="link.springapp.mvc"/>
 
-	<tx:annotation-driven proxy-target-class="true" />
+    <tx:annotation-driven proxy-target-class="true"/>
 
-	<mvc:annotation-driven />
-	<mvc:resources location="/resources/" mapping="/resources/**" />
+    <mvc:annotation-driven/>
+    <mvc:resources location="/resources/" mapping="/resources/**"/>
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<property name="initialSize" value="20" />
-		<property name="maxActive" value="20" />
-		<property name="validationQuery" value="SELECT 1" />
-		<property name="testOnBorrow" value="true" />
-	</bean>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="20"/>
+        <property name="maxActive" value="20"/>
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="testOnBorrow" value="true"/>
+    </bean>
 
 
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
-	<!-- MyBatis -->
-	<mybatis:scan base-package="link.springapp.mvc.repository" factory-ref="sqlSessionFactory" />
+    <!-- MyBatis -->
+    <mybatis:scan base-package="link.springapp.mvc.repository" factory-ref="sqlSessionFactory"/>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis.xml" />
-	</bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+    </bean>
 
-	<!-- WebSocket -->
-	<websocket:handlers>
-		<websocket:mapping handler="echoWebsocketHandler" path="/echo" />
-	</websocket:handlers>
-	<bean id="echoWebsocketHandler" class="link.springapp.mvc.handler.EchoHandler">
-	</bean>
+    <!-- WebSocket -->
+    <websocket:handlers>
+        <websocket:mapping handler="echoWebsocketHandler" path="/echo"/>
+    </websocket:handlers>
+    <bean id="echoWebsocketHandler" class="link.springapp.mvc.handler.EchoHandler">
+    </bean>
 </beans>

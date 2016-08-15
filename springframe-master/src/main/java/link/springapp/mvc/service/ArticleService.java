@@ -14,16 +14,20 @@ public class ArticleService {
         Article article = articleMapper.getArticle(id);
         return article;
     }
-    public int getArticleCount(){
+//    public Article[] getArticleArray(int id){
+//        Article[] article = articleMapper.getArticleArray(id);
+//        return article;
+//    }
+
+    public int getArticleCount() {
         int count = articleMapper.getArticleCount();
         return count;
     }
-    public int getSearchCount(String searchDate){
-        int count = articleMapper.getSearchResult(searchDate).length;
-        return count;
+
+    public int getSearchResultMinId(String searchDate) {
+        int id = articleMapper.getSearchResultMinId(searchDate);
+        return id;
     }
-    public Article[] getSearchResult(String searchDate){
-        Article[] article =  articleMapper.getSearchResult(searchDate);
-        return article;
-    }
+
+
 }
