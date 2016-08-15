@@ -42,7 +42,7 @@
     <%--END INDEX_PAGE SCRIPT--%>
 
 </head>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"/>
 
 <!-- BEGIN PAGE CONTAINER -->
 <div class="page-container">
@@ -102,40 +102,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="timeline">
-                                <c:forEach var="article" items="${articleArrayList}">
-                                    <li class=timeline id="${article.id}" hidden>
-                                        <div class="timeline-time">
-                                                <%--<c:out value="안녕하세요"></c:out>--%>
-                                            <c:choose>
-                                                <c:when test="${date==article.date}">
-                                                    <c:set var="date" value="${article.date}"></c:set>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span class="time"
-                                                          style='color: #303a41'>${article.date.substring(4,6)}월${article.date.substring(6,8)}일${article.date.substring(8,article.date.length())}</span>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <c:set var="date" value="${article.date}"></c:set>
-                                        </div>
-                                        <div class="timeline-icon">
-                                        </div>
-                                        <div class="timeline-body" data-name="${article.emblem}">
-                                            <h2>${article.head}</h2>
-                                            <div class="timeline-content">
-                                                <img class="timeline-img pull-left"
-                                                     src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.emblem)} alt="${article.emblem}">
-                                                    ${article.intro}
-                                                <br/>
-                                                    ${article.main}
-                                            </div>
-                                            <div class="timeline-footer">
-                                                <a href="${article.url}" class="nav-link pull-right">
-                                                    해당 경기 상세히 보러가기<i class="m-icon-swapright m-icon-white"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </c:forEach>
+                                <jsp:include page="scroll.jsp"/>
                                 <li id="getMoreArticle" align="center">
                                     <img src="/resources/images/page-loading.gif" id="loading-img" alt="Loading"
                                          width="180px"/>

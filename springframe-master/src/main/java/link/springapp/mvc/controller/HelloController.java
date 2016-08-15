@@ -27,6 +27,8 @@ public class HelloController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
+        logger.info("-----BEGIN index CONTROLLER-----");
+
         ArrayList<Article> articleArrayList = new ArrayList<>();
 
         int articleCount = articleService.getArticleCount();
@@ -36,47 +38,63 @@ public class HelloController {
             articleArrayList.add(article);
         }
         model.addAttribute("articleArrayList", articleArrayList);
+        logger.info("-----END index CONTROLLER-----");
+
         return "index";
     }
 
     @RequestMapping(value = "/scroll", method = RequestMethod.GET)
-    public String getMoreArticle(ModelMap model, @RequestParam(value = "articleId") int articleId,@RequestParam(value= "sequence") String sequence) {
+    public String getMoreArticle(ModelMap model,@RequestParam("articleId") int articleId,@RequestParam("sequence") String sequence) {
+        logger.info("-----BEGIN /scroll CONTROLLER-----");
 
         ArrayList<Article> articleArrayList = new ArrayList<>();
+        logger.info("----- WORKING 1 -----");
+        logger.info("articleId="+articleId);
+        logger.info("sequence="+sequence);
+
 
 //        lastIndex설정
         for (int i = 0; i < 10; i++) {
 //          RECENT->OLD 글 순서
-            if(articleService.getArticle(articleId + i)==null)
+            int index=i;
+            if (sequence.equals("DESC"))index*= -1;
+            logger.info("for LOOP i = "+i);
+            if(articleService.getArticle(articleId + index)==null)
                 break;
-            if (sequence.equals("DESC")) i *= -1;
-            else {
-                Article article = articleService.getArticle(articleId+i);
-                articleArrayList.add(article);
-            }
-        }
-        model.addAttribute("articleArrayList", articleArrayList);
-        System.out.println(articleArrayList);
+            Article article = articleService.getArticle(articleId+index);
+            articleArrayList.add(article);
 
-        logger.info("123");
+        }
+        logger.info("WORKING 2");
+
+        model.addAttribute("articleArrayList", articleArrayList);
+
+        logger.info("-----END /scroll CONTROLLER-----");
+
         return "scroll";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String getSearchResult(ModelMap model, @RequestParam(value = "searchDate") String searchDate) {
         int searchResultMinId = articleService.getSearchResultMinId(searchDate);
-        int arrLength = 0;
-        for (int i = 0; i < 10; i++) {
+
+        logger.info("-----BEGIN /search CONTROLLER-----");
+        ArrayList<Article> articleArrayList = new ArrayList<>();
+        logger.info("----- WORKING 1 -----");
+        logger.info("searchDate="+searchDate);
+
 //        lastIndex설정
-            if (articleService.getArticle(searchResultMinId + i) == null)
+        for (int i = 0; i < 10; i++) {
+//          RECENT->OLD 글 순서
+            logger.info("for LOOP i = "+i);
+            if(articleService.getArticle(searchResultMinId + i)==null)
                 break;
-            arrLength++;
+            Article article = articleService.getArticle(searchResultMinId+i);
+            articleArrayList.add(article);
         }
-        Article[] searchResult = new Article[arrLength];
-        for (int i = 0; i < searchResult.length; i++) {
-            searchResult[i] = articleService.getArticle(searchResultMinId + i);
-        }
-        model.addAttribute("searchResult", searchResult);
+        logger.info("WORKING 2");
+        model.addAttribute("articleArrayList", articleArrayList);
+        logger.info("-----END /search CONTROLLER-----");
         return "search";
     }
 }

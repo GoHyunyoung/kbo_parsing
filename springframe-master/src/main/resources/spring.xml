@@ -17,6 +17,7 @@
 						http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
     <context:property-placeholder location="classpath:config.properties"/>
+    <context:property-placeholder location="classpath:log4j.properties"/>
     <context:component-scan base-package="link.springapp.mvc"/>
 
     <tx:annotation-driven proxy-target-class="true"/>

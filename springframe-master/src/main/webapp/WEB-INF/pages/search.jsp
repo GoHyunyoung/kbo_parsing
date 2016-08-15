@@ -5,6 +5,7 @@
 
 </head>
 <body>
+<!-- BEGIN PAGE CONTAINER -->
 <div class="page-container">
     <!-- BEGIN PAGE HEAD -->
     <div class="page-head">
@@ -62,39 +63,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="timeline">
-                                <c:forEach var="searchResult" items="${searchResult}">
-                                    <li class=timeline>
-                                        <div class="timeline-time">
-                                            <c:choose>
-                                                <c:when test="${date==searchResult.date}">
-                                                    <c:set var="date" value="${searchResult.date}"></c:set>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span class="time"
-                                                          style='color: #303a41'>${searchResult.date.substring(4,6)}월${searchResult.date.substring(6,8)}일${searchResult.date.substring(8,searchResult.date.length())}</span>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <c:set var="date" value="${searchResult.date}"></c:set>
-                                        </div>
-                                        <div class="timeline-icon">
-                                        </div>
-                                        <div class="timeline-body" data-name="${searchResult.emblem}">
-                                            <h2>${searchResult.head}</h2>
-                                            <div class="timeline-content">
-                                                <img class="timeline-img pull-left"
-                                                     src=${String.format("/resources/images/emblem_image/emblemB_%s.png",searchResult.emblem)} alt="${searchResult.emblem}">
-                                                    ${searchResult.intro}
-                                                <br/>
-                                                    ${searchResult.main}
-                                            </div>
-                                            <div class="timeline-footer">
-                                                <a href="${searchResult.url}" class="nav-link pull-right">
-                                                    해당 경기 상세히 보러가기<i class="m-icon-swapright m-icon-white"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </c:forEach>
+                                <jsp:include page="scroll.jsp"/>
                                 <li id="getMoreArticle" align="center">
                                     <img src="/resources/images/page-loading.gif" id="loading-img" alt="Loading"
                                          width="180px"/>

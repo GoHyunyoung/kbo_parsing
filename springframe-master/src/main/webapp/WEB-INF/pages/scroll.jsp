@@ -7,7 +7,11 @@
   Time: 오후 5:19
   To change this template use File | Settings | File Templates.
 --%>
+<html>
+<head>
 
+</head>
+<body>
 <c:forEach var="article" items="${articleArrayList}">
     <li class=timeline id="${article.id}" hidden>
         <div class="timeline-time">
