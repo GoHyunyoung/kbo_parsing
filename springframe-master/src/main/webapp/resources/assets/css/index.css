@@ -4,63 +4,72 @@
 Rounded Portlets
 ***/
 
-
 /*hello.jsp*/
 /*BEGIN*/
 .timeline > li .timeline-time span.time {
-	font-weight: bold;
-	font-size: 25px;
-	line-height: 38px;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 38px;
 }
 
-.timeline li.timeline .timeline-body[data-name="SS"]{
-	background: #4186BB;
-}
-.timeline li.timeline .timeline-body[data-name="HH"]{
-	background: #ED5F23;
-}
-.timeline li.timeline .timeline-body[data-name="SK"]{
-	background: #E0002A;
-}
-.timeline li.timeline .timeline-body[data-name="HT"]{
-	background: #E70005;
-}
-.timeline li.timeline .timeline-body[data-name="LG"]{
-	background: #C6064C;
-}
-.timeline li.timeline .timeline-body[data-name="OB"]{
-	background: #EF868B;
-}
-.timeline li.timeline .timeline-body[data-name="LT"]{
-	background: #F04E22;
-}
-.timeline li.timeline .timeline-body[data-name="WO"]{
-	background: #9A304D;
-}
-.timeline li.timeline .timeline-body[data-name="KT"]{
-	background: #868586;
-}
-.timeline li.timeline .timeline-body[data-name="NC"]{
-	background: #2C5482;
+.timeline li.timeline .timeline-body[data-name="SS"] {
+    background: #4186BB;
 }
 
-.timeline > li .timeline-body h2, .timeline > li .timeline-content{
-	font-weight: bold;
-}
-.timeline > li .timeline-body img.timeline-img{
-	width:90px;
+.timeline li.timeline .timeline-body[data-name="HH"] {
+    background: #ED5F23;
 }
 
-.page-header .page-header-top .page-logo .logo-default{
-	margin: 0 0 0 0;
+.timeline li.timeline .timeline-body[data-name="SK"] {
+    background: #E0002A;
 }
 
-.page-header .container, .page-header .container-fluid{
-	margin-top: 20px;
+.timeline li.timeline .timeline-body[data-name="HT"] {
+    background: #E70005;
 }
 
-.col-md-3 input.form-control-inline{
-	width: 160px;
+.timeline li.timeline .timeline-body[data-name="LG"] {
+    background: #C6064C;
+}
+
+.timeline li.timeline .timeline-body[data-name="OB"] {
+    background: #EF868B;
+}
+
+.timeline li.timeline .timeline-body[data-name="LT"] {
+    background: #F04E22;
+}
+
+.timeline li.timeline .timeline-body[data-name="WO"] {
+    background: #9A304D;
+}
+
+.timeline li.timeline .timeline-body[data-name="KT"] {
+    background: #868586;
+}
+
+.timeline li.timeline .timeline-body[data-name="NC"] {
+    background: #2C5482;
+}
+
+.timeline > li .timeline-body h2, .timeline > li .timeline-content {
+    font-weight: bold;
+}
+
+.timeline > li .timeline-body img.timeline-img {
+    width: 90px;
+}
+
+.page-header .page-header-top .page-logo .logo-default {
+    margin: 0 0 0 0;
+}
+
+.page-header .container, .page-header .container-fluid {
+    margin-top: 20px;
+}
+
+.col-md-3 input.form-control-inline {
+    width: 160px;
 }
 
 /*END*/

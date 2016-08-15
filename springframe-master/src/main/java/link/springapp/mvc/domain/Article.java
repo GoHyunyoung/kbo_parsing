@@ -1,6 +1,14 @@
 package link.springapp.mvc.domain;
 
 public class Article {
+    private Integer id;
+    private String date;
+    private String Head;
+    private String Intro;
+    private String Main;
+    private String Url;
+    private String emblem;
+
     public Integer getId() {
         return id;
     }
@@ -56,14 +64,6 @@ public class Article {
     public void setEmblem(String emblem) {
         this.emblem = emblem;
     }
-
-    private Integer id;
-    private String date;
-    private String Head;
-    private String Intro;
-    private String Main;
-    private String Url;
-    private String emblem;
 
     @Override
     public int hashCode() {

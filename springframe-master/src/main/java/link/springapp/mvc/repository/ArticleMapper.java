@@ -8,10 +8,15 @@ public interface ArticleMapper {
     @Select("SELECT * FROM Article WHERE id = #{ArticleId}")
     Article getArticle(@Param("ArticleId") int ArticleId);
 
+//    @Select("SELECT * FROM Article WHERE id = #{ArticleId} LIMIT 10")
+//    Article[] getArticleArray(@Param("ArticleId") int ArticleId);
+
     @Select("SELECT COUNT(*) FROM Article")
     int getArticleCount();
 
-    @Select("call searchArticle_FromDate(#{searchDate})")
-    Article[] getSearchResult(@Param("searchDate")String searchDate);
+    @Select("SELECT MIN(Article.id) FROM Article WHERE date >= #{searchDate}")
+    int getSearchResultMinId(@Param("searchDate") String searchDate);
 
+//    @Select("call searchArticle_FromDate(#{searchDate})")
+//    Article[] getSearchResult(@Param("searchDate") String searchDate);
 }
