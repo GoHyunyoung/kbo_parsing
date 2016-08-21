@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[7]:
 
 
 from bs4 import BeautifulSoup
@@ -9,13 +9,15 @@ import numpy as np
 import pandas as pd
 import urllib2
 import re
+from UrlParser import UrlParser
 
 
-# In[1]:
+# In[ ]:
 
 #URL넣어주면 해당 박스스코어 파싱
-class BoxScoreParser:
-    def __init__(self,url):
+class Parser_KBO:
+    def __init__(self,date,awayTeam):
+        
         data = urllib2.urlopen(url)
         html = BeautifulSoup(data)
         
@@ -143,4 +145,9 @@ class BoxScoreParser:
             self.winScore = self.h_score[12]
             self.winTeam_pitRecord= self.h_pitRecord
             self.winTeam_batRecord = self.h_batRecord
+
+
+# In[ ]:
+
+
 

@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[4]:
 
 
 from bs4 import BeautifulSoup
@@ -23,14 +23,14 @@ import sys
 import os
 
 
-# In[7]:
+# In[5]:
 
-class UrlParser:
+class UrlParserForKBO:
 #     초기화때 날짜를 입력(박스스코어 확인 날짜)
     def __init__(self,startDate,endDate):
-#         박스스코어의 url을 담는 리스트
-        self.urlList=list()        
-        
+#       박스스코어의 url을 담는 리스트
+        self.urlList=[]     
+    
         today=datetime.date.today()
         date=str(startDate)
         yy=int(date[:4])
@@ -67,14 +67,6 @@ class UrlParser:
             btnList = browser.find_elements_by_css_selector('a[href^="/Schedule/Game/BoxScore.aspx?"]')
             for href_in_btnList in btnList:
                 self.urlList.append(href_in_btnList.get_attribute('href'))
-#                 open in new Tab
-#                 btnList[i].send_keys(Keys.CONTROL+Keys.RETURN)
-#                 time.sleep(0.7)
-#                 switch window_handle to new Tab
-#                 browser.switch_to_window(browser.window_handles[1])
-#                 self.urlList.append(browser.current_url)
-#                 browser.close()
-#                 browser.switch_to_window(browser.window_handles[0])
             browser.find_element_by_id('cphContainer_cphContents_btnPreDate').click()
             time.sleep(0.7)
         browser.quit()

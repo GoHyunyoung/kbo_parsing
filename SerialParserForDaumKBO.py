@@ -1,0 +1,36 @@
+
+# coding: utf-8
+
+# In[1]:
+
+
+from bs4 import BeautifulSoup
+import urllib2
+import UrlParserForKBO
+
+
+# In[4]:
+
+#날짜와 AWAY팀이름을 넣으면 url상의 serial을 반환
+class SerialParserForDaumKBO:
+    def __init__(self,date,awayTeam):
+        year=date[:4]
+        month=date[4:4+2]
+        day=date[4+2:(4+2)+2]
+        
+        url='http://score.sports.media.daum.net/schedule/baseball/kbo/main.daum?game_year=2016&game_month=08'
+        page=urllib2.urlopen(url)
+        html=BeautifulSoup(page)
+        s=unicode(html)
+        date_index=s.find(str.format('<td class="time_date" rowspan="5">%d<span class="txt_day">')%(int(9)))
+        s=s[date_index:]
+        
+        s=s[s.find('LG'):]
+        serial_find_url='http://sports.media.daum.net/sports/gamecenter/'
+        serial_start_index=s.find(serial_find_url)+len(serial_find_url)
+        serial=s[serial_start_index:serial_start_index+8]
+        self.serial
+        
+    def getSerial():
+        return self.serial
+
