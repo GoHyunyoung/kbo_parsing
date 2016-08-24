@@ -1,147 +1,269 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 
 from bs4 import BeautifulSoup
-import numpy as np
-import pandas as pd
-import urllib2
+from selenium import webdriver
+from SerialParserForDaumKBO import SerialParserForDaumKBO
+
+import sys
 import re
-import UrlParser
+import urllib2
+import os
 
 
-# In[ ]:
+# In[6]:
 
-#URL넣어주면 해당 박스스코어 파싱
 class Parser_DaumKBO:
-    def __init__(self,url):
-        data = urllib2.urlopen(url)
-        html = BeautifulSoup(data)
-        
-        #DATE
-        self.date = html.select('div.yearDate span')[0].text.replace('.','')
-        
-        #AWAY팀명
-        self.a_team=html.select('table.socreBoard tr:nth-of-type(2) th')[0].text
-        
-        #HOME팀명
-        self.h_team=html.select('table.socreBoard tr:nth-of-type(3) th')[0].text
-        
-        #AWAY_SCORE
-        tmp=html.select('table.socreBoard tr:nth-of-type(2) td')
-        self.a_score=list()
-        for score in tmp:
-            if score.text==u'-':
-                self.a_score.append(0)
-            else:
-                self.a_score.append(int(score.text))
-        
-        #HOME_SCORE
-        tmp=html.select('table.socreBoard tr:nth-of-type(3) td')
-        self.h_score=list()
-        for score in tmp:
-            if score.text==u'-':
-                self.h_score.append(0)
-            else:
-                self.h_score.append(int(score.text))
-        
-        #AWAY_SUM_OF_SCORE
-        self.a_scoreSum = self.a_score[12]
-        #HOME_SUM_OF_SCORE
-        self.h_scoreSum = self.h_score[12]
-        
-        #AWAY_STATUS
-        self.a_status=html.select('p.results')[0].text
-        
-        #HOME_STATUS
-        self.h_status=html.select('p.results')[1].text
-        
-        #STADIUM
-        tmp=html.select('p.ballpark')[0]
-        #.text 메서드는 unicode형태로 반환
-        tmp=tmp.text
-        self.stadium=tmp[tmp.find(u'구장')+4:tmp.find(u'관중')].strip()
-        
-        #HEAD
-        headRowNum = len(html.select('table.tEx tbody tr'))
-        head=dict()
-        for i in range(headRowNum):
-            key = html.select('table.tEx tr:nth-of-type(%d) th'%(i+1))[0].text
-            dat = html.select('table.tEx tr:nth-of-type(%d) td'%(i+1))[0].text
-            dat = dat.strip()
-            
-            if key==u'심판':
-                dat = dat.split()
-            else:
-                dat = dat.replace(') ',')) ').split(') ')
-            head[key]=dat
-        
-        #AWAY 투수기록
-        columns=[u'선수명',u'등판',u'결과',u'승',u'패',u'세',u'이닝',u'타자',u'투구수',u'타수',u'피안타',u'홈런',u'4사구',u'삼진',u'실점',u'자책',u'평균자책점']
-        frame=html.select('table#xtable3 tbody:nth-of-type(1) tr')
-        data=list()    #frame으로부터 데이터를 담을 리스트
-        for row in frame:
-            tmp=list()
-            for dat in row.text.strip().split('\n'):    #한 행(한 투수의 데이터)마다 split한뒤 list로 정리
-                tmp.append(dat)
-            data.append(tmp)   #정리된 list를 data에 추가
-        self.a_pitRecord = pd.DataFrame(data=data,columns=columns)
+    '''
+    stadium : 경기장
 
-        #HOME 투수기록
-        #col=[u'선수명',u'등판',u'결과',u'승',u'패',u'세',u'이닝',u'타자',u'투구수',u'타수',u'피안타',u'홈런',u'4사구',u'삼진',u'실점',u'자책',u'평균자책점']
-        frame=html.select('table#xtable3 tbody:nth-of-type(2) tr')
-        data=list()    #frame으로부터 데이터를 담을 리스트
-        for row in frame:
-            tmp=list()
-            for dat in row.text.strip().split('\n'):    #한 행(한 투수의 데이터)마다 split한뒤 list로 정리
-                tmp.append(dat)
-            data.append(tmp)   #정리된 list를 data에 추가
-        self.h_pitRecord = pd.DataFrame(data=data,columns=columns)
-        #등판:선발의 선수명과 이닝,타자를 get
-        # -> h_pitRecord[h_pitRecord[u'등판']==u'선발'].reindex(columns=[u'선수명',u'이닝',u'타자'])
+    seasonStat : 선발투수 시즌성적
+    ------- key list -------
+    (away/home) : StarterPitcher : 선발투수 이름
+    (away/home) : StarterPitcherWinCount : 선발투수 승수
+    (away/home) : StarterPitcherLoseCount : 선발투수 패수
+    (away/home) : StarterPitcherERA : 선발투수 평균자책
+    (away/home) : StarterPitcherWHIP : 이닝당 안타 볼넷 허용률
+
+    vsStat : 선발투수 상대전적
+    ------- key list -------
+    (away/home) : StarterPitcher : 선발투수 이름
+    (away/home) : StarterPitcherWinCount : 선발투수 승수
+    (away/home) : StarterPitcherLoseCount : 선발투수 패수
+    (away/home) : StarterPitcherERA : 선발투수 평균자책
+    (away/home) : StarterPitcherWHIP : 이닝당 안타 볼넷 허용률
+    
+    startingLineUp : 선발타자
+    ------- key list -------
+    (away/home) : (포지션,이름,평균타율)
+
+    keyPlayer : 키플레이어(타자)
+    ------- key list -------
+    (away/home) : (포지션,이름,평균타율)
+
+    rank : 팀의 순위(변동)
+    ------- key list -------
+    (away/home) : (순위,(1:상승/-1:하강/0:유지))
+
+    win_lose : 팀의 전적
+    ------- key list -------
+    (away/home) : (승,무,패)
+
+    accumulation : 팀의 연승(패)
+    ------- key list -------
+    (away/home) : (1/-1)
+
+    batRecord : 타석기록
+    ------- key list -------
+    (away/home) : H : 안타
+    (away/home) : HR : 홈런
+    (away/home) : SB : 도루
+    (away/home) : BB : 사사구
+    (away/home) : SO : 탈삼진
+    (away/home) : E : 실책
+    (away/home) : GDP : 병살
+    (away/home) : LOB : 잔루
+
+    '''
+    def __init__(self,date,awayTeam):
+        s=SerialParserForDaumKBO(date,awayTeam)
+        serial=s.getSerial()
+        url='http://m.sports.media.daum.net/m/sports/pack/3min/%s'%(serial)
         
-        #AWAY_타자기록
-        columns=[u'선수명',u'1',u'2',u'3',u'4',u'5',u'6',u'7',u'8',u'9',u'10',u'11',u'12',u'타수',u'안타',u'타점',u'득점',u'타율']
-        frame=html.select('table#xtable1 tbody:nth-of-type(1) tr')
-        data=list()
-        for row in frame:
-            tmp=list()
-            for dat in row.text.strip().split('\n')[2:]:
-                tmp.append(dat)
-            data.append(tmp)
-        self.a_batRecord = pd.DataFrame(data=data,columns=columns)
-        
-        #HOME_타자기록
-        columns=[u'선수명',u'1',u'2',u'3',u'4',u'5',u'6',u'7',u'8',u'9',u'10',u'11',u'12',u'타수',u'안타',u'타점',u'득점',u'타율']
-        frame=html.select('table#xtable1 tbody:nth-of-type(2) tr')
-        data=list()
-        for row in frame:
-            tmp=list()
-            for dat in row.text.strip().split('\n')[2:]:
-                tmp.append(dat)
-            data.append(tmp)
-        self.h_batRecord = pd.DataFrame(data=data,columns=columns)
-        
-        
-        #WinTeam
-        if self.a_score[12] > self.h_score[12]:
-            self.winTeam = self.a_team
-            self.winScore = self.a_score[12]
-            self.winTeam_pitRecord = self.a_pitRecord
-            self.winTeam_batRecord = self.a_batRecord        
-            self.loseTeam = self.h_team        
-            self.loseScore = self.h_score[12]
-            self.loseTeam_pitRecord = self.h_pitRecord
-            self.loseTeam_batRecord = self.h_batRecord
+#         window=nt
+        if os.name=='nt':
+            driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
+#       ubuntu=posix
         else:
-            self.loseTeam= self.a_team
-            self.loseScore= self.a_score[12]
-            self.loseTeam_pitRecord = self.a_pitRecord
-            self.loseTeam_batRecord= self.a_batRecord        
-            self.winTeam = self.h_team        
-            self.winScore = self.h_score[12]
-            self.winTeam_pitRecord= self.h_pitRecord
-            self.winTeam_batRecord = self.h_batRecord
+            driver=webdriver.PhantomJS(executable_path='./phantomjs')
+        driver.get(url)
+        
+        data=driver.page_source
+        html=BeautifulSoup(data)
+        
+        self.stadium=html.select_one('span.location').text
+        
+        self.seasonStat={'away':{},'home':{}}
+        self.seasonStat['away']['StarterPitcher']=html.select_one('div.pitcher_comm.pitcher_away strong.name').text
+        self.seasonStat['away']['StarterPitcherWinCount']=int(html.select_one('div#season_stat ul.list_record li:nth-of-type(1) span.bg_graph.graph_away span').text)
+        self.seasonStat['away']['StarterPitcherLoseCount']=int(html.select_one('div#season_stat ul.list_record li:nth-of-type(2) span.bg_graph.graph_away span').text)
+        self.seasonStat['away']['StarterPitcherERA']=float(html.select_one('div#season_stat ul.list_record li:nth-of-type(3) span.bg_graph.graph_away span').text)
+        self.seasonStat['away']['StarterPitcherWHIP']=float(html.select_one('div#season_stat ul.list_record li:nth-of-type(4) span.bg_graph.graph_away span').text)
+        self.seasonStat['home']['StarterPitcher']=html.select_one('div.pitcher_comm.pitcher_home strong.name').text
+        self.seasonStat['home']['StarterPitcherWinCount']=int(html.select_one('div#season_stat ul.list_record li:nth-of-type(1) span.bg_graph.graph_home span').text)
+        self.seasonStat['home']['StarterPitcherLoseCount']=int(html.select_one('div#season_stat ul.list_record li:nth-of-type(2) span.bg_graph.graph_home span').text)
+        self.seasonStat['home']['StarterPitcherERA']=float(html.select_one('div#season_stat ul.list_record li:nth-of-type(3) span.bg_graph.graph_home span').text)
+        self.seasonStat['home']['StarterPitcherWHIP']=float(html.select_one('div#season_stat ul.list_record li:nth-of-type(4) span.bg_graph.graph_home span').text)
+        
+        self.vsStat={'away':{},'home':{}}
+        self.vsStat['away']['StarterPitcher']=html.select_one('div.pitcher_comm.pitcher_away strong.name').text
+        self.vsStat['away']['StarterPitcherWinCount']=int(html.select_one('div#season_stat ul.list_record li:nth-of-type(1) span.bg_graph.graph_away span').text)
+        self.vsStat['away']['StarterPitcherLoseCount']=int(html.select_one('div#season_stat ul.list_record li:nth-of-type(2) span.bg_graph.graph_away span').text)
+        self.vsStat['away']['StarterPitcherERA']=float(html.select_one('div#season_stat ul.list_record li:nth-of-type(3) span.bg_graph.graph_away span').text)
+        self.vsStat['away']['StarterPitcherWHIP']=float(html.select_one('div#season_stat ul.list_record li:nth-of-type(4) span.bg_graph.graph_away span').text)
+        self.vsStat['home']['StarterPitcher']=html.select_one('div.pitcher_comm.pitcher_home strong.name').text
+        self.vsStat['home']['StarterPitcherWinCount']=int(html.select_one('div#season_stat ul.list_record li:nth-of-type(1) span.bg_graph.graph_home span').text)        
+        self.vsStat['home']['StarterPitcherLoseCount']=int(html.select_one('div#season_stat ul.list_record li:nth-of-type(2) span.bg_graph.graph_home span').text)
+        self.vsStat['home']['StarterPitcherERA']=float(html.select_one('div#season_stat ul.list_record li:nth-of-type(3) span.bg_graph.graph_home span').text)
+        self.vsStat['home']['StarterPitcherWHIP']=float(html.select_one('div#season_stat ul.list_record li:nth-of-type(4) span.bg_graph.graph_home span').text)
+        
+#         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+#         lineup부분을 새로 가져와야함
+        url='http://m.sports.media.daum.net/m/sports/pack/3min/%s?lineup'%(serial)
+#         window=nt
+        if os.name=='nt':
+            driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
+#       ubuntu=posix
+        else:
+            driver=webdriver.PhantomJS(executable_path='./phantomjs')
+        driver.get(url)
+        data=driver.page_source
+        html=BeautifulSoup(data)
+#         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+        self.startingLineUp={}
+        for line in html.select('div.wrap tbody tr'):
+            self.startingLineUp['away']=(line.select_one('td:nth-of-type(1)').text,line.select_one('td:nth-of-type(2)').text,float(re.findall('[\.\d]+',line.select_one('td:nth-of-type(3)').text)[0]))
+            self.startingLineUp['home']=(line.select_one('td:nth-of-type(4)').text,line.select_one('td:nth-of-type(5)').text,float(re.findall('[\.\d]+',line.select_one('td:nth-of-type(6)').text)[0]))
+                     
+        self.keyPlayer={'away':(),'home':()}
+        try:
+            keyPlayerParentNode=html.select_one('td.position.away.key-player').parent
+            self.keyPlayer['away']=(keyPlayerParentNode.select_one('td.position.away').text,keyPlayerParentNode.select_one('td:nth-of-type(2)').text,float(re.findall('[\.\d]+',keyPlayerParentNode.select_one('td.batting_average').text)[0]))
+        except AttributeError:
+            self.keyPlayer['away']=()
+            sys.stderr.write('td.position.away.key-player == None\n')
+        try:
+            keyPlayerParentNode=html.select_one('td.position.home.key-player').parent
+            self.keyPlayer['home']=(keyPlayerParentNode.select_one('td.position.home').text,keyPlayerParentNode.select_one('td:nth-of-type(2)').text,float(re.findall('[\.\d]+',keyPlayerParentNode.select_one('td.batting_average').text)[0]))
+        except AttributeError:
+            self.keyPlayer['home']=()
+            sys.stderr.write('td.position.home.key-player == None\n')
+        
+        self.criticalInning={'away':[],'home':[]}
+        try:
+            for x in html.select('table.tbl_score strong.img_highlight.ico_decisive'):
+                node=x.parent.parent.parent
+                if node.attrs['data-half']=='first':
+                    self.criticalInning['away'].append(int(node.attrs['data-inning']))
+                else:
+                    self.criticalInning['home'].append(int(node.attrs['data-inning']))
+        except TypeError:
+            sys.stderr.write('html.select(\'table.tbl_score strong.img_highlight.ico_decisive\') == None\n')
+        
+#         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+#         result부분을 새로 가져와야함
+        url='http://m.sports.media.daum.net/m/sports/pack/3min/%s?result'%(serial)
+#         window=nt
+        if os.name=='nt':
+            driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
+#       ubuntu=posix
+        else:
+            driver=webdriver.PhantomJS(executable_path='./phantomjs')
+        driver.get(url)
+        data=driver.page_source
+        html=BeautifulSoup(data)
+#         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+                
+        self.rank={}
+        sen=html.select_one('div.recent_stats div.away p.change').text
+#      ex)   순위 9위 (-)
+        rankNumber=int(sen.split()[1][:-1])
+#      순위상승
+        if u'▲' in sen:
+            self.rank['away']=(rankNumber,int(sen[sen.find('▲'):sen.find(')')]))
+#      순위하강
+        elif u'▽' in sen:
+            self.rank['away']=(rankNumber,-1*int(sen[sen.find('▽'):sen.find(')')]))
+#      순위유지
+        else:
+            self.rank['away']=(rankNumber,0)
+        sen=html.select_one('div.recent_stats div.home p.change').text
+#      ex)   순위 9위 (-)
+        rankNumber=int(sen.split()[1][:-1])
+#      순위상승
+        if u'▲' in sen:
+            self.rank['home']=(rankNumber,int(sen[sen.find('▲'):sen.find(')')]))
+#      순위하강
+        elif u'▽' in sen:
+            self.rank['home']=(rankNumber,-1*int(sen[sen.find('▽'):sen.find(')')]))
+#      순위유지
+        else:
+            self.rank['home']=(rankNumber,0)
+        
+        self.win_lose={}
+        sen=html.select_one('div.recent_stats div.away p.win-lose').text
+        self.win_lose['away']=tuple(map(int,re.findall('[\d]+',sen)))
+        sen=html.select_one('div.recent_stats div.home p.win-lose').text
+        self.win_lose['home']=tuple(map(int,re.findall('[\d]+',sen)))
+        
+        self.accumulation={}
+        sen=html.select_one('div.recent_stats div.away p.accumulation').text
+        self.accumulation['away']= int(re.findall('[\d]+',sen)[0]) if sen[-1]==u'승' else (-1)*int(re.findall('[\d]+',sen)[0])
+        sen=html.select_one('div.recent_stats div.home p.accumulation').text
+        self.accumulation['home']=int(re.findall('[\d]+',sen)[0]) if sen[-1]==u'승' else (-1)*int(re.findall('[\d]+',sen)[0])
+        
+        if int(html.select('td.run')[0].text) >= int(html.select('td.run')[1].text):
+            winTeam='away'
+            loseTeam='home'
+        else:
+            winTeam='home'
+            loseTeam='away'
+#         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+#         stats부분을 새로 가져와야함
+        url='http://m.sports.media.daum.net/m/sports/pack/3min/%s?stats'%(serial)
+#         window=nt
+        if os.name=='nt':
+            driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
+#       ubuntu=posix
+        else:
+            driver=webdriver.PhantomJS(executable_path='./phantomjs')
+        driver.get(url)
+        data=driver.page_source
+        html=BeautifulSoup(data)
+#         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        self.batRecord={'away':{},'home':{}}
+        tmpList=[]
+    #     안타,홈런,도루,사사구,탈삼진,실책,병살,잔루
+        keyList=['H','HR','SB','BB','SO','E','GDP','LOB']
+        for element in html.select('li#page-stats div.vs_graph ul.list_record'):
+            tmpList.extend(tuple(map(int,re.findall('[\d]+',element.text))))
+        for k in enumerate(keyList):
+    #     짝수 인덱스
+            if k[0]%2==0 :
+                self.batRecord['home'][k[1]]= tmpList[k[0]]
+            else:
+                self.batRecord['away'][k[1]]=tmpList[k[0]]
+
+        if winTeam=='away':
+            self.seasonStat['winTeam']=self.seasonStat['away']
+            self.vsStat['winTeam']=self.vsStat['away']
+            self.startingLineUp['winTeam']=self.startingLineUp['away']
+            self.keyPlayer['winTeam']=self.keyPlayer['away']
+            self.rank['winTeam']=self.rank['away']
+            self.seasonStat['loseTeam']=self.seasonStat['away']
+            self.accumulation['winTeam']=self.accumulation['away']
+            
+            self.vsStat['loseTeam']=self.vsStat['home']
+            self.startingLineUp['loseTeam']=self.startingLineUp['home']
+            self.keyPlayer['loseTeam']=self.keyPlayer['home']
+            self.rank['loseTeam']=self.rank['home']
+            self.batRecord['loseTeam']=self.batRecord['home']
+        else :
+            self.seasonStat['winTeam']=self.seasonStat['home']
+            self.vsStat['winTeam']=self.vsStat['home']
+            self.startingLineUp['winTeam']=self.startingLineUp['home']
+            self.keyPlayer['winTeam']=self.keyPlayer['home']
+            self.rank['winTeam']=self.rank['home']
+            self.seasonStat['loseTeam']=self.seasonStat['home']
+            self.accumulation['winTeam']=self.accumulation['home']
+            
+            self.vsStat['loseTeam']=self.vsStat['away']
+            self.startingLineUp['loseTeam']=self.startingLineUp['away']
+            self.keyPlayer['loseTeam']=self.keyPlayer['away']
+            self.rank['loseTeam']=self.rank['away']
+            self.batRecord['loseTeam']=self.batRecord['away']
 
