@@ -16,3 +16,5 @@ src/main/resources/rebel.xml
 /.ipynb_checkpoints
 /metronic_v3.3.0
 /springframe-master\src\main\resources
+./ppt
+./DecisionLearning
