@@ -1,35 +1,22 @@
 
 # coding: utf-8
 
-# In[4]:
+# In[1]:
 
 
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.by import By
-
 import datetime
-import numpy  as np
-import pandas as pd
-import random as rd
 import time
 import urllib2
-import sys
-import os
 
 
-# In[5]:
+# In[1]:
 
 class UrlParserForKBO:
 #     초기화때 날짜를 입력(박스스코어 확인 날짜)
     def __init__(self,startDate,endDate):
 #       박스스코어의 url을 담는 리스트
-        self.urlList=[]     
+        self.urlList=[]
     
         today=datetime.date.today()
         date=str(startDate)
@@ -70,4 +57,7 @@ class UrlParserForKBO:
             browser.find_element_by_id('cphContainer_cphContents_btnPreDate').click()
             time.sleep(0.7)
         browser.quit()
+        
+        def getUrlList(self):
+            return self.urlList
 
