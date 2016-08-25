@@ -25,9 +25,16 @@ public class HelloController {
     @Autowired
     private ArticleService articleService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
-        logger.info("-----BEGIN index CONTROLLER-----");
+        logger.info("-----BEGIN /index CONTROLLER-----");
+        logger.info("-----END /index CONTROLLER-----");
+        return "index";
+    }
+    
+    @RequestMapping(value = {"/timeline"}, method = RequestMethod.GET)
+    public String printTimeline(ModelMap model) {
+        logger.info("-----BEGIN /timeline CONTROLLER-----");
 
         ArrayList<Article> articleArrayList = new ArrayList<>();
 
@@ -38,9 +45,9 @@ public class HelloController {
             articleArrayList.add(article);
         }
         model.addAttribute("articleArrayList", articleArrayList);
-        logger.info("-----END index CONTROLLER-----");
+        logger.info("-----END /timeline CONTROLLER-----");
 
-        return "index";
+        return "timeline";
     }
 
     @RequestMapping(value = "/scroll", method = RequestMethod.GET)

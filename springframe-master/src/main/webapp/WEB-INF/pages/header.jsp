@@ -55,10 +55,10 @@
             <div class="hor-menu">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="index.jsp">Mr.Writer?</a>
+                        <a href="/index">Mr.Writer?</a>
                     </li>
                     <li>
-                        <a href="timeline.jsp">Timeline</a>
+                        <a href="/timeline">Timeline</a>
                     </li>
                     <li>
                         <a href="/">BoxScore</a>
