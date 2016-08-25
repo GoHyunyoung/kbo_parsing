@@ -9,25 +9,27 @@
 --%>
 <html>
 <head>
-
 </head>
 <body>
+<c:set var="date" value="${article.date}"></c:set>
 <c:forEach var="article" items="${articleArrayList}">
     <li class=timeline id="${article.id}" hidden>
         <div class="timeline-time">
-                <%--<c:out value="안녕하세요"></c:out>--%>
             <c:choose>
                 <c:when test="${date==article.date}">
                     <c:set var="date" value="${article.date}"></c:set>
                 </c:when>
                 <c:otherwise>
-                    <span class="time" style='color: #303a41'>${article.date.substring(4,6)}월${article.date.substring(6,8)}일${article.date.substring(8,article.date.length())}</span>
+                    <span class="time" style='color: #303a41'>
+                        ${article.date.substring(4,6)}월
+                        ${article.date.substring(6,8)}일
+                        ${article.date.substring(8,article.date.length())}
+                    </span>
                 </c:otherwise>
             </c:choose>
             <c:set var="date" value="${article.date}"></c:set>
         </div>
-        <div class="timeline-icon">
-        </div>
+        <div class="timeline-icon"></div>
         <div class="timeline-body" data-name="${article.emblem}">
             <h2>${article.head}</h2>
             <div class="timeline-content">

@@ -2,12 +2,11 @@
  * Created by gohyunyoung98 on 16. 7. 25.
  */
 
-$(document).ready(function () {
-    var win = $(window);
+$(document).ready(function() {
     // Each time the user scrolls
-    win.scroll(function () {
+    $(window).scroll(function() {
         // End of the document reached?
-        if ($(document).height() - win.height() <= win.scrollTop()) {
+        if ($(document).height() - $(window).height() == $(window).scrollTop()) {
             var articleId = $('li.timeline:nth-last-of-type(2)').attr('id');
             var sequence="DESC";
             // RECENT->OLD 순서

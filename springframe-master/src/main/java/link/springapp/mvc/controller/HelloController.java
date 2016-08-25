@@ -52,7 +52,6 @@ public class HelloController {
         logger.info("articleId="+articleId);
         logger.info("sequence="+sequence);
 
-
 //        lastIndex설정
         for (int i = 0; i < 10; i++) {
 //          RECENT->OLD 글 순서
@@ -63,8 +62,8 @@ public class HelloController {
                 break;
             Article article = articleService.getArticle(articleId+index);
             articleArrayList.add(article);
-
         }
+
         logger.info("WORKING 2");
 
         model.addAttribute("articleArrayList", articleArrayList);
@@ -83,7 +82,7 @@ public class HelloController {
         logger.info("----- WORKING 1 -----");
         logger.info("searchDate="+searchDate);
 
-//        lastIndex설정
+//      lastIndex설정
         for (int i = 0; i < 10; i++) {
 //          RECENT->OLD 글 순서
             logger.info("for LOOP i = "+i);

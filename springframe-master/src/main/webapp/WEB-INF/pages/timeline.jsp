@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>KBO Article Generator | Index</title>
+    <title>KBO Article Generator | Timeline</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/resources/assets/bootstrap-3.3.4/css/bootstrap.min.css">
@@ -39,7 +39,6 @@
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/assets/javascript/scroll.js"></script>
-    <script type="text/javascript" src="/resources/assets/javascript/index.js"></script>
     <%--END INDEX_PAGE SCRIPT--%>
 
 </head>
@@ -51,8 +50,8 @@
         <div class="container">
             <!-- BEGIN PAGE TITLE -->
             <div class="page-title">
-                <h1>Introduction
-                    <small>Who is Mr.Writer?</small>
+                <h1>Timeline
+                    <small>Recent Article on the KBO</small>
                 </h1>
             </div>
             <!-- END PAGE TITLE -->
@@ -91,7 +90,7 @@
                     <a href="#">Home</a><i class="fa fa-circle"></i>
                 </li>
                 <li class="active">
-                    Mr.Writer
+                    Timeline
                 </li>
             </ul>
             <!-- END PAGE BREADCRUMB -->
@@ -100,42 +99,14 @@
             <div class="portlet light">
                 <div class="portlet-body">
                     <div class="row">
-                        <!-- Introduce -->
-                        <div class="col-md-12" >
-                            <div class="col-md-4" align="center">
-                                <br/><br/>
-                                <a><img src="/resources/images/logo.png" alt="logo" class="logo_img"></a>
-                            </div>
-                            <div class="col-md-8" align="left">
-                                <div class="explain">
-                                    <br/><h1>Mr.Writer</h1><br/>
-                                    <p>Mr.Writer은 KBO홈페이지를 파싱하여 추출된 데이터들을 통해 기사를 작성한다.</p>
-                                    <p>[의사결정트리]를 사용해 서두의 문장을 통해 다음과 본론에 나올 문장구성들을 재조정하여</p>
-                                    <p>생성된 기사들을 Facebook 봇계정 타임라인에 자동등록 된다</p>
-                                    <p>다음 설명은 다음 업데이트에 맞춰 추가됩니다</p>
-                                </div>
-                            </div>
-                            <a href="/"></a>
-                        </div>
-                        <!-- phone & Com img -->
-                        <div class="col-md-1"></div>
-                        <div class="col-md-11" align="center">
-                            <br/>
-                            <a><img src="/resources/images/page.png" class="big_img"></a>
-                        </div>
-                        <!-- Arrow -->
-                        <div class="col-md-12" align="center">
-                            <br/><br/>
-                            <div class="hover1 effect1">
-                                <a onclick="kuisin('testdiv'); return false;"><img src="/resources/images/arrow.png"></a>
-                            </div>
-                            <br/>
-                            <!-- Hidden Page -->
-                            <div id="testdiv" style="display:none">
-                                <br/>
-                                <a><img src="/resources/images/structure.png" class="big_img"></a>
-                                <br/><br/>
-                            </div>
+                        <div class="col-md-12">
+                            <ul class="timeline">
+                                <jsp:include page="scroll.jsp"/>
+                                <li id="getMoreArticle" align="center">
+                                    <img src="/resources/images/page-loading.gif" id="loading-img" alt="Loading"
+                                         width="180px"/>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

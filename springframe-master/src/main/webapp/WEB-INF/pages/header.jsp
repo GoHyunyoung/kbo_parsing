@@ -12,6 +12,7 @@
 <head>
     <script type="text/javascript" src="../../resources/assets/javascript/searchResult.js"></script>
 </head>
+
 <body>
 <!-- BEGIN HEADER -->
 <div class="page-header">
@@ -28,7 +29,7 @@
     <!-- END HEADER TOP -->
 
     <!-- BEGIN HEADER MENU -->
-    <div class="page-header-menu">
+    <div class="page-header-menu">  <!-- Error in SAFARI _ Yong -->
         <div class="container">
             <!-- BEGIN HEADER SEARCH BOX -->
             <form class="search-form" action="search.jsp" method="GET">
@@ -40,23 +41,24 @@
                         </c:when>
                         <c:otherwise>
                             <input class="form-control form-control-inline date-picker" size="16" type="text"
-                                   placeholder="${articleList[0].date.substring(0,4)}-${articleList[0].date.substring(4,6)}-${articleList[0].date.substring(6,articleList[0].date.length())}"
+                                   placeholder="${articleList[0].date.substring(0,4)}-
+                                   ${articleList[0].date.substring(4,6)}-
+                                   ${articleList[0].date.substring(6,articleList[0].date.length())}"
                                    value="">
                         </c:otherwise>
                     </c:choose>
-
                 </div>
             </form>
 
             <!-- END HEADER SEARCH BOX -->
             <!-- BEGIN MEGA MENU -->
-            <div class="hor-menu ">
+            <div class="hor-menu">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/">Mr.Writer?</a>
+                        <a href="index.jsp">Mr.Writer?</a>
                     </li>
                     <li>
-                        <a href="/">Timeline</a>
+                        <a href="timeline.jsp">Timeline</a>
                     </li>
                     <li>
                         <a href="/">BoxScore</a>

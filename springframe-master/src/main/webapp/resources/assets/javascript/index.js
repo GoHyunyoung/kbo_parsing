@@ -1909,7 +1909,12 @@ var Layout = function () {
     $(function () {
         $('[data-provide="datepicker-inline"]').datepicker();
     });
-
 }(window.jQuery));
 
+function kuisin(idMyDiv){
+    var objDiv = document.getElementById(idMyDiv);
+
+    if(objDiv.style.display=="block"){ objDiv.style.display = "none"; }
+    else{ objDiv.style.display = "block"; }
+}
 
