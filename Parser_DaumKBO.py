@@ -22,50 +22,54 @@ class Parser_DaumKBO:
 
     seasonStat : 선발투수 시즌성적
     ------- key list -------
-    (away/home) : StarterPitcher : 선발투수 이름
-    (away/home) : StarterPitcherWinCount : 선발투수 승수
-    (away/home) : StarterPitcherLoseCount : 선발투수 패수
-    (away/home) : StarterPitcherERA : 선발투수 평균자책
-    (away/home) : StarterPitcherWHIP : 이닝당 안타 볼넷 허용률
+    [away/home/winTeam/loseTeam][StarterPitcher] : 선발투수 이름
+    [away/home/winTeam/loseTeam][StarterPitcherWinCount] : 선발투수 승수
+    [away/home/winTeam/loseTeam][StarterPitcherLoseCount] : 선발투수 패수
+    [away/home/winTeam/loseTeam][StarterPitcherERA] : 선발투수 평균자책
+    [away/home/winTeam/loseTeam][StarterPitcherWHIP] : 이닝당 안타 볼넷 허용률
 
     vsStat : 선발투수 상대전적
     ------- key list -------
-    (away/home) : StarterPitcher : 선발투수 이름
-    (away/home) : StarterPitcherWinCount : 선발투수 승수
-    (away/home) : StarterPitcherLoseCount : 선발투수 패수
-    (away/home) : StarterPitcherERA : 선발투수 평균자책
-    (away/home) : StarterPitcherWHIP : 이닝당 안타 볼넷 허용률
+    [away/home/winTeam/loseTeam][StarterPitcher] : 선발투수 이름
+    [away/home/winTeam/loseTeam][StarterPitcherWinCount] : 선발투수 승수
+    [away/home/winTeam/loseTeam][StarterPitcherLoseCount] : 선발투수 패수
+    [away/home/winTeam/loseTeam][StarterPitcherERA] : 선발투수 평균자책
+    [away/home/winTeam/loseTeam][StarterPitcherWHIP] : 이닝당 안타 볼넷 허용률
     
     startingLineUp : 선발타자
     ------- key list -------
-    (away/home) : (포지션,이름,평균타율)
+    [away/home/winTeam/loseTeam] : (포지션,이름,평균타율)
 
     keyPlayer : 키플레이어(타자)
     ------- key list -------
-    (away/home) : (포지션,이름,평균타율)
+    [away/home/winTeam/loseTeam] : (포지션,이름,평균타율)
+    
+    criticalInning : 승부처 이닝
+    ------- key list -------
+    [away/home/winTeam/loseTeam] : [승부처 이닝]
 
     rank : 팀의 순위(변동)
     ------- key list -------
-    (away/home) : (순위,(1:상승/-1:하강/0:유지))
+    [away/home/winTeam/loseTeam] : (순위,(1:상승/-1:하강/0:유지))
 
     win_lose : 팀의 전적
     ------- key list -------
-    (away/home) : (승,무,패)
+    [away/home/winTeam/loseTeam] : (승,무,패)
 
     accumulation : 팀의 연승(패)
     ------- key list -------
-    (away/home) : (1/-1)
+    [away/home/winTeam/loseTeam] : (1:승/-1:패)
 
     batRecord : 타석기록
     ------- key list -------
-    (away/home) : H : 안타
-    (away/home) : HR : 홈런
-    (away/home) : SB : 도루
-    (away/home) : BB : 사사구
-    (away/home) : SO : 탈삼진
-    (away/home) : E : 실책
-    (away/home) : GDP : 병살
-    (away/home) : LOB : 잔루
+    [away/home/winTeam/loseTeam][H] : 안타
+    [away/home/winTeam/loseTeam][HR]: 홈런
+    [away/home/winTeam/loseTeam][SB]: 도루
+    [away/home/winTeam/loseTeam][BB]: 사사구
+    [away/home/winTeam/loseTeam][SO]: 탈삼진
+    [away/home/winTeam/loseTeam][E] :실책
+    [away/home/winTeam/loseTeam][GDP] : 병살
+    [away/home/winTeam/loseTeam][LOB] : 잔루
 
     '''
     def __init__(self,date,awayTeam):
