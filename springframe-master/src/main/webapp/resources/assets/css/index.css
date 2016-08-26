@@ -111,4 +111,21 @@ Rounded Portlets
     transform: scale(1.15, 1.15);
 }
 
+.boxscore {
+    text-align: left;
+    background-color : rgba(0, 0, 0, 0.02);
+}
+.emblem-right {
+    text-align: right;
+}
+.emblem-left {
+    text-align: left;
+}
+.scorepoint {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: #4c4c4c;
+}
+
 /*END*/

@@ -29,7 +29,7 @@
     <!-- END HEADER TOP -->
 
     <!-- BEGIN HEADER MENU -->
-    <div class="page-header-menu">  <!-- Error in SAFARI _ Yong -->
+    <div class="page-header-menu">
         <div class="container">
             <!-- BEGIN HEADER SEARCH BOX -->
             <form class="search-form" action="search.jsp" method="GET">
@@ -43,8 +43,7 @@
                             <input class="form-control form-control-inline date-picker" size="16" type="text"
                                    placeholder="${articleList[0].date.substring(0,4)}-
                                    ${articleList[0].date.substring(4,6)}-
-                                   ${articleList[0].date.substring(6,articleList[0].date.length())}"
-                                   value="">
+                                   ${articleList[0].date.substring(6,articleList[0].date.length())}" value="">
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -61,7 +60,7 @@
                         <a href="/timeline">Timeline</a>
                     </li>
                     <li>
-                        <a href="/">BoxScore</a>
+                        <a href="/boxscore">BoxScore</a>
                     </li>
                     <li>
                         <a href="/">Etc</a>

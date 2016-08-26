@@ -16,9 +16,7 @@
     <li class=timeline id="${article.id}" hidden>
         <div class="timeline-time">
             <c:choose>
-                <c:when test="${date==article.date}">
-                    <c:set var="date" value="${article.date}"></c:set>
-                </c:when>
+                <c:when test="${date==article.date}"></c:when>
                 <c:otherwise>
                     <span class="time" style='color: #303a41'>
                         ${article.date.substring(4,6)}월

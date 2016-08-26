@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>KBO Article Generator | Index</title>
+    <title>KBO Article Generator | BoxScore</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/resources/assets/bootstrap-3.3.4/css/bootstrap.min.css">
@@ -35,12 +35,12 @@
     <link href="/resources/assets/css/index.css" rel="stylesheet" type="text/css">
     <link href="/resources/assets/css/calendar.css" rel="stylesheet" type="text/css">
     <!-- END THEME STYLES -->
-    <%--BEGIN INDEX_PAGE SCRIPT--%>
+    <%--BEGIN BOXSCORE_PAGE SCRIPT--%>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/resources/assets/javascript/scroll.js"></script>
     <script type="text/javascript" src="/resources/assets/javascript/index.js"></script>
-    <%--END INDEX_PAGE SCRIPT--%>
+    <%--END BOXSCORE_PAGE SCRIPT--%>
 
 </head>
 <jsp:include page="header.jsp"/>
@@ -51,8 +51,8 @@
         <div class="container">
             <!-- BEGIN PAGE TITLE -->
             <div class="page-title">
-                <h1>Introduction
-                    <small>Who is Mr.Writer?</small>
+                <h1>BoxScore
+                    <small>Easy To Look Score</small>
                 </h1>
             </div>
             <!-- END PAGE TITLE -->
@@ -91,51 +91,106 @@
                     <a href="#">Home</a><i class="fa fa-circle"></i>
                 </li>
                 <li class="active">
-                    Mr.Writer
+                    BoxScore
                 </li>
             </ul>
             <!-- END PAGE BREADCRUMB -->
 
             <!-- BEGIN PAGE CONTENT INNER -->
-            <div class="portlet light">
-                <div class="portlet-body">
-                    <div class="row">
-                        <!-- Introduce -->
-                        <div class="col-md-12" >
-                            <div class="col-md-4" align="center">
-                                <br/><br/>
-                                <a><img src="/resources/images/logo.png" alt="logo" class="logo_img"></a>
-                            </div>
-                            <div class="col-md-8" align="left">
-                                <div class="explain">
-                                    <br/><h1>Mr.Writer</h1><br/>
-                                    <p>Mr.Writer은 KBO홈페이지를 파싱하여 추출된 데이터들을 통해 기사를 작성한다.</p>
-                                    <p>[의사결정트리]를 사용해 서두의 문장을 통해 다음과 본론에 나올 문장구성들을 재조정하여</p>
-                                    <p>생성된 기사들을 Mr.Writer Webpage 및 Facebook 봇계정 타임라인에 자동등록 된다</p>
-                                    <p>다음 설명은 다음 업데이트에 맞춰 추가됩니다</p>
+            <div class="portlet light col-md-12">
+                <div class="col-md-2"></div>
+                <div class="boxscore col-md-8">
+                    <div class="portlet-body">
+                        <div class="row number-stats margin-bottom-30">
+                            <div class="col-md-2">
+                                <div class="stat-left">
+                                    <div class="stat-number">
+                                        <div class="title">Home</div>
+                                        <div class="number">한화</div>
+                                    </div>
                                 </div>
                             </div>
-                            <a href="/"></a>
-                        </div>
-                        <!-- phone & Com img -->
-                        <div class="col-md-1"></div>
-                        <div class="col-md-11" align="center">
-                            <br/>
-                            <a><img src="/resources/images/page.png" class="big_img"></a>
-                        </div>
-                        <!-- Arrow -->
-                        <div class="col-md-12" align="center">
-                            <br/><br/>
-                            <div class="hover1 effect1">
-                                <a onclick="kuisin('testdiv'); return false;"><img src="/resources/images/arrow.png"></a>
+                            <div class="emblem-left col-md-2">
+                                <a><img src="/resources/images/emblem_image/emblemB_HH.png"/></a>
                             </div>
-                            <br/>
-                            <!-- Hidden Page -->
-                            <div id="testdiv" style="display:none">
-                                <br/>
-                                <a><img src="/resources/images/structure.png" class="big_img"></a>
-                                <br/><br/>
+                            <div class="scorepoint col-md-4">
+                                6 : 10
                             </div>
+                            <div class="emblem-right col-md-2">
+                                <a><img src="/resources/images/emblem_image/emblemB_SS.png"/></a>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="stat-right">
+                                    <div class="stat-number">
+                                        <div class="title">Away</div>
+                                        <div class="number">삼성</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-scrollable table-scrollable-borderless">
+                            <table class="table table-hover table-light">
+                                <thead>
+                                <tr class="uppercase">
+                                    <th>TEAM</th>
+                                    <th>1</th>
+                                    <th>2</th>
+                                    <th>3</th>
+                                    <th>4</th>
+                                    <th>5</th>
+                                    <th>6</th>
+                                    <th>7</th>
+                                    <th>8</th>
+                                    <th>9</th>
+                                    <th>10</th>
+                                    <th>11</th>
+                                    <th>12</th>
+                                    <th>R</th>
+                                    <th>H</th>
+                                    <th>E</th>
+                                    <th>B</th>
+                                </tr>
+                                </thead>
+                                <tbody><tr>
+                                    <td>한화</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>2</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>3</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>12</td>
+                                    <td>1</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>삼성</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>3</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>8</td>
+                                    <td>1</td>
+                                    <td>3</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

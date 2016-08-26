@@ -31,13 +31,11 @@ public class HelloController {
         logger.info("-----END /index CONTROLLER-----");
         return "index";
     }
-    
+
     @RequestMapping(value = {"/timeline"}, method = RequestMethod.GET)
     public String printTimeline(ModelMap model) {
         logger.info("-----BEGIN /timeline CONTROLLER-----");
-
         ArrayList<Article> articleArrayList = new ArrayList<>();
-
         int articleCount = articleService.getArticleCount();
 
         for (int i = 0; i < 10; i++) {
@@ -46,20 +44,27 @@ public class HelloController {
         }
         model.addAttribute("articleArrayList", articleArrayList);
         logger.info("-----END /timeline CONTROLLER-----");
-
         return "timeline";
     }
 
-    @RequestMapping(value = "/scroll", method = RequestMethod.GET)
-    public String getMoreArticle(ModelMap model,@RequestParam("articleId") int articleId,@RequestParam("sequence") String sequence) {
-        logger.info("-----BEGIN /scroll CONTROLLER-----");
+    @RequestMapping(value = {"/boxscore"}, method = RequestMethod.GET)
+    public String printBoxScore(ModelMap model) {
+        logger.info("-----BEGIN /index CONTROLLER-----");
+        logger.info("-----END /index CONTROLLER-----");
+        return "boxscore";
+    }
 
+    @RequestMapping(value = "/scroll", method = RequestMethod.GET)
+    public String getMoreArticle(ModelMap model,@RequestParam("articleId")
+        int articleId,@RequestParam("sequence") String sequence) {
+
+        logger.info("-----BEGIN /scroll CONTROLLER-----");
         ArrayList<Article> articleArrayList = new ArrayList<>();
         logger.info("----- WORKING 1 -----");
         logger.info("articleId="+articleId);
         logger.info("sequence="+sequence);
 
-//        lastIndex설정
+//      lastIndex설정
         for (int i = 0; i < 10; i++) {
 //          RECENT->OLD 글 순서
             int index=i;
@@ -72,11 +77,8 @@ public class HelloController {
         }
 
         logger.info("WORKING 2");
-
         model.addAttribute("articleArrayList", articleArrayList);
-
         logger.info("-----END /scroll CONTROLLER-----");
-
         return "scroll";
     }
 
@@ -98,6 +100,7 @@ public class HelloController {
             Article article = articleService.getArticle(searchResultMinId+i);
             articleArrayList.add(article);
         }
+
         logger.info("WORKING 2");
         model.addAttribute("articleArrayList", articleArrayList);
         logger.info("-----END /search CONTROLLER-----");
