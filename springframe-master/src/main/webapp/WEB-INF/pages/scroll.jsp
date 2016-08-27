@@ -39,7 +39,7 @@
             </div>
             <div class="timeline-footer">
                 <a href="${article.url}" class="nav-link pull-right">
-                    해당 경기 상세히 보러가기<i class="m-icon-swapright m-icon-white"></i>
+                    해당 경기 상세히 보러가기 <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>
         </div>

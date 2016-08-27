@@ -38,7 +38,7 @@ $(document).ready(function() {
                     //     param.articleId=$('li.timeline:nth-last-of-type(2)').attr('id')+1;
                     // console.log('success 후 : '+ param.articleId);
                     // console.log("articleId = "+articleId);
-                    console.log("sequence = "+sequence);
+                    // console.log("sequence = "+sequence);
                     // console.log("param.articleId = "+param.articleId);
                     // console.log("param.sequence = "+param.sequence);
 

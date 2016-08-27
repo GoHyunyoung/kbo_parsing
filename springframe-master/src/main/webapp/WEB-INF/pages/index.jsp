@@ -103,12 +103,12 @@
                         <!-- Introduce -->
                         <div class="col-md-12" >
                             <div class="col-md-4" align="center">
-                                <br/><br/>
+                                <br/>
                                 <a><img src="/resources/images/logo.png" alt="logo" class="logo_img"></a>
                             </div>
                             <div class="col-md-8" align="left">
                                 <div class="explain">
-                                    <br/><h1>Mr.Writer</h1><br/>
+                                    <h1>Mr.Writer</h1><br/>
                                     <p>Mr.Writer은 KBO홈페이지를 파싱하여 추출된 데이터들을 통해 기사를 작성한다.</p>
                                     <p>[의사결정트리]를 사용해 서두의 문장을 통해 다음과 본론에 나올 문장구성들을 재조정하여</p>
                                     <p>생성된 기사들을 Mr.Writer Webpage 및 Facebook 봇계정 타임라인에 자동등록 된다</p>

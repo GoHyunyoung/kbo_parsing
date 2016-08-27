@@ -49,8 +49,9 @@ public class HelloController {
 
     @RequestMapping(value = {"/boxscore"}, method = RequestMethod.GET)
     public String printBoxScore(ModelMap model) {
-        logger.info("-----BEGIN /index CONTROLLER-----");
-        logger.info("-----END /index CONTROLLER-----");
+        logger.info("-----BEGIN /boxscore CONTROLLER-----");
+
+        logger.info("-----END /boxscore CONTROLLER-----");
         return "boxscore";
     }
 
