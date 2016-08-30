@@ -1911,10 +1911,70 @@ var Layout = function () {
     });
 }(window.jQuery));
 
+/* Intro -> Hidden -> Show */
 function kuisin(idMyDiv){
     var objDiv = document.getElementById(idMyDiv);
     if(objDiv.style.display=="block"){ objDiv.style.display = "none";}
     else {objDiv.style.display = "block";}
 }
 
+/* Date Picker -- Show All date 16.07.01 ~ 16.9.30 */
+var ul = $('ul.datebox-content');
+var num = 0;
+var days_in_month = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+var day_week = new Array('금','토','일','월','화','수','목');
+for(var i = 7; i <= 9; i++) {
+    ul.append('<li class="month-dimmed"> <span class="year">2016</span> <div></div> <span class="month">'
+        + i +
+        '</span> </li>');
+    for(var j = 1; j<= days_in_month[i-1]; j++) {
+        if (num%7 == 1) {
+            ul.append('<a href="#" onclick="datePicker(20160'
+                + i +
+                + j +
+                ')"> <li class="day-sat"> <span>'
+                + day_week[num%7] +
+                '</span> <span>'
+                + j +
+                '</span> </li> </a>');
+        }
+        else if (num%7 == 2) {
+            ul.append('<a href="#"onclick="datePicker(20160'
+                + i +
+                + j +
+                ')"> <li class="day-sun"> <span>'
+                + day_week[num%7] +
+                '</span> <span>'
+                + j +
+                '</span> </li> </a>');
+        }
+        else {
+            ul.append('<a href="#" onclick="datePicker(20160'
+                + i +
+                + j +
+                ')"> <li class="day"> <span>'
+                + day_week[num%7] +
+                '</span> <span>'
+                + j +
+                '</span> </li> </a>');
+        }
+        num++;
+    }
+}
 
+function datePicker(pickedDate) {
+
+    var sequence="DESC";
+
+    $.ajax({
+        url: '/boxscore',
+        type: 'get',
+        data: 'gameDate='+pickedDate,
+        success: function (data) {
+            console.log("success");
+        },
+        error : function () {
+            console.log("error");
+        }
+    });
+}

@@ -41,7 +41,6 @@
     <script type="text/javascript" src="/resources/assets/javascript/scroll.js"></script>
     <script type="text/javascript" src="/resources/assets/javascript/index.js"></script>
     <%--END BOXSCORE_PAGE SCRIPT--%>
-
 </head>
 <jsp:include page="header.jsp"/>
 <!-- BEGIN PAGE CONTAINER -->
@@ -100,130 +99,35 @@
             <!-- BEGIN PAGE CONTENT INNER -->
             <div class="portlet light col-md-12">
 
-                <!------------------------------------------------------------>
+                <!----------------- Date Picker ------------------------->
                 <div class="datebox col-md-1">
                     <div class="section-date">
                         <div class="col-head">
                             <h3>Date</h3>
                         </div>
                         <div class="col-body">
-                            <ul>
-                                <div>
-                                    <li class="month-dimmed">
-                                        <span class="year">2016</span>
-                                        <div></div>
-                                        <span class="month">8</span>
-                                    </li>
-                                    <li data-index="2" date="20160824" class="day">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">수</span>
-                                            <span class="day">24</span>
-                                        </a>
-                                    </li>
-                                    <li data-index="3" date="20160825" class="day">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">목</span>
-                                            <span class="day">25</span>
-                                        </a>
-                                    </li>
-                                    <li data-index="4" date="20160826" class="day">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">금</span>
-                                            <span class="day">26</span>
-                                        </a>
-                                    </li>
-                                    <li data-index="0" date="20160827" class="day day-sat">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">토</span>
-                                            <span class="day">27</span>
-                                        </a>
-                                    </li>
-                                    <li data-index="1" date="20160828" class="day day-sun">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">일</span>
-                                            <span class="day">28</span>
-                                        </a>
-                                    </li>
-                                    <li data-index="2" date="20160829" class="day">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">월</span>
-                                            <span class="day">29</span>
-                                        </a>
-                                    </li>
-                                    <li data-index="3" date="20160830" class="day">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">화</span>
-                                            <span class="day">30</span>
-                                        </a>
-                                    </li>
-                                    <li data-index="4" date="20160831" class="day">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">수</span>
-                                            <span class="day">31</span>
-                                        </a>
-                                    </li>
-                                    <li class="month-dimmed">
-                                        <div>
-                                            <span class="year">2016</span>
-                                            <div></div>
-                                            <span class="month">9</span>
-                                        </div>
-                                    </li>
-                                    <li data-index="5" date="20160901" class="day">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">목</span>
-                                            <span class="day">1</span>
-                                        </a>
-                                    </li>
-                                    <li data-index="6" date="20160902" class="day">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">금</span>
-                                            <span class="day">2</span>
-                                        </a>
-                                    </li>
-                                    <li data-index="7" date="20160903" class="day day-sat">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">토</span>
-                                            <span class="day">3</span>
-                                        </a>
-                                    </li>
-                                    <li data-index="8" date="20160904" class="day day-sun">
-                                        <a href="#" onclick="return false;">
-                                            <span class="dayweek">일</span>
-                                            <span class="day">4</span>
-                                        </a>
-                                    </li>
-                                </div>
+                            <ul class="datebox-content">
+                            <!-------- in Javascript (index.js) --------->
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!------------------------------------------------------------>
+                <!------------------ Game Picker ------------------------->
                 <div class="gamebox col-md-3">
-                    <div class="section-date">
+                    <div class="section-game">
                         <div class="col-head">
                             <h3>Game</h3>
                         </div>
                         <div class="col-body">
-                            <ul>
-                                <div>
-                                    <li class="month-dimmed">
-                                        <span class="year">한화 vs 삼성</span>
-                                    </li>
-                                    <li class="month-dimmed">
-                                        <span class="year">LG vs NC</span>
-                                    </li>
-                                    <li class="month-dimmed">
-                                        <span class="year">두산 vs KT</span>
-                                    </li>
-                                </div>
+                            <ul class="gamePicker">
+                                <jsp:include page="gamePicker.jsp"/>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!------------------------------------------------------------>
+                <!------------------- Box Score -------------------------->
                 <div class="boxscore col-md-8">
                     <div class="portlet-body">
                         <div class="row number-stats margin-bottom-30">
