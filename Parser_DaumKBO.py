@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[3]:
 
 
 from bs4 import BeautifulSoup
@@ -14,7 +14,7 @@ import urllib2
 import os
 
 
-# In[6]:
+# In[5]:
 
 class Parser_DaumKBO:
     '''
@@ -227,6 +227,9 @@ class Parser_DaumKBO:
         driver.get(url)
         data=driver.page_source
         html=BeautifulSoup(data)
+        # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
+        if os.name=='nt':
+            os.system('taskkill /f /im phantomjs.exe')
 #         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         
         self.batRecord={'away':{},'home':{}}
@@ -248,26 +251,39 @@ class Parser_DaumKBO:
             self.startingLineUp['winTeam']=self.startingLineUp['away']
             self.keyPlayer['winTeam']=self.keyPlayer['away']
             self.rank['winTeam']=self.rank['away']
-            self.seasonStat['loseTeam']=self.seasonStat['away']
+            self.criticalInning['winTeam']=self.criticalInning['away']
+            self.rank['winTeam']=self.rank['away']
             self.accumulation['winTeam']=self.accumulation['away']
+            self.batRecord['winTeam']=self.batRecord['away']
             
+            self.seasonStat['loseTeam']=self.seasonStat['home']
             self.vsStat['loseTeam']=self.vsStat['home']
             self.startingLineUp['loseTeam']=self.startingLineUp['home']
             self.keyPlayer['loseTeam']=self.keyPlayer['home']
             self.rank['loseTeam']=self.rank['home']
+            self.criticalInning['loseTeam']=self.criticalInning['home']
+            self.rank['loseTeam']=self.rank['home']
+            self.accumulation['loseTeam']=self.accumulation['home']
             self.batRecord['loseTeam']=self.batRecord['home']
+            
         else :
             self.seasonStat['winTeam']=self.seasonStat['home']
             self.vsStat['winTeam']=self.vsStat['home']
             self.startingLineUp['winTeam']=self.startingLineUp['home']
             self.keyPlayer['winTeam']=self.keyPlayer['home']
             self.rank['winTeam']=self.rank['home']
-            self.seasonStat['loseTeam']=self.seasonStat['home']
+            self.criticalInning['winTeam']=self.criticalInning['home']
+            self.rank['winTeam']=self.rank['home']
             self.accumulation['winTeam']=self.accumulation['home']
+            self.batRecord['winTeam']=self.batRecord['home']
             
+            self.seasonStat['loseTeam']=self.seasonStat['away']
             self.vsStat['loseTeam']=self.vsStat['away']
             self.startingLineUp['loseTeam']=self.startingLineUp['away']
             self.keyPlayer['loseTeam']=self.keyPlayer['away']
             self.rank['loseTeam']=self.rank['away']
+            self.criticalInning['loseTeam']=self.criticalInning['away']
+            self.rank['loseTeam']=self.rank['away']
+            self.accumulation['loseTeam']=self.accumulation['away']
             self.batRecord['loseTeam']=self.batRecord['away']
 
