@@ -1,9 +1,0 @@
-div.datepicker-days > table > thead > tr:nth-child(2) > th:nth-child(1),
-div.datepicker-days > table > tbody td:first-child[class="day"] {
-    color: red;
-}
-
-div.datepicker-days > table > thead > tr:nth-child(2) > th:nth-child(7),
-div.datepicker-days > table > tbody td:last-child[class="day"] {
-    color: blue;
-}
