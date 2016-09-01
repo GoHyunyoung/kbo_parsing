@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[3]:
+# In[1]:
 
 
 from bs4 import BeautifulSoup
@@ -14,7 +14,7 @@ import urllib2
 import os
 
 
-# In[5]:
+# In[49]:
 
 class Parser_DaumKBO:
     '''
@@ -88,6 +88,10 @@ class Parser_DaumKBO:
         data=driver.page_source
         html=BeautifulSoup(data)
         
+        if os.name=='nt':
+            os.system('taskkill /f /im phantomjs.exe')
+        driver.quit()
+        
         self.stadium=html.select_one('span.location').text
         
         self.seasonStat={'away':{},'home':{}}
@@ -126,6 +130,10 @@ class Parser_DaumKBO:
         driver.get(url)
         data=driver.page_source
         html=BeautifulSoup(data)
+        # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
+        if os.name=='nt':
+            os.system('taskkill /f /im phantomjs.exe')
+        driver.quit()
 #         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         self.startingLineUp={}
         for line in html.select('div.wrap tbody tr'):
@@ -135,13 +143,13 @@ class Parser_DaumKBO:
         self.keyPlayer={'away':(),'home':()}
         try:
             keyPlayerParentNode=html.select_one('td.position.away.key-player').parent
-            self.keyPlayer['away']=(keyPlayerParentNode.select_one('td.position.away').text,keyPlayerParentNode.select_one('td:nth-of-type(2)').text,float(re.findall('[\.\d]+',keyPlayerParentNode.select_one('td.batting_average').text)[0]))
+            self.keyPlayer['away']=(keyPlayerParentNode.select_one('td:nth-of-type(1)').text,keyPlayerParentNode.select_one('td:nth-of-type(2)').text,float(re.findall('[\.\d]+',keyPlayerParentNode.select_one('td:nth-of-type(3)').text)[0]))
         except AttributeError:
             self.keyPlayer['away']=()
             sys.stderr.write('td.position.away.key-player == None\n')
         try:
             keyPlayerParentNode=html.select_one('td.position.home.key-player').parent
-            self.keyPlayer['home']=(keyPlayerParentNode.select_one('td.position.home').text,keyPlayerParentNode.select_one('td:nth-of-type(2)').text,float(re.findall('[\.\d]+',keyPlayerParentNode.select_one('td.batting_average').text)[0]))
+            self.keyPlayer['home']=(keyPlayerParentNode.select_one('td:nth-of-type(4)').text,keyPlayerParentNode.select_one('td:nth-of-type(5)').text,float(re.findall('[\.\d]+',keyPlayerParentNode.select_one('td:nth-of-type(6)').text)[0]))
         except AttributeError:
             self.keyPlayer['home']=()
             sys.stderr.write('td.position.home.key-player == None\n')
@@ -169,6 +177,10 @@ class Parser_DaumKBO:
         driver.get(url)
         data=driver.page_source
         html=BeautifulSoup(data)
+        # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
+        if os.name=='nt':
+            os.system('taskkill /f /im phantomjs.exe')
+        driver.quit()
 #         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
                 
         self.rank={}
@@ -230,6 +242,7 @@ class Parser_DaumKBO:
         # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
         if os.name=='nt':
             os.system('taskkill /f /im phantomjs.exe')
+        driver.quit()
 #         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         
         self.batRecord={'away':{},'home':{}}
@@ -255,6 +268,7 @@ class Parser_DaumKBO:
             self.rank['winTeam']=self.rank['away']
             self.accumulation['winTeam']=self.accumulation['away']
             self.batRecord['winTeam']=self.batRecord['away']
+            self.win_lose['winTeam']=self.win_lose['away']
             
             self.seasonStat['loseTeam']=self.seasonStat['home']
             self.vsStat['loseTeam']=self.vsStat['home']
@@ -265,6 +279,7 @@ class Parser_DaumKBO:
             self.rank['loseTeam']=self.rank['home']
             self.accumulation['loseTeam']=self.accumulation['home']
             self.batRecord['loseTeam']=self.batRecord['home']
+            self.win_lose['loseTeam']=self.win_lose['home']
             
         else :
             self.seasonStat['winTeam']=self.seasonStat['home']
@@ -276,6 +291,7 @@ class Parser_DaumKBO:
             self.rank['winTeam']=self.rank['home']
             self.accumulation['winTeam']=self.accumulation['home']
             self.batRecord['winTeam']=self.batRecord['home']
+            self.win_lose['winTeam']=self.win_lose['home']
             
             self.seasonStat['loseTeam']=self.seasonStat['away']
             self.vsStat['loseTeam']=self.vsStat['away']
@@ -286,4 +302,5 @@ class Parser_DaumKBO:
             self.rank['loseTeam']=self.rank['away']
             self.accumulation['loseTeam']=self.accumulation['away']
             self.batRecord['loseTeam']=self.batRecord['away']
+            self.win_lose['loseTeam']=self.win_lose['away']
 
