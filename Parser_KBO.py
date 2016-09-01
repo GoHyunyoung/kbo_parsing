@@ -49,7 +49,7 @@ class Parser_KBO:
         self.boxScore['away']['name']=html.select_one('table.socreBoard tr:nth-of-type(2) th').text
         
         #HOME팀명
-        self.boxScore['away']['name']=html.select_one('table.socreBoard tr:nth-of-type(3) th').text
+        self.boxScore['home']['name']=html.select_one('table.socreBoard tr:nth-of-type(3) th').text
         
         self.boxScore['away']['score']=[]
         self.boxScore['home']['score']=[]
