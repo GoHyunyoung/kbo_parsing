@@ -12,7 +12,7 @@ import urllib2
 import os
 
 
-# In[1]:
+# In[6]:
 
 class UrlParserForKBO:
 #     초기화때 날짜를 입력(박스스코어 확인 날짜)
@@ -59,6 +59,7 @@ class UrlParserForKBO:
             browser.find_element_by_id('cphContainer_cphContents_btnPreDate').click()
             time.sleep(0.7)
         browser.quit()
+        self.urlList.reverse()
         
         def getUrlList(self):
             return self.urlList

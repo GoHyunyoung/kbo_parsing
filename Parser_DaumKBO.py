@@ -14,7 +14,7 @@ import urllib2
 import os
 
 
-# In[49]:
+# In[2]:
 
 class Parser_DaumKBO:
     '''
@@ -189,22 +189,22 @@ class Parser_DaumKBO:
         rankNumber=int(sen.split()[1][:-1])
 #      순위상승
         if u'▲' in sen:
-            self.rank['away']=(rankNumber,int(sen[sen.find('▲'):sen.find(')')]))
+            self.rank['away']=(rankNumber,int(sen[sen.find(u'▲')+1:sen.find(')')]))
 #      순위하강
         elif u'▽' in sen:
-            self.rank['away']=(rankNumber,-1*int(sen[sen.find('▽'):sen.find(')')]))
+            self.rank['away']=(rankNumber,-1*int(sen[sen.find(u'▽')+1:sen.find(')')]))
 #      순위유지
         else:
             self.rank['away']=(rankNumber,0)
         sen=html.select_one('div.recent_stats div.home p.change').text
 #      ex)   순위 9위 (-)
         rankNumber=int(sen.split()[1][:-1])
-#      순위상승
+#      순위상승(u'▲'==u'\u25b2')
         if u'▲' in sen:
-            self.rank['home']=(rankNumber,int(sen[sen.find('▲'):sen.find(')')]))
-#      순위하강
+            self.rank['home']=(rankNumber,int(sen[sen.find(u'▲')+1:sen.find(')')]))
+#      순위하강(u'▽'==u'\u25bd')
         elif u'▽' in sen:
-            self.rank['home']=(rankNumber,-1*int(sen[sen.find('▽'):sen.find(')')]))
+            self.rank['home']=(rankNumber,-1*int(sen[sen.find(u'▽')+1:sen.find(')')]))
 #      순위유지
         else:
             self.rank['home']=(rankNumber,0)
@@ -303,4 +303,24 @@ class Parser_DaumKBO:
             self.accumulation['loseTeam']=self.accumulation['away']
             self.batRecord['loseTeam']=self.batRecord['away']
             self.win_lose['loseTeam']=self.win_lose['away']
+
+
+# In[8]:
+
+parser_DaumKBO=Parser_DaumKBO('20160831',u'SK')
+
+
+# In[9]:
+
+get_ipython().magic(u'debug')
+
+
+# In[10]:
+
+unicode.find(u'순위 5위▽1',u'▽')
+
+
+# In[ ]:
+
+
 
