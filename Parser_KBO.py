@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 
 from bs4 import BeautifulSoup
@@ -13,7 +13,7 @@ import pandas as pd
 import urllib2
 
 
-# In[3]:
+# In[2]:
 
 #URL넣어주면 해당 박스스코어 파싱
 class Parser_KBO:
@@ -32,6 +32,10 @@ class Parser_KBO:
     situation : 경기상황
     ------- key list -------
     [away/home/winTeam/loseTeam][이닝][몇번째][player/act]
+    
+    rank : 팀순위
+    ------- key list -------
+    0순위 1팀명 2승 3패 4무 5승률 6게임차 7최근10경기 8연속 9홈 10방문
     '''
     def __init__(self,url):
         data = urllib2.urlopen(url)
@@ -178,4 +182,19 @@ class Parser_KBO:
             self.situation['winTeam'] = self.situation['home']
         #-------END winTeam,loseTeam-------#
         
+        data = urllib2.urlopen('http://www.koreabaseball.com/TeamRank/TeamRank.aspx')
+        html = BeautifulSoup(data)
+        self.rank={}
+        
+        columns=[u'순위',u'팀명',u'승',u'패',u'무',u'승률',u'게임차',u'최근10경기',u'연속',u'홈',u'방문']
+        frame=html.select('table:nth-of-type(1) tbody tr')
+        
+        data=list()
+        for row in frame:
+            tmp=list()
+            for dat in row.text.strip().split('\n'):
+                tmp.append(dat)
+            data.append(tmp)
+        self.rank = pd.DataFrame(data=data,columns=columns)
+        self.rank.index=self.rank.pop(u'순위')
 
