@@ -88,9 +88,9 @@ class Parser_DaumKBO:
         data=driver.page_source
         html=BeautifulSoup(data)
         
-        if os.name=='nt':
-            os.system('taskkill /f /im phantomjs.exe')
-        driver.quit()
+#         if os.name=='nt':
+#             os.system('taskkill /f /im phantomjs.exe')
+#         driver.quit()
         
         self.stadium=html.select_one('span.location').text
         
@@ -122,18 +122,18 @@ class Parser_DaumKBO:
 #         lineup부분을 새로 가져와야함
         url='http://m.sports.media.daum.net/m/sports/pack/3min/%s?lineup'%(serial)
 #         window=nt
-        if os.name=='nt':
-            driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
-#       ubuntu=posix
-        else:
-            driver=webdriver.PhantomJS(executable_path='./phantomjs')
+#         if os.name=='nt':
+#             driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
+# #       ubuntu=posix
+#         else:
+#             driver=webdriver.PhantomJS(executable_path='./phantomjs')
         driver.get(url)
         data=driver.page_source
         html=BeautifulSoup(data)
         # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
-        if os.name=='nt':
-            os.system('taskkill /f /im phantomjs.exe')
-        driver.quit()
+#         if os.name=='nt':
+#             os.system('taskkill /f /im phantomjs.exe')
+#         driver.quit()
 #         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         self.startingLineUp={}
         for line in html.select('div.wrap tbody tr'):
@@ -155,6 +155,7 @@ class Parser_DaumKBO:
             sys.stderr.write('td.position.home.key-player == None\n')
         
         self.criticalInning={'away':[],'home':[]}
+        self.criticalInningVOD_Url=[]
         try:
             for x in html.select('table.tbl_score strong.img_highlight.ico_decisive'):
                 node=x.parent.parent.parent
@@ -162,25 +163,37 @@ class Parser_DaumKBO:
                     self.criticalInning['away'].append(int(node.attrs['data-inning']))
                 else:
                     self.criticalInning['home'].append(int(node.attrs['data-inning']))
+                    
+            for x in html.select('table.tbl_score strong.img_highlight.ico_decisive'):        
+                node=x.parent.parent.parent
+                vod_id=node.select_one('a.link_vod').attrs['data-id']
+                url='http://m.sports.media.daum.net/m/sports/pack/3min/%s?%s'%(serial,vod_id)
+                driver.get(url)
+                data=driver.page_source
+                html=BeautifulSoup(data)
+                url=html.select_one('div.highlight_video iframe').attrs['src']
+                self.criticalInningVOD_Url.append(url)
+            
         except TypeError:
             sys.stderr.write('html.select(\'table.tbl_score strong.img_highlight.ico_decisive\') == None\n')
         
+               
 #         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 #         result부분을 새로 가져와야함
         url='http://m.sports.media.daum.net/m/sports/pack/3min/%s?result'%(serial)
 #         window=nt
-        if os.name=='nt':
-            driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
-#       ubuntu=posix
-        else:
-            driver=webdriver.PhantomJS(executable_path='./phantomjs')
+#         if os.name=='nt':
+#             driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
+# #       ubuntu=posix
+#         else:
+#             driver=webdriver.PhantomJS(executable_path='./phantomjs')
         driver.get(url)
         data=driver.page_source
         html=BeautifulSoup(data)
         # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
-        if os.name=='nt':
-            os.system('taskkill /f /im phantomjs.exe')
-        driver.quit()
+#         if os.name=='nt':
+#             os.system('taskkill /f /im phantomjs.exe')
+#         driver.quit()
 #         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
                 
         self.rank={}
@@ -231,11 +244,11 @@ class Parser_DaumKBO:
 #         stats부분을 새로 가져와야함
         url='http://m.sports.media.daum.net/m/sports/pack/3min/%s?stats'%(serial)
 #         window=nt
-        if os.name=='nt':
-            driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
-#       ubuntu=posix
-        else:
-            driver=webdriver.PhantomJS(executable_path='./phantomjs')
+#         if os.name=='nt':
+#             driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
+# #       ubuntu=posix
+#         else:
+#             driver=webdriver.PhantomJS(executable_path='./phantomjs')
         driver.get(url)
         data=driver.page_source
         html=BeautifulSoup(data)
@@ -303,24 +316,4 @@ class Parser_DaumKBO:
             self.accumulation['loseTeam']=self.accumulation['away']
             self.batRecord['loseTeam']=self.batRecord['away']
             self.win_lose['loseTeam']=self.win_lose['away']
-
-
-# In[8]:
-
-parser_DaumKBO=Parser_DaumKBO('20160831',u'SK')
-
-
-# In[9]:
-
-get_ipython().magic(u'debug')
-
-
-# In[10]:
-
-unicode.find(u'순위 5위▽1',u'▽')
-
-
-# In[ ]:
-
-
 
