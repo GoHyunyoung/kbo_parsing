@@ -14,7 +14,7 @@ import urllib2
 import os
 
 
-# In[2]:
+# In[1]:
 
 class Parser_DaumKBO:
     '''
@@ -70,7 +70,14 @@ class Parser_DaumKBO:
     [away/home/winTeam/loseTeam][E] :실책
     [away/home/winTeam/loseTeam][GDP] : 병살
     [away/home/winTeam/loseTeam][LOB] : 잔루
-
+    
+    winlosePitcher
+    ------- key list -------
+    [winTeam/loseTeam][winCount] : 선수의 승수
+    [winTeam/loseTeam][loseCount] : 선수의 패수
+    [winTeam/loseTeam][ERA] : 선수의 ERA
+    [winTeam/loseTeam][faceUrl] : 선수 얼굴 이미지 URL
+    
     '''
     def __init__(self,date,awayTeam):
         s=SerialParserForDaumKBO(date,awayTeam)
@@ -253,9 +260,9 @@ class Parser_DaumKBO:
         data=driver.page_source
         html=BeautifulSoup(data)
         # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
-        if os.name=='nt':
-            os.system('taskkill /f /im phantomjs.exe')
-        driver.quit()
+#         if os.name=='nt':
+#             os.system('taskkill /f /im phantomjs.exe')
+#         driver.quit()
 #         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         
         self.batRecord={'away':{},'home':{}}
@@ -271,6 +278,39 @@ class Parser_DaumKBO:
             else:
                 self.batRecord['away'][k[1]]=tmpList[k[0]]
 
+#         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+#         hightlight부분을 새로 가져와야함
+        url='http://sports.media.daum.net/sports/gamecenter/%s/highlight'%(serial)
+#         window=nt
+#         if os.name=='nt':
+#             driver=webdriver.PhantomJS(executable_path='./phantomjs.exe')
+# #       ubuntu=posix
+#         else:
+#             driver=webdriver.PhantomJS(executable_path='./phantomjs')
+        driver.get(url)
+        data=driver.page_source
+        html=BeautifulSoup(data)
+        # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
+        if os.name=='nt':
+            os.system('taskkill /f /im phantomjs.exe')
+        driver.quit()
+#         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+        html=html.select_one('ul.list_result')
+        self.winlosePitcher={}
+        self.winlosePitcher['winTeam']={}
+        self.winlosePitcher['loseTeam']={}
+    
+        self.winlosePitcher['winTeam']['name']=html.select_one('li:nth-of-type(1) dt.tit_name').text
+        self.winlosePitcher['winTeam']['winCount']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(1) dd.desc_result').text)[0]
+        self.winlosePitcher['winTeam']['loseCount']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(1) dd.desc_result').text)[1]
+        self.winlosePitcher['winTeam']['ERA']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(1) dd.desc_result').text)[2]
+        self.winlosePitcher['winTeam']['faceUrl']=html.select_one('li:nth-of-type(1) img').attrs['src']
+        self.winlosePitcher['loseTeam']['name']=html.select_one('li:nth-of-type(2) dt.tit_name').text
+        self.winlosePitcher['loseTeam']['winCount']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(2) dd.desc_result').text)[0]
+        self.winlosePitcher['loseTeam']['loseCount']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(2) dd.desc_result').text)[1]
+        self.winlosePitcher['loseTeam']['ERA']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(2) dd.desc_result').text)[2]
+        self.winlosePitcher['loseTeam']['faceUrl']=html.select_one('li:nth-of-type(2) img').attrs['src']
+    
         if winTeam=='away':
             self.seasonStat['winTeam']=self.seasonStat['away']
             self.vsStat['winTeam']=self.vsStat['away']
