@@ -90,8 +90,8 @@ class Parser_DaumKBO:
 #       ubuntu=posix
         else:
             driver=webdriver.PhantomJS(executable_path='./phantomjs')
-        driver.get(url)
-        
+        driver.implicitly_wait(10) # seconds
+        driver.get(url)        
         data=driver.page_source
         html=BeautifulSoup(data)
         
@@ -134,6 +134,7 @@ class Parser_DaumKBO:
 # #       ubuntu=posix
 #         else:
 #             driver=webdriver.PhantomJS(executable_path='./phantomjs')
+        driver.implicitly_wait(10) # seconds
         driver.get(url)
         data=driver.page_source
         html=BeautifulSoup(data)
@@ -194,6 +195,7 @@ class Parser_DaumKBO:
 # #       ubuntu=posix
 #         else:
 #             driver=webdriver.PhantomJS(executable_path='./phantomjs')
+        driver.implicitly_wait(10) # seconds
         driver.get(url)
         data=driver.page_source
         html=BeautifulSoup(data)
@@ -256,6 +258,7 @@ class Parser_DaumKBO:
 # #       ubuntu=posix
 #         else:
 #             driver=webdriver.PhantomJS(executable_path='./phantomjs')
+        driver.implicitly_wait(10) # seconds
         driver.get(url)
         data=driver.page_source
         html=BeautifulSoup(data)
@@ -287,6 +290,7 @@ class Parser_DaumKBO:
 # #       ubuntu=posix
 #         else:
 #             driver=webdriver.PhantomJS(executable_path='./phantomjs')
+        driver.implicitly_wait(10) # seconds
         driver.get(url)
         data=driver.page_source
         html=BeautifulSoup(data)
