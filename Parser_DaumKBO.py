@@ -12,9 +12,10 @@ import sys
 import re
 import urllib2
 import os
+import time
 
 
-# In[1]:
+# In[2]:
 
 class Parser_DaumKBO:
     '''
@@ -90,7 +91,7 @@ class Parser_DaumKBO:
 #       ubuntu=posix
         else:
             driver=webdriver.PhantomJS(executable_path='./phantomjs')
-        driver.implicitly_wait(10) # seconds
+        time.sleep(1)
         driver.get(url)        
         data=driver.page_source
         html=BeautifulSoup(data)
@@ -134,8 +135,8 @@ class Parser_DaumKBO:
 # #       ubuntu=posix
 #         else:
 #             driver=webdriver.PhantomJS(executable_path='./phantomjs')
-        driver.implicitly_wait(10) # seconds
         driver.get(url)
+        time.sleep(1) # seconds
         data=driver.page_source
         html=BeautifulSoup(data)
         # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
@@ -195,8 +196,8 @@ class Parser_DaumKBO:
 # #       ubuntu=posix
 #         else:
 #             driver=webdriver.PhantomJS(executable_path='./phantomjs')
-        driver.implicitly_wait(10) # seconds
         driver.get(url)
+        time.sleep(1) # seconds
         data=driver.page_source
         html=BeautifulSoup(data)
         # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
@@ -258,8 +259,8 @@ class Parser_DaumKBO:
 # #       ubuntu=posix
 #         else:
 #             driver=webdriver.PhantomJS(executable_path='./phantomjs')
-        driver.implicitly_wait(10) # seconds
         driver.get(url)
+        time.sleep(1) # seconds
         data=driver.page_source
         html=BeautifulSoup(data)
         # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
@@ -290,8 +291,8 @@ class Parser_DaumKBO:
 # #       ubuntu=posix
 #         else:
 #             driver=webdriver.PhantomJS(executable_path='./phantomjs')
-        driver.implicitly_wait(10) # seconds
         driver.get(url)
+        time.sleep(1) # seconds
         data=driver.page_source
         html=BeautifulSoup(data)
         # Window에서는 PhantomJS프로세스가 남아있으므로 강제종료\n",
