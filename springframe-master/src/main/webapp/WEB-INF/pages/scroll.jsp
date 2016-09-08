@@ -11,10 +11,6 @@
 <head>
 </head>
 <body>
-<<<<<<< HEAD
-<c:set var="date" value="${article.date}"></c:set>
-=======
->>>>>>> parent of 137822a... ...
 <c:forEach var="article" items="${articleArrayList}">
     <li class=timeline id="${article.id}" hidden>
         <div class="timeline-time">
