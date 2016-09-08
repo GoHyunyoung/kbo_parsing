@@ -429,3 +429,16 @@ a:hover, a:focus { text-decoration : none; }
 .list_result .mark_gray .txt_gc{background-position:-50px -775px}
 .list_result .info_result .tit_name{display:block;margin-top:12px;margin-bottom:5px;font-weight:bold;font-size:14px;color:#333;text-align:center}
 .list_result .info_result .desc_result{display:block;text-align:center}
+
+
+/* Team Page */
+.teamEmblemButton {
+    text-align: center;
+    align-content: center;
+}
+
+.teamEmblemButton img {
+    min-width : 50px;
+    min-height : 45px;
+    margin : 5px 12px 5px 12px;
+}

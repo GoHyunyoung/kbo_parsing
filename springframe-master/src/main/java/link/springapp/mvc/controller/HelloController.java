@@ -166,4 +166,11 @@ public class HelloController {
         logger.info("-----END /gamebox CONTROLLER-----");
         return "gamebox";
     }
+
+    @RequestMapping(value = {"/teampage"}, method = RequestMethod.GET)
+    public String getTeamPage(ModelMap model) {
+        logger.info("-----BEGIN /teampage CONTROLLER-----");
+        logger.info("-----END /teampage CONTROLLER-----");
+        return "teampage";
+    }
 }

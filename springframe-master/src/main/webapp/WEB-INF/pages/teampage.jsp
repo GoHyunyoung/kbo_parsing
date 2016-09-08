@@ -1,4 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: moonlight
+  Date: 2016. 9. 9.
+  Time: 오전 3:32
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,8 +59,8 @@
         <div class="container">
             <!-- BEGIN PAGE TITLE -->
             <div class="page-title">
-                <h1>Introduction
-                    <small>Who is Mr.Writer?</small>
+                <h1>TeamPage
+                    <small>My Team is BEST</small>
                 </h1>
             </div>
             <!-- END PAGE TITLE -->
@@ -91,7 +99,7 @@
                     <a href="#">Home</a><i class="fa fa-circle"></i>
                 </li>
                 <li class="active">
-                    Mr.Writer
+                    TeamPage
                 </li>
             </ul>
             <!-- END PAGE BREADCRUMB -->
@@ -100,43 +108,44 @@
             <div class="portlet light">
                 <div class="portlet-body">
                     <div class="row">
-                        <!-- Introduce -->
-                        <div class="col-md-12" >
-                            <div class="col-md-4" align="center">
-                                <br/>
-                                <a><img src="/resources/images/logo.png" alt="logo" class="logo_img"></a>
+                        <div class="col-md-12">
+                            <div class="teamEmblemButton col-md-2">
+                                <p>엠블럼 선택</p>
+                                <a href="">
+                                    <img src="/resources/images/emblem_image/emblemB_HH.png"/>
+                                </a>
+                                <a href="">
+                                    <img src="/resources/images/emblem_image/emblemB_HT.png"/>
+                                </a>
+                                <a href="">
+                                    <img src="/resources/images/emblem_image/emblemB_KT.png"/>
+                                </a>
+                                <a href="">
+                                    <img src="/resources/images/emblem_image/emblemB_LG.png"/>
+                                </a>
+                                <a href="">
+                                    <img src="/resources/images/emblem_image/emblemB_LT.png"/>
+                                </a>
+                                <a href="">
+                                    <img src="/resources/images/emblem_image/emblemB_NC.png"/>
+                                </a>
+                                <a href="">
+                                    <img src="/resources/images/emblem_image/emblemB_OB.png"/>
+                                </a>
+                                <a href="">
+                                    <img src="/resources/images/emblem_image/emblemB_SK.png"/>
+                                </a>
+                                <a href="">
+                                    <img src="/resources/images/emblem_image/emblemB_SS.png"/>
+                                </a>
+                                <a href="">
+                                    <img src="/resources/images/emblem_image/emblemB_WO.png"/>
+                                </a>
                             </div>
-                            <div class="col-md-8" align="left">
-                                <div class="explain">
-                                    <h1>Mr.Writer</h1><br/>
-                                    <p>Mr.Writer은 KBO홈페이지를 파싱하여 추출된 데이터들을 통해 기사를 작성한다.</p>
-                                    <p>[의사결정트리]를 사용해 서두의 문장을 통해 다음과 본론에 나올 문장구성들을 재조정하여</p>
-                                    <p>생성된 기사들을 Mr.Writer Webpage 및 Facebook 봇계정 타임라인에 자동등록 된다</p>
-                                    <p>다음 설명은 다음 업데이트에 맞춰 추가됩니다</p>
-                                </div>
+                            <div class="col-md-10">
+                                <p>해당 팀 기사 출력</p>
                             </div>
-                            <a href="/"></a>
-                        </div>
-                        <!-- phone & Com img -->
-                        <div class="col-md-1"></div>
-                        <div class="col-md-11" align="center">
-                            <br/>
-                            <a><img src="/resources/images/page.png" class="big_img"></a>
-                        </div>
-                        <!-- Arrow -->
-                        <div class="col-md-12" align="center">
-                            <br/><br/>
-                            <div class="hover1 effect1">
-                                <a onclick="kuisin('testdiv'); return false;"><img src="/resources/images/arrow.png"></a>
-                            </div>
-                            <br/>
-                            <!-- Hidden Page -->
-                            <div id="testdiv" style="display:none">
-                                <br/>
-                                <a><img src="/resources/images/structure.png" class="big_img"></a>
-                                <br/><br/>
-                            </div>
-                        </div>
+                        </div><br/>
                     </div>
                 </div>
             </div>

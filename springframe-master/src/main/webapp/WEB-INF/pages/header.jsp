@@ -48,7 +48,6 @@
                     </c:choose>
                 </div>
             </form>
-
             <!-- END HEADER SEARCH BOX -->
             <!-- BEGIN MEGA MENU -->
             <div class="hor-menu">
@@ -63,7 +62,7 @@
                         <a href="/boxscore">BoxScore</a>
                     </li>
                     <li>
-                        <a href="/">Etc</a>
+                        <a href="/teampage">TeamPage</a>
                     </li>
                 </ul>
             </div>
