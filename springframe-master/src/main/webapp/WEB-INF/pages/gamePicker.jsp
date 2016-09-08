@@ -13,19 +13,24 @@
     <link href="/resources/assets/css/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
 <c:forEach var="article" items="${articleArrayList}">
-    <a href="#">
-        <li class="gamePickerBox" data-name="${article.emblem}">
-            <img class="left-img" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.emblem)} alt="${article.emblem}">
-
-            <span>${article.head.substring(3,4)} </span>
-            <span>: </span>
-            <span>${article.head.substring(11)}</span>
-
-            <img class="right-img" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.emblem)} alt="${article.emblem}">
-        </li>
-    </a>
+    <c:choose>
+        <c:when test="${(date!=article.date) && (date!=null)}">
+            <c:set var="date" value="NULL"></c:set>
+        </c:when>
+        <c:otherwise>
+            <!-- GamePickerBox -->
+            <a href="#">
+                <li class="gamePickerBox" data-name="${article.emblem}" onclick="gamePicker(${article.id})">
+                    <img class="left-img" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.awayT)} alt="${article.awayT}">
+                    <span>${article.head.substring(3,5)}</span> <span>: </span>
+                    <span>${article.head.substring(article.head.length() -2)}</span>
+                    <img class="right-img" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.homeT)} alt="${article.homeT}">
+                </li>
+            </a>
+            <c:set var="date" value="${article.date}"></c:set>
+        </c:otherwise>
+    </c:choose>
 </c:forEach>
 
 </body>

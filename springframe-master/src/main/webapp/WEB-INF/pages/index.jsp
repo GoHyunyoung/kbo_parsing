@@ -108,6 +108,9 @@
                             </div>
                             <div class="col-md-8" align="left">
                                 <div class="explain">
+
+
+
                                     <h1>Mr.Writer</h1><br/>
                                     <p>Mr.Writer은 KBO홈페이지를 파싱하여 추출된 데이터들을 통해 기사를 작성한다.</p>
                                     <p>[의사결정트리]를 사용해 서두의 문장을 통해 다음과 본론에 나올 문장구성들을 재조정하여</p>

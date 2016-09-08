@@ -98,7 +98,6 @@
 
             <!-- BEGIN PAGE CONTENT INNER -->
             <div class="portlet light col-md-12">
-
                 <!----------------- Date Picker ------------------------->
                 <div class="datebox col-md-1">
                     <div class="section-date">
@@ -106,13 +105,102 @@
                             <h3>Date</h3>
                         </div>
                         <div class="col-body">
+                            <ul>
+                                <div>
+                                    <li class="month-dimmed">
+                                        <span class="year">2016</span>
+                                        <div></div>
+                                        <span class="month">8</span>
+                                    </li>
+                                    <li data-index="2" date="20160824" class="day">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">수</span>
+                                            <span class="day">24</span>
+                                        </a>
+                                    </li>
+                                    <li data-index="3" date="20160825" class="day">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">목</span>
+                                            <span class="day">25</span>
+                                        </a>
+                                    </li>
+                                    <li data-index="4" date="20160826" class="day">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">금</span>
+                                            <span class="day">26</span>
+                                        </a>
+                                    </li>
+                                    <li data-index="0" date="20160827" class="day day-sat">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">토</span>
+                                            <span class="day">27</span>
+                                        </a>
+                                    </li>
+                                    <li data-index="1" date="20160828" class="day day-sun">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">일</span>
+                                            <span class="day">28</span>
+                                        </a>
+                                    </li>
+                                    <li data-index="2" date="20160829" class="day">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">월</span>
+                                            <span class="day">29</span>
+                                        </a>
+                                    </li>
+                                    <li data-index="3" date="20160830" class="day">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">화</span>
+                                            <span class="day">30</span>
+                                        </a>
+                                    </li>
+                                    <li data-index="4" date="20160831" class="day">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">수</span>
+                                            <span class="day">31</span>
+                                        </a>
+                                    </li>
+                                    <li class="month-dimmed">
+                                        <div>
+                                            <span class="year">2016</span>
+                                            <div></div>
+                                            <span class="month">9</span>
+                                        </div>
+                                    </li>
+                                    <li data-index="5" date="20160901" class="day">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">목</span>
+                                            <span class="day">1</span>
+                                        </a>
+                                    </li>
+                                    <li data-index="6" date="20160902" class="day">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">금</span>
+                                            <span class="day">2</span>
+                                        </a>
+                                    </li>
+                                    <li data-index="7" date="20160903" class="day day-sat">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">토</span>
+                                            <span class="day">3</span>
+                                        </a>
+                                    </li>
+                                    <li data-index="8" date="20160904" class="day day-sun">
+                                        <a href="#" onclick="return false;">
+                                            <span class="dayweek">일</span>
+                                            <span class="day">4</span>
+                                        </a>
+                                    </li>
+                                </div>
                             <ul class="datebox-content">
                             <!-------- in Javascript (index.js) --------->
                             </ul>
                         </div>
                     </div>
                 </div>
-
+                <!------------------------------------------------------------>
+                <div class="gamebox col-md-3">
+                    <div class="section-date">
                 <!------------------ Game Picker ------------------------->
                 <div class="gamebox col-md-3">
                     <div class="section-game">
@@ -120,6 +208,18 @@
                             <h3>Game</h3>
                         </div>
                         <div class="col-body">
+                            <ul>
+                                <div>
+                                    <li class="month-dimmed">
+                                        <span class="year">한화 vs 삼성</span>
+                                    </li>
+                                    <li class="month-dimmed">
+                                        <span class="year">LG vs NC</span>
+                                    </li>
+                                    <li class="month-dimmed">
+                                        <span class="year">두산 vs KT</span>
+                                    </li>
+                                </div>
                             <ul class="gamePicker">
                                 <jsp:include page="gamePicker.jsp"/>
                             </ul>
@@ -129,99 +229,7 @@
 
                 <!------------------- Box Score -------------------------->
                 <div class="boxscore col-md-8">
-                    <div class="portlet-body">
-                        <div class="row number-stats margin-bottom-30">
-                            <div class="col-md-2">
-                                <div class="stat-left">
-                                    <div class="stat-number">
-                                        <div class="title">Home</div>
-                                        <div class="number">한화</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="emblem-left col-md-2">
-                                <a><img src="/resources/images/emblem_image/emblemB_HH.png"/></a>
-                            </div>
-                            <div class="scorepoint col-md-4">
-                                6 : 10
-                            </div>
-                            <div class="emblem-right col-md-2">
-                                <a><img src="/resources/images/emblem_image/emblemB_SS.png"/></a>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="stat-right">
-                                    <div class="stat-number">
-                                        <div class="title">Away</div>
-                                        <div class="number">삼성</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-scrollable table-scrollable-borderless">
-                            <table class="table table-hover table-light">
-                                <thead>
-                                <tr class="uppercase">
-                                    <th>TEAM</th>
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-                                    <th>4</th>
-                                    <th>5</th>
-                                    <th>6</th>
-                                    <th>7</th>
-                                    <th>8</th>
-                                    <th>9</th>
-                                    <th>10</th>
-                                    <th>11</th>
-                                    <th>12</th>
-                                    <th>R</th>
-                                    <th>H</th>
-                                    <th>E</th>
-                                    <th>B</th>
-                                </tr>
-                                </thead>
-                                <tbody><tr>
-                                    <td>한화</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>2</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>1</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>3</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>12</td>
-                                    <td>1</td>
-                                    <td>4</td>
-                                </tr>
-                                <tr>
-                                    <td>삼성</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>3</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>5</td>
-                                    <td>0</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>8</td>
-                                    <td>1</td>
-                                    <td>3</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <jsp:include page="gamebox.jsp"/>
                 </div>
             </div>
             <!-- END PAGE CONTENT INNER -->

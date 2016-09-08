@@ -28,6 +28,4 @@ public class ArticleService {
         int id = articleMapper.getSearchResultMinId(searchDate);
         return id;
     }
-
-
 }
