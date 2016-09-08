@@ -1911,19 +1911,13 @@ var Layout = function () {
     });
 }(window.jQuery));
 
-<<<<<<< HEAD
-=======
 /* Intro -> Hidden -> Show */
->>>>>>> parent of 137822a... ...
 function kuisin(idMyDiv){
     var objDiv = document.getElementById(idMyDiv);
     if(objDiv.style.display=="block"){ objDiv.style.display = "none";}
     else {objDiv.style.display = "block";}
 }
 
-<<<<<<< HEAD
-
-=======
 /* Date Picker -- Show All date 16.07.01 ~ 16.9.30 */
 var ul = $('ul.datebox-content');
 var num = 0;
@@ -1984,4 +1978,3 @@ function datePicker(pickedDate) {
         }
     });
 }
->>>>>>> parent of 137822a... ...

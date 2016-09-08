@@ -41,10 +41,6 @@
     <script type="text/javascript" src="/resources/assets/javascript/scroll.js"></script>
     <script type="text/javascript" src="/resources/assets/javascript/index.js"></script>
     <%--END BOXSCORE_PAGE SCRIPT--%>
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 137822a... ...
 </head>
 <jsp:include page="header.jsp"/>
 <!-- BEGIN PAGE CONTAINER -->
@@ -103,18 +99,14 @@
             <!-- BEGIN PAGE CONTENT INNER -->
             <div class="portlet light col-md-12">
 
-<<<<<<< HEAD
-                <!------------------------------------------------------------>
-=======
+
                 <!----------------- Date Picker ------------------------->
->>>>>>> parent of 137822a... ...
                 <div class="datebox col-md-1">
                     <div class="section-date">
                         <div class="col-head">
                             <h3>Date</h3>
                         </div>
                         <div class="col-body">
-<<<<<<< HEAD
                             <ul>
                                 <div>
                                     <li class="month-dimmed">
@@ -202,29 +194,22 @@
                                         </a>
                                     </li>
                                 </div>
-=======
-                            <ul class="datebox-content">
-                            <!-------- in Javascript (index.js) --------->
->>>>>>> parent of 137822a... ...
+
                             </ul>
                         </div>
                     </div>
                 </div>
 
-<<<<<<< HEAD
                 <!------------------------------------------------------------>
                 <div class="gamebox col-md-3">
                     <div class="section-date">
-=======
                 <!------------------ Game Picker ------------------------->
                 <div class="gamebox col-md-3">
                     <div class="section-game">
->>>>>>> parent of 137822a... ...
                         <div class="col-head">
                             <h3>Game</h3>
                         </div>
                         <div class="col-body">
-<<<<<<< HEAD
                             <ul>
                                 <div>
                                     <li class="month-dimmed">
@@ -237,20 +222,15 @@
                                         <span class="year">두산 vs KT</span>
                                     </li>
                                 </div>
-=======
                             <ul class="gamePicker">
                                 <jsp:include page="gamePicker.jsp"/>
->>>>>>> parent of 137822a... ...
                             </ul>
                         </div>
                     </div>
                 </div>
 
-<<<<<<< HEAD
-                <!------------------------------------------------------------>
-=======
+
                 <!------------------- Box Score -------------------------->
->>>>>>> parent of 137822a... ...
                 <div class="boxscore col-md-8">
                     <div class="portlet-body">
                         <div class="row number-stats margin-bottom-30">

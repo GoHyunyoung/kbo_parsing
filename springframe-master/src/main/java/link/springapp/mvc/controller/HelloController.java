@@ -47,17 +47,6 @@ public class HelloController {
         return "timeline";
     }
 
-<<<<<<< HEAD
-    @RequestMapping(value = {"/boxscore"}, method = RequestMethod.GET)
-    public String printBoxScore(ModelMap model) {
-        logger.info("-----BEGIN /boxscore CONTROLLER-----");
-
-        logger.info("-----END /boxscore CONTROLLER-----");
-        return "boxscore";
-    }
-
-=======
->>>>>>> parent of 137822a... ...
     @RequestMapping(value = "/scroll", method = RequestMethod.GET)
     public String getMoreArticle(ModelMap model,@RequestParam("articleId")
         int articleId,@RequestParam("sequence") String sequence) {
@@ -127,6 +116,4 @@ public class HelloController {
         logger.info("-----END /gamePicker CONTROLLER-----");
         return "boxscore";
     }
-
->>>>>>> parent of 137822a... ...
 }

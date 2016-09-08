@@ -12,7 +12,6 @@ Rounded Portlets
     line-height: 38px;
 }
 
-<<<<<<< HEAD
 .timeline li.timeline .timeline-body[data-name="SS"] {
     background: #4186BB;
 }
@@ -52,7 +51,6 @@ Rounded Portlets
 .timeline li.timeline .timeline-body[data-name="NC"] {
     background: #2C5482;
 }
-=======
 .timeline li.timeline .timeline-body[data-name="SS"] {  background: #4186BB;  }
 .timeline li.timeline .timeline-body[data-name="HH"] {  background: #ED5F23;  }
 .timeline li.timeline .timeline-body[data-name="SK"] {  background: #E0002A;  }
@@ -63,7 +61,6 @@ Rounded Portlets
 .timeline li.timeline .timeline-body[data-name="WO"] {  background: #9A304D;  }
 .timeline li.timeline .timeline-body[data-name="KT"] {  background: #868586;  }
 .timeline li.timeline .timeline-body[data-name="NC"] {  background: #2C5482;  }
->>>>>>> parent of 137822a... ...
 
 .timeline > li .timeline-body h2, .timeline > li .timeline-content {
     font-weight: bold;
@@ -124,11 +121,6 @@ Rounded Portlets
     transform: scale(1.15, 1.15);
 }
 
-<<<<<<< HEAD
-=======
-/* BoxScore - BoxScore */
-
->>>>>>> parent of 137822a... ...
 .boxscore {
     text-align: left;
     background-color : #eff3f8;
@@ -146,19 +138,13 @@ Rounded Portlets
     color: #4c4c4c;
 }
 
-<<<<<<< HEAD
 /* BoxScore DatePicker */
 
-=======
-/* BoxScore - DatePicker */
->>>>>>> parent of 137822a... ...
 .datebox {
     padding-left: 0;
     padding-right: 0;
 }
 
-<<<<<<< HEAD
-=======
 a:hover {
     text-decoration: none;
 }
@@ -172,7 +158,6 @@ a:hover {
     background-color : #ccc;
 }
 
->>>>>>> parent of 137822a... ...
 dl, ul, ol {
     list-style: none;
     margin:0;
@@ -191,11 +176,7 @@ dl, ul, ol {
 
 .section-date .col-head h3{
     font-size: 24px;
-<<<<<<< HEAD
-    font-weight: bolder;
-=======
     font-weight: 500;
->>>>>>> parent of 137822a... ...
     font-family: Verdana;
     color : #eff3f8;
     background-color : #55616f;
@@ -206,11 +187,7 @@ dl, ul, ol {
 .section-date .col-body {
     text-align : center;
     padding-left: 5px;
-<<<<<<< HEAD
-    height : 400px;
-=======
     height : 500px;
->>>>>>> parent of 137822a... ...
     overflow-y: auto;
 }
 
@@ -232,27 +209,12 @@ dl, ul, ol {
 .section-date .col-body .month-dimmed .year {  font-size: 12px;  }
 .section-date .col-body .month-dimmed .month {  font-size: 32px;  }
 
-<<<<<<< HEAD
-.section-date .col-body .day span{
-=======
 .section-date .col-body .day span {
->>>>>>> parent of 137822a... ...
     color: #666;
     font-size: 14px;
     font-weight: 700;
 }
-<<<<<<< HEAD
-.section-date .col-body .day-sat span{  color: #31597e;  }
-.section-date .col-body .day-sun span{  color: #ad2727;  }
 
-
-
-
-
-
-
-
-=======
 .section-date .col-body .day-sat span {
     color: #31597e;
     font-size: 14px;
@@ -338,4 +300,3 @@ dl, ul, ol {
     float : right;
     height : 40px;
 }
->>>>>>> parent of 137822a... ...
