@@ -1,8 +1,10 @@
 package link.springapp.mvc.controller;
 import link.springapp.mvc.domain.Article;
 import link.springapp.mvc.domain.CriticalVOD_Url;
+import link.springapp.mvc.domain.winlosePitcher;
 import link.springapp.mvc.service.ArticleService;
 import link.springapp.mvc.service.CriticalVOD_UrlService;
+import link.springapp.mvc.service.winlosePitcherService;
 import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.ibatis.logging.Log;
 import org.apache.log4j.Logger;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.Deque;
 
+import static link.springapp.mvc.service.winlosePitcherService.*;
+
 @Controller
 @Transactional
 @RequestMapping("/")
@@ -27,6 +31,8 @@ public class HelloController {
     private ArticleService articleService;
     @Autowired
     private CriticalVOD_UrlService CriticalVOD_UrlService;
+    @Autowired
+    private winlosePitcherService winlosePitcherService;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
@@ -147,11 +153,15 @@ public class HelloController {
         logger.info("-----BEGIN /gamebox CONTROLLER-----");
 
         ArrayList<Article> articleArrayList = new ArrayList<>();
+        ArrayList<winlosePitcher> WinlosePitcherArrayList = new ArrayList<>();
 
         Article article = articleService.getArticle(articleId);
         articleArrayList.add(article);
-
         model.addAttribute("articleArrayList", articleArrayList);
+
+        winlosePitcher WinlosePitcher = winlosePitcherService.getWinlosePitcher(articleId);
+        WinlosePitcherArrayList.add(WinlosePitcher);
+        model.addAttribute("WinlosePitcherArrayList", WinlosePitcherArrayList);
 
         logger.info("-----END /gamebox CONTROLLER-----");
         return "gamebox";

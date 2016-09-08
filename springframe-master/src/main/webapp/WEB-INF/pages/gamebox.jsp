@@ -101,6 +101,7 @@
             </tbody>
         </table><br/>
 
+        <c:forEach var="wlPitcher" items="${WinlosePitcherArrayList}">
         <div class="pitcher-box col-md-12">
             <br/>
             <ul class="list_result">
@@ -108,30 +109,30 @@
                 <li class="col-md-4">
                     <span class="thumb_vs">
                         <a class="thumb_round thumb_round120">
-                            <img src="http://t1.daumcdn.net/thumb/F120x150ht.u/?fname=http%3A%2F%2Fi1.daumcdn.net%2Fimg-section%2Fsports13%2Fplayer%2Fkbo%2F61666.jpg%3F_v%3D20160711" width="120" height="150" class="thumb_g" alt="한승혁" onerror="this.src=namespace('SPORTS_GAMECENTER.CONFIG').PLAYER_NOIMAGE">
+                            <img src="${wlPitcher.winPlayerFaceUrl}" width="120" height="150" class="thumb_g" alt="한승혁" onerror="this.src=namespace('SPORTS_GAMECENTER.CONFIG').PLAYER_NOIMAGE">
                             <span class="frame_round"></span>
                         </a>
                         <span class="mark_tip mark_blue"><span class="txt_gc">승</span></span>
                     </span>
                     <dl class="info_result">
-                        <dt class="tit_name">한승혁</dt>
+                        <dt class="tit_name">${wlPitcher.winPlayerName}</dt>
                         <dd class="desc_result">
-                            시즌 2승 1패 / ERA 6.64
+                            시즌 ${wlPitcher.winPlayerWinCount}승 ${wlPitcher.winPlayerLoseCount}패 / ERA ${wlPitcher.winPlayerERA}
                         </dd>
                     </dl>
                 </li>
                 <li class="col-md-4">
                     <span class="thumb_vs">
                         <a class="thumb_round thumb_round120">
-                            <img src="http://t1.daumcdn.net/thumb/F120x150ht.u/?fname=http%3A%2F%2Fi1.daumcdn.net%2Fimg-section%2Fsports13%2Fplayer%2Fkbo%2F76118.jpg%3F_v%3D20160711" width="120" height="150" class="thumb_g" alt="원종현" onerror="this.src=namespace('SPORTS_GAMECENTER.CONFIG').PLAYER_NOIMAGE">
+                            <img src="${wlPitcher.losePlayerFaceUrl}" width="120" height="150" class="thumb_g" alt="원종현" onerror="this.src=namespace('SPORTS_GAMECENTER.CONFIG').PLAYER_NOIMAGE">
                             <span class="frame_round"></span>
                         </a>
                         <span class="mark_tip mark_gray"><span class="txt_gc">패</span></span>
                     </span>
                     <dl class="info_result">
-                        <dt class="tit_name">원종현</dt>
+                        <dt class="tit_name">${wlPitcher.losePlayerName}</dt>
                         <dd class="desc_result">
-                            시즌 3승 2패 / ERA 2.42
+                            시즌 ${wlPitcher.losePlayerWinCount}승 ${wlPitcher.losePlayerLoseCount}패 / ERA ${wlPitcher.losePlayerERA}
                         </dd>
                         <br/>
                     </dl>
@@ -139,6 +140,7 @@
                 <li class="col-md-2"></li>
             </ul>
         </div>
+        </c:forEach>
 
         <ul class="list_graph col-md-12">
             <li class="fst">

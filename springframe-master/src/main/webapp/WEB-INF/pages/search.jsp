@@ -12,8 +12,6 @@
         <div class="container">
             <!-- BEGIN PAGE TITLE -->
             <div class="page-title">
-                <h1>Timeline
-                    <small>Recent Article on the KBO</small>
                 <h1>Search
                     <small>Articles on Search</small>
                 </h1>
