@@ -110,8 +110,6 @@ public class HelloController {
         logger.info("-----END /search CONTROLLER-----");
         return "search";
     }
-<<<<<<< HEAD
-=======
 
     @RequestMapping(value = {"/boxscore"}, method = RequestMethod.GET)
     public String getGameData(ModelMap model) {
