@@ -100,43 +100,80 @@
             </tr>
             </tbody>
         </table><br/>
-
         <c:forEach var="wlPitcher" items="${WinlosePitcherArrayList}">
         <div class="pitcher-box col-md-12">
             <br/>
             <ul class="list_result">
                 <li class="col-md-2"></li>
-                <li class="col-md-4">
-                    <span class="thumb_vs">
-                        <a class="thumb_round thumb_round120">
-                            <img src="${wlPitcher.winPlayerFaceUrl}" width="120" height="150" class="thumb_g" alt="한승혁" onerror="this.src=namespace('SPORTS_GAMECENTER.CONFIG').PLAYER_NOIMAGE">
-                            <span class="frame_round"></span>
-                        </a>
-                        <span class="mark_tip mark_blue"><span class="txt_gc">승</span></span>
-                    </span>
-                    <dl class="info_result">
-                        <dt class="tit_name">${wlPitcher.winPlayerName}</dt>
-                        <dd class="desc_result">
-                            시즌 ${wlPitcher.winPlayerWinCount}승 ${wlPitcher.winPlayerLoseCount}패 / ERA ${wlPitcher.winPlayerERA}
-                        </dd>
-                    </dl>
-                </li>
-                <li class="col-md-4">
-                    <span class="thumb_vs">
-                        <a class="thumb_round thumb_round120">
-                            <img src="${wlPitcher.losePlayerFaceUrl}" width="120" height="150" class="thumb_g" alt="원종현" onerror="this.src=namespace('SPORTS_GAMECENTER.CONFIG').PLAYER_NOIMAGE">
-                            <span class="frame_round"></span>
-                        </a>
-                        <span class="mark_tip mark_gray"><span class="txt_gc">패</span></span>
-                    </span>
-                    <dl class="info_result">
-                        <dt class="tit_name">${wlPitcher.losePlayerName}</dt>
-                        <dd class="desc_result">
-                            시즌 ${wlPitcher.losePlayerWinCount}승 ${wlPitcher.losePlayerLoseCount}패 / ERA ${wlPitcher.losePlayerERA}
-                        </dd>
-                        <br/>
-                    </dl>
-                </li>
+                <c:choose>
+                    <c:when test="${article.emblem == article.awayT}">
+                        <li class="col-md-4">
+                            <span class="thumb_vs">
+                                <a class="thumb_round thumb_round120">
+                                    <img src="${wlPitcher.winPlayerFaceUrl}" width="120" height="150" class="thumb_g" onerror="this.src=namespace('SPORTS_GAMECENTER.CONFIG').PLAYER_NOIMAGE">
+                                    <span class="frame_round"></span>
+                                </a>
+                                <span class="mark_tip mark_blue"><span class="txt_gc">승</span></span>
+                            </span>
+                            <dl class="info_result">
+                                <dt class="tit_name">${wlPitcher.winPlayerName}</dt>
+                                <dd class="desc_result">
+                                    시즌 ${wlPitcher.winPlayerWinCount}승 ${wlPitcher.winPlayerLoseCount}패 / ERA ${wlPitcher.winPlayerERA}
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="col-md-4">
+                            <span class="thumb_vs">
+                                <a class="thumb_round thumb_round120">
+                                    <img src="${wlPitcher.losePlayerFaceUrl}" width="120" height="150" class="thumb_g" onerror="this.src=namespace('SPORTS_GAMECENTER.CONFIG').PLAYER_NOIMAGE">
+                                    <span class="frame_round"></span>
+                                </a>
+                                <span class="mark_tip mark_gray"><span class="txt_gc">패</span></span>
+                            </span>
+                            <dl class="info_result">
+                                <dt class="tit_name">${wlPitcher.losePlayerName}</dt>
+                                <dd class="desc_result">
+                                    시즌 ${wlPitcher.losePlayerWinCount}승 ${wlPitcher.losePlayerLoseCount}패 / ERA ${wlPitcher.losePlayerERA}
+                                </dd>
+                                <br/>
+                            </dl>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="col-md-4">
+                            <span class="thumb_vs">
+                                <a class="thumb_round thumb_round120">
+                                    <img src="${wlPitcher.losePlayerFaceUrl}" width="120" height="150" class="thumb_g" onerror="this.src=namespace('SPORTS_GAMECENTER.CONFIG').PLAYER_NOIMAGE">
+                                    <span class="frame_round"></span>
+                                </a>
+                                <span class="mark_tip mark_gray"><span class="txt_gc">패</span></span>
+                            </span>
+                            <dl class="info_result">
+                                <dt class="tit_name">${wlPitcher.losePlayerName}</dt>
+                                <dd class="desc_result">
+                                    시즌 ${wlPitcher.losePlayerWinCount}승 ${wlPitcher.losePlayerLoseCount}패 / ERA ${wlPitcher.losePlayerERA}
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="col-md-4">
+                            <span class="thumb_vs">
+                                <a class="thumb_round thumb_round120">
+                                    <img src="${wlPitcher.winPlayerFaceUrl}" width="120" height="150" class="thumb_g" onerror="this.src=namespace('SPORTS_GAMECENTER.CONFIG').PLAYER_NOIMAGE">
+                                    <span class="frame_round"></span>
+                                </a>
+                                <span class="mark_tip mark_blue"><span class="txt_gc">승</span></span>
+                            </span>
+                            <dl class="info_result">
+                                <dt class="tit_name">${wlPitcher.winPlayerName}</dt>
+                                <dd class="desc_result">
+                                    시즌 ${wlPitcher.winPlayerWinCount}승 ${wlPitcher.winPlayerLoseCount}패 / ERA ${wlPitcher.winPlayerERA}
+                                </dd>
+                                <br/>
+                            </dl>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+
                 <li class="col-md-2"></li>
             </ul>
         </div>
