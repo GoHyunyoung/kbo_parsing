@@ -20,7 +20,6 @@ import java.util.Deque;
 @Controller
 @Transactional
 @RequestMapping("/")
-
 public class HelloController {
     private Logger logger= Logger.getLogger(this.getClass());
 
@@ -41,27 +40,20 @@ public class HelloController {
         logger.info("-----BEGIN /timeline CONTROLLER-----");
         ArrayList<Article> articleArrayList = new ArrayList<>();
 //        Deque urlArrayDeque<CriticalVOD_Url> urlArrayDeque = new Deque<>();
-        int[] urlCountArr= new int[10];
+//        int[] urlCountArr= new int[10];
         int articleCount = articleService.getArticleCount();
 
         for (int i = 0; i < 10; i++) {
             Article article = articleService.getArticle(articleCount-i);
             articleArrayList.add(article);
-            CriticalVOD_Url[] criticalVOD_url = CriticalVOD_UrlService.getCriticalVOD_Url(article.getId());
-            urlCountArr[i]=criticalVOD_url.length;
+//            CriticalVOD_Url[] criticalVOD_url = CriticalVOD_UrlService.getCriticalVOD_Url(article.getId());
+//            urlCountArr[i]=criticalVOD_url.length;
             }
         model.addAttribute("articleArrayList", articleArrayList);
 //        model.addAttribute("urlArrayList",UrlArrayList);
-        model.addAttribute("urlCountArr",urlCountArr);
+//        model.addAttribute("urlCountArr",urlCountArr);
         logger.info("-----END /timeline CONTROLLER-----");
         return "timeline";
-    }
-    @RequestMapping(value = {"/boxscore"}, method = RequestMethod.GET)
-    public String printBoxScore(ModelMap model) {
-        logger.info("-----BEGIN /boxscore CONTROLLER-----");
-
-        logger.info("-----END /boxscore CONTROLLER-----");
-        return "boxscore";
     }
 
     @RequestMapping(value = "/scroll", method = RequestMethod.GET)

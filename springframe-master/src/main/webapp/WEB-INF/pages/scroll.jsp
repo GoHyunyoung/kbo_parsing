@@ -11,10 +11,7 @@
 <head>
 </head>
 <body>
-<<<<<<< HEAD
 <c:set var="date" value="${article.date}"></c:set>
-=======
->>>>>>> parent of 137822a... ...
 <c:forEach var="article" items="${articleArrayList}">
     <li class=timeline id="${article.id}" hidden>
         <div class="timeline-time">
@@ -43,11 +40,13 @@
                     ${article.conc}
             </div>
             <div class="timeline-footer">
-                <c:set var="count" value="${urlCountArr[article.varStatus]}">
-                    <c:forEach var="" items="${urlArrayList}">
-                    <p>${urlArrayList[]}</p>
-                    </c:forEach>
-                </c:set>
+
+                <%--<c:set var="count" value="${urlCountArr[article.varStatus]}">--%>
+                    <%--<c:forEach var="" items="${urlArrayList}">--%>
+                    <%--<p>${urlArrayList[]}</p>--%>
+                    <%--</c:forEach>--%>
+                <%--</c:set>--%>
+
                 <a href="${article.url}" class="nav-link pull-right">
                     해당 경기 상세히 보러가기 <i class="m-icon-swapright m-icon-white"></i>
                 </a>
