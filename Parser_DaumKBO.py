@@ -15,7 +15,7 @@ import os
 import time
 
 
-# In[2]:
+# In[13]:
 
 class Parser_DaumKBO:
     '''
@@ -74,6 +74,7 @@ class Parser_DaumKBO:
     
     winlosePitcher
     ------- key list -------
+    [winTeam/loseTeam][name] : 선수이름
     [winTeam/loseTeam][winCount] : 선수의 승수
     [winTeam/loseTeam][loseCount] : 선수의 패수
     [winTeam/loseTeam][ERA] : 선수의 ERA
@@ -276,11 +277,8 @@ class Parser_DaumKBO:
         for element in html.select('li#page-stats div.vs_graph ul.list_record'):
             tmpList.extend(tuple(map(int,re.findall('[\d]+',element.text))))
         for k in enumerate(keyList):
-    #     짝수 인덱스
-            if k[0]%2==0 :
-                self.batRecord['home'][k[1]]= tmpList[k[0]]
-            else:
-                self.batRecord['away'][k[1]]=tmpList[k[0]]
+            self.batRecord['home'][k[1]]= tmpList[k[0]]
+            self.batRecord['away'][k[1]]=tmpList[k[0]+8]
 
 #         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 #         hightlight부분을 새로 가져와야함
@@ -306,14 +304,14 @@ class Parser_DaumKBO:
         self.winlosePitcher['loseTeam']={}
     
         self.winlosePitcher['winTeam']['name']=html.select_one('li:nth-of-type(1) dt.tit_name').text
-        self.winlosePitcher['winTeam']['winCount']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(1) dd.desc_result').text)[0]
-        self.winlosePitcher['winTeam']['loseCount']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(1) dd.desc_result').text)[1]
-        self.winlosePitcher['winTeam']['ERA']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(1) dd.desc_result').text)[2]
+        self.winlosePitcher['winTeam']['winCount']=int(re.findall('[\.\d]+',html.select_one('li:nth-of-type(1) dd.desc_result').text)[0])
+        self.winlosePitcher['winTeam']['loseCount']=int(re.findall('[\.\d]+',html.select_one('li:nth-of-type(1) dd.desc_result').text)[1])
+        self.winlosePitcher['winTeam']['ERA']=float(re.findall('[\.\d]+',html.select_one('li:nth-of-type(1) dd.desc_result').text)[2])
         self.winlosePitcher['winTeam']['faceUrl']=html.select_one('li:nth-of-type(1) img').attrs['src']
         self.winlosePitcher['loseTeam']['name']=html.select_one('li:nth-of-type(2) dt.tit_name').text
-        self.winlosePitcher['loseTeam']['winCount']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(2) dd.desc_result').text)[0]
-        self.winlosePitcher['loseTeam']['loseCount']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(2) dd.desc_result').text)[1]
-        self.winlosePitcher['loseTeam']['ERA']=re.findall('[\.\d]+',html.select_one('li:nth-of-type(2) dd.desc_result').text)[2]
+        self.winlosePitcher['loseTeam']['winCount']=int(re.findall('[\.\d]+',html.select_one('li:nth-of-type(2) dd.desc_result').text)[0])
+        self.winlosePitcher['loseTeam']['loseCount']=int(re.findall('[\.\d]+',html.select_one('li:nth-of-type(2) dd.desc_result').text)[1])
+        self.winlosePitcher['loseTeam']['ERA']=float(re.findall('[\.\d]+',html.select_one('li:nth-of-type(2) dd.desc_result').text)[2])
         self.winlosePitcher['loseTeam']['faceUrl']=html.select_one('li:nth-of-type(2) img').attrs['src']
     
         if winTeam=='away':
