@@ -110,40 +110,44 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="teamEmblemButton col-md-2">
-                                <p>엠블럼 선택</p>
-                                <a href="">
+                                <p>---- Select Amblem ----</p>
+                                <a href="#" onclick="teamClick(HH)">
                                     <img src="/resources/images/emblem_image/emblemB_HH.png"/>
                                 </a>
-                                <a href="">
+                                <a href="#" onclick="teamClick(HT)">
                                     <img src="/resources/images/emblem_image/emblemB_HT.png"/>
                                 </a>
-                                <a href="">
+                                <a href="#" onclick="teamClick(KT)">
                                     <img src="/resources/images/emblem_image/emblemB_KT.png"/>
                                 </a>
-                                <a href="">
+                                <a href="#" onclick="teamClick(LG)">
                                     <img src="/resources/images/emblem_image/emblemB_LG.png"/>
                                 </a>
-                                <a href="">
+                                <a href="#" onclick="teamClick(LT)">
                                     <img src="/resources/images/emblem_image/emblemB_LT.png"/>
                                 </a>
-                                <a href="">
+                                <a href="#" onclick="teamClick(NC)">
                                     <img src="/resources/images/emblem_image/emblemB_NC.png"/>
                                 </a>
-                                <a href="">
+                                <a href="#" onclick="teamClick(OB)">
                                     <img src="/resources/images/emblem_image/emblemB_OB.png"/>
                                 </a>
-                                <a href="">
+                                <a href="#" onclick="teamClick(SK)">
                                     <img src="/resources/images/emblem_image/emblemB_SK.png"/>
                                 </a>
-                                <a href="">
+                                <a href="#" onclick="teamClick(SS)">
                                     <img src="/resources/images/emblem_image/emblemB_SS.png"/>
                                 </a>
-                                <a href="">
+                                <a href="#" onclick="teamClick(WO)">
                                     <img src="/resources/images/emblem_image/emblemB_WO.png"/>
                                 </a>
                             </div>
                             <div class="col-md-10">
-                                <p>해당 팀 기사 출력</p>
+                                <div class="teamArticle">
+                                    <p>---- Print TeamArticle ----</p>
+                                    <jsp:include page="teamArticle.jsp"/>
+                                    <!-- teamArticle.jsp -->
+                                </div>
                             </div>
                         </div><br/>
                     </div>

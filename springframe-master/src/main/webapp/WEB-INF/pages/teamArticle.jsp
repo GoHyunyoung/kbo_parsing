@@ -1,19 +1,24 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
-  User: gohyunyoung98
-  Date: 16. 7. 25
-  Time: 오후 5:19
+  User: moonlight
+  Date: 2016. 9. 11.
+  Time: 오후 9:23
   To change this template use File | Settings | File Templates.
-  --%>
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <title></title>
+    <link href="/resources/assets/css/index.css" rel="stylesheet" type="text/css">
+    <!-- END THEME STYLES -->
+    <%--BEGIN INDEX_PAGE SCRIPT--%>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/resources/assets/javascript/scroll.js"></script>
+    <script type="text/javascript" src="/resources/assets/javascript/index.js"></script>
+    <%--END INDEX_PAGE SCRIPT--%>
 </head>
 <body>
-<c:set var="startIdx" value="0"/>
-<c:set var="count" value="${urlCountArr[0]}"/>
-<c:set var="endIdx" value="${startIdx+count}"/>
 <c:set var="date" value="${article.date}"></c:set>
 <c:forEach var="article" items="${articleArrayList}" varStatus="status">
     <li class=timeline id="${article.id}" hidden>
@@ -42,25 +47,8 @@
                 <br/>
                     ${article.conc}
             </div>
-            <div class="plusImage" >
-                <a onclick="plusVideo()">
-                    <img src="/resources/images/arrow.png"/>
-                </a>
-            </div>
-
-            <div class="timeline-footer" style="display:none;">
-                <c:if test="${count>0}">
-                    <c:forEach var="urlArrayList" begin="${startIdx}" end="${endIdx-1}" items="${criticalVOD_urlArrayList}">
-                        <iframe width="400px" height="250px" src="${urlArrayList.vodUrl}"></iframe>
-                    </c:forEach>
-                </c:if>
-                <c:set var="startIdx" value="${endIdx}"/>
-                <c:set var="count" value="${urlCountArr[status.index+1]}"/>
-                <c:set var="endIdx" value="${startIdx+count}"/>
-                <div></div>
-                <div align="right">
-                    <a href="${article.url}"> <i class="m-icon-swapright m-icon-white"></i><i>해당 경기 상세히 보러가기</i> </a>
-                </div>
+            <div class="timeline-footer">
+                <a href="${article.url}"> <i class="m-icon-swapright m-icon-white"></i> 해당 경기 상세히 보러가기  </a>
             </div>
         </div>
     </li>

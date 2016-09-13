@@ -2012,3 +2012,19 @@ function gamePicker(articleId) {
         error : function () { console.log("error"); }
     });
 }
+// TeamPage -> TeamClick
+function teamClick(teamName) {
+    $.ajax({
+        url: '/teamArticle',
+        type: 'get',
+        data: 'teamName='+teamName,
+        success: function(data) { $(".teamArticle").html(data); },
+        error : function () { console.log("error"); }
+    });
+}
+
+function plusVideo() {
+    $(".timeline-footer").toggle();
+}
+
+

@@ -44,7 +44,7 @@ public class HelloController {
         int articleCount = articleService.getArticleCount();
         ArrayList<CriticalVOD_Url> criticalVOD_urlArrayList = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             Article article = articleService.getArticle(articleCount-i);
             articleArrayList.add(article);
             urlCountArr[i]=criticalVOD_UrlService.getCriticalVOD_Url(article.getId()).size();
@@ -73,7 +73,7 @@ public class HelloController {
         logger.info("sequence="+sequence);
 
 //      lastIndex설정
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
 //          RECENT->OLD 글 순서
             int index=i;
             if (sequence.equals("DESC"))index*= -1;
@@ -104,7 +104,7 @@ public class HelloController {
         logger.info("searchDate="+searchDate);
 
 //      lastIndex설정
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
 //          RECENT->OLD 글 순서
             logger.info("for LOOP i = "+i);
             if(articleService.getArticle(searchResultMinId + i)==null)
@@ -173,5 +173,30 @@ public class HelloController {
         logger.info("-----BEGIN /teampage CONTROLLER-----");
         logger.info("-----END /teampage CONTROLLER-----");
         return "teampage";
+    }
+
+    @RequestMapping(value = {"/teamArticle"}, method = RequestMethod.GET)
+    public String getTeamArticle(ModelMap model,@RequestParam("teamName") String teamName) {
+        logger.info("-----BEGIN /teamArticle CONTROLLER-----");
+
+        int articleCount = articleService.getArticleCount();
+        ArrayList<Article> articleArrayList = new ArrayList<>();
+
+        /*
+        for (int i = 0; i < 25; i++) {
+            logger.info("for LOOP i = "+i);
+            Article article = articleService.getArticle(articleCount-i);
+            if ( teamName == article.getawayT() ) {
+                articleArrayList.add(article);
+            }
+            else if ( teamName == article.gethomeT() ) {
+                articleArrayList.add(article);
+            }
+        }
+        */
+
+        model.addAttribute("articleArrayList", articleArrayList);
+        logger.info("-----END /teamArticle CONTROLLER-----");
+        return "teamArticle";
     }
 }
