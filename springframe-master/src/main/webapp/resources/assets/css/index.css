@@ -148,8 +148,14 @@ a i {
 .emblem-right {
     text-align: right;
 }
+.emblem-right a img {
+    height : 56px;
+}
 .emblem-left {
     text-align: left;
+}
+.emblem-left a img {
+    height : 56px;
 }
 .scorepoint {
     text-align: center;

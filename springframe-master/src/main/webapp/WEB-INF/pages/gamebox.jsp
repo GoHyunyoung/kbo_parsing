@@ -183,13 +183,13 @@
             <li class="fst">
                 <span class="txt_gc tit_hit">안타</span>
                 <span class="vs_graph vs_team1">
-                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.AH*3+6}%">
+                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.AH*4+6}%">
                         <span class="num_g">${article.AH}</span>
                     </span>
                 </span>
                 <span class="screen_out"> vs</span>
                 <span class="vs_graph vs_team2">
-                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.HH*3+6}%">
+                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.HH*4+6}%">
                         <span class="num_g">${article.HH}</span>
                     </span>
                 </span>
@@ -197,55 +197,55 @@
             <li>
                 <span class="txt_gc tit_homerun">홈런</span>
                 <span class="vs_graph vs_team1">
-                    <span class="rod_graph" data-name="${article.awayT}" style="width:35%">
-                        <span class="num_g">4</span>
+                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.awayHR*8+6}%">
+                        <span class="num_g">${article.awayHR}</span>
                     </span>
                 </span>
                 <span class="screen_out"> vs</span>
                 <span class="vs_graph vs_team2">
-                    <span class="rod_graph2" data-name="${article.homeT}" style="width:15%">
-                        <span class="num_g">3</span>
+                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.homeHR*8+6}%">
+                        <span class="num_g">${article.homeHR}</span>
                     </span>
                 </span>
             </li>
             <li>
                 <span class="txt_gc tit_strikeout2">탈삼진</span>
                 <span class="vs_graph vs_team1">
-                    <span class="rod_graph" data-name="${article.awayT}" style="width:29%">
-                        <span class="num_g">6</span>
+                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.awaySO*5+6}%">
+                        <span class="num_g">${article.awaySO}</span>
                     </span>
                 </span>
                 <span class="screen_out"> vs</span>
                 <span class="vs_graph vs_team2">
-                    <span class="rod_graph2" data-name="${article.homeT}" style="width:65%">
-                        <span class="num_g">15</span>
+                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.homeSO*5+6}%">
+                        <span class="num_g">${article.homeSO}</span>
                     </span>
                 </span>
             </li>
             <li>
                 <span class="txt_gc tit_sab">도루</span>
                 <span class="vs_graph vs_team1">
-                    <span class="rod_graph" data-name="${article.awayT}" style="width:6%">
-                        <span class="num_g">0</span>
+                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.awaySB*8+6}%">
+                        <span class="num_g">${article.awaySB}</span>
                     </span>
                 </span>
                 <span class="screen_out"> vs</span>
                 <span class="vs_graph vs_team2">
-                    <span class="rod_graph2" data-name="${article.homeT}" style="width:15%">
-                        <span class="num_g">1</span>
+                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.homeSB*8+6}%">
+                        <span class="num_g">${article.homeSB}</span>
                     </span>
                 </span>
             </li>
             <li>
                 <span class="txt_gc tit_mistake">실책</span>
                 <span class="vs_graph vs_team1">
-                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.AE*6+6}%">
+                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.AE*8+6}%">
                         <span class="num_g">${article.AE}</span>
                     </span>
                 </span>
                 <span class="screen_out"> vs</span>
                 <span class="vs_graph vs_team2">
-                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.HE*6+6}">
+                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.HE*8+6}%">
                         <span class="num_g">${article.HE}</span>
                     </span>
                 </span>
@@ -253,41 +253,41 @@
             <li>
                 <span class="txt_gc tit_dp">병살</span>
                 <span class="vs_graph vs_team1">
-                    <span class="rod_graph" data-name="${article.awayT}" style="width:6%">
-                        <span class="num_g">0</span>
+                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.awayGDP*8+6}%">
+                        <span class="num_g">${article.awayGDP}</span>
                     </span>
                 </span>
                 <span class="screen_out"> vs</span>
                 <span class="vs_graph vs_team2">
-                    <span class="rod_graph2" data-name="${article.homeT}" style="width:15%">
-                        <span class="num_g">1</span>
+                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.homeGDP*8+6}%">
+                        <span class="num_g">${article.homeGDP}</span>
                     </span>
                 </span>
             </li>
             <li>
                 <span class="txt_gc tit_lob">잔루</span>
                 <span class="vs_graph vs_team1">
-                    <span class="rod_graph" data-name="${article.awayT}" style="width:45%">
-                        <span class="num_g">10</span>
+                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.awayLOB*4+6}%">
+                        <span class="num_g">${article.awayLOB}</span>
                     </span>
                 </span>
                 <span class="screen_out"> vs</span>
                 <span class="vs_graph vs_team2">
-                    <span class="rod_graph2" data-name="${article.homeT}" style="width:29%">
-                        <span class="num_g">6</span>
+                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.homeLOB*4+6}%">
+                        <span class="num_g">${article.homeLOB}</span>
                     </span>
                 </span>
             </li>
             <li>
                 <span class="txt_gc tit_walk">사사구</span>
                 <span class="vs_graph vs_team1">
-                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.AB*4+6}%">
+                    <span class="rod_graph" data-name="${article.awayT}" style="width:${article.AB*5+6}%">
                         <span class="num_g">${article.AB}</span>
                     </span>
                 </span>
                 <span class="screen_out"> vs</span>
                 <span class="vs_graph vs_team2">
-                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.HB*4+6}%">
+                    <span class="rod_graph2" data-name="${article.homeT}" style="width:${article.HB*5+6}%">
                         <span class="num_g">${article.HB}</span>
                     </span>
                 </span>

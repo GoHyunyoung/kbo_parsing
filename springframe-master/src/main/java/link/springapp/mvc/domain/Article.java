@@ -11,10 +11,10 @@ public class Article {
     private String emblem;
     private String awayT;
     private String homeT;
+    private Integer awayHR,awaySB,awaySO,awayGDP,awayLOB;
+    private Integer homeHR,homeSB,homeSO,homeGDP,homeLOB;
     private Integer A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,AR,AH,AE,AB;
     private Integer H1,H2,H3,H4,H5,H6,H7,H8,H9,H10,H11,H12,HR,HH,HE,HB;
-
-
 
     @Override
     public int hashCode() {
@@ -105,13 +105,51 @@ public class Article {
         this.emblem = emblem;
     }
 
-    public String getAwayT() {
-        return awayT;
-    }
+    public String getAwayT() {return awayT;}
 
     public void setAwayT(String awayT) {
         this.awayT = awayT;
     }
+
+    public Integer getAwayHR() {return awayHR;}
+
+    public void setAwayHR(Integer awayHR) {this.awayHR = awayHR;}
+
+    public Integer getAwaySB() {return awaySB;}
+
+    public void setAwaySB(Integer awaySB) {this.awaySB = awaySB;}
+
+    public Integer getAwaySO() {return awaySO;}
+
+    public void setAwaySO(Integer awaySO) {this.awaySO = awaySO;}
+
+    public Integer getAwayGDP() {return awayGDP;}
+
+    public void setAwayGDP(Integer awayGDP) {this.awayGDP = awayGDP;}
+
+    public Integer getAwayLOB() {return awayLOB;}
+
+    public void setAwayLOB(Integer awayLOB) {this.awayLOB = awayLOB;}
+
+    public Integer getHomeHR() {return homeHR;}
+
+    public void setHomeHR(Integer homeHR) {this.homeHR = homeHR;}
+
+    public Integer getHomeSB() {return homeSB;}
+
+    public void setHomeSB(Integer homeSB) {this.homeSB = homeSB;}
+
+    public Integer getHomeSO() {return homeSO;}
+
+    public void setHomeSO(Integer homeSO) {this.homeSO = homeSO;}
+
+    public Integer getHomeGDP() {return homeGDP;}
+
+    public void setHomeGDP(Integer homeGDP) {this.homeGDP = homeGDP;}
+
+    public Integer getHomeLOB() {return homeLOB;}
+
+    public void setHomeLOB(Integer homeLOB) {this.homeLOB = homeLOB;}
 
     public String getHomeT() {
         return homeT;

@@ -2002,6 +2002,7 @@ function datePicker(pickedDate) {
         error : function () { console.log("error"); }
     });
 }
+
 // BoxScore -> GamePicker
 function gamePicker(articleId) {
     $.ajax({
@@ -2022,9 +2023,7 @@ function teamClick(teamName) {
         error : function () { console.log("error"); }
     });
 }
-
+// Timeline -> show hidden video
 function plusVideo() {
-    $(".timeline-footer").toggle();
+    $("#timeline-footer").toggle();
 }
-
-
