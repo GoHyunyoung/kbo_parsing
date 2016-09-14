@@ -15,7 +15,7 @@ import os
 import time
 
 
-# In[13]:
+# In[21]:
 
 class Parser_DaumKBO:
     '''
@@ -276,9 +276,10 @@ class Parser_DaumKBO:
         keyList=['H','HR','SB','BB','SO','E','GDP','LOB']
         for element in html.select('li#page-stats div.vs_graph ul.list_record'):
             tmpList.extend(tuple(map(int,re.findall('[\d]+',element.text))))
+        
         for k in enumerate(keyList):
-            self.batRecord['home'][k[1]]= tmpList[k[0]]
-            self.batRecord['away'][k[1]]=tmpList[k[0]+8]
+            self.batRecord['home'][k[1]]= tmpList[k[0]*2]
+            self.batRecord['away'][k[1]]=tmpList[k[0]*2+1]
 
 #         ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 #         hightlight부분을 새로 가져와야함
