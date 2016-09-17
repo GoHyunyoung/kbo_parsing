@@ -42,13 +42,15 @@
                 <br/>
                     ${article.conc}
             </div>
-            <div class="plusImage" >
-                <a onclick="plusVideo()">
-                    <img src="/resources/images/arrow.png"/>
-                </a>
+            <div class="hover2 effect2">
+                <div class="plusImage">
+                    <a onclick="plusVideo(${article.id}*1000)">
+                        <img src="/resources/images/arrow2.png"/>
+                    </a>
+                </div>
             </div>
 
-            <div class="timeline-footer" style="display:none;">
+            <div class="timeline-footer" id="${article.id*1000}" style="display:none;">
                 <c:if test="${count>0}">
                     <c:forEach var="urlArrayList" begin="${startIdx}" end="${endIdx-1}" items="${criticalVOD_urlArrayList}">
                         <iframe width="400px" height="250px" src="${urlArrayList.vodUrl}"></iframe>

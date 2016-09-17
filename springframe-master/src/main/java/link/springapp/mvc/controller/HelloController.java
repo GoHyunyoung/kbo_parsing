@@ -31,8 +31,7 @@ public class HelloController {
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
-        logger.info("-----BEGIN /index CONTROLLER-----");
-        logger.info("-----END /index CONTROLLER-----");
+        logger.info("-----/index CONTROLLER-----");
         return "index";
     }
 
@@ -121,8 +120,7 @@ public class HelloController {
 
     @RequestMapping(value = {"/boxscore"}, method = RequestMethod.GET)
     public String getGameData(ModelMap model) {
-        logger.info("-----BEGIN /gamePicker CONTROLLER-----");
-        logger.info("-----END /gamePicker CONTROLLER-----");
+        logger.info("-----/gamePicker CONTROLLER-----");
         return "boxscore";
     }
 
@@ -170,30 +168,24 @@ public class HelloController {
 
     @RequestMapping(value = {"/teampage"}, method = RequestMethod.GET)
     public String getTeamPage(ModelMap model) {
-        logger.info("-----BEGIN /teampage CONTROLLER-----");
-        logger.info("-----END /teampage CONTROLLER-----");
+        logger.info("-----/teampage CONTROLLER-----");
         return "teampage";
     }
 
     @RequestMapping(value = {"/teamArticle"}, method = RequestMethod.GET)
-    public String getTeamArticle(ModelMap model,@RequestParam("teamName") String teamName) {
+    public String getTeamArticle(ModelMap model,@RequestParam(value = "teamName") String teamName) {
         logger.info("-----BEGIN /teamArticle CONTROLLER-----");
 
         int articleCount = articleService.getArticleCount();
         ArrayList<Article> articleArrayList = new ArrayList<>();
 
-        /*
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 20; i++) {
             logger.info("for LOOP i = "+i);
             Article article = articleService.getArticle(articleCount-i);
-            if ( teamName == article.getawayT() ) {
-                articleArrayList.add(article);
-            }
-            else if ( teamName == article.gethomeT() ) {
+            if (article.getEmblem() == teamName) {
                 articleArrayList.add(article);
             }
         }
-        */
 
         model.addAttribute("articleArrayList", articleArrayList);
         logger.info("-----END /teamArticle CONTROLLER-----");

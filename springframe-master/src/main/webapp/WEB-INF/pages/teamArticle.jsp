@@ -19,6 +19,7 @@
     <%--END INDEX_PAGE SCRIPT--%>
 </head>
 <body>
+<%--
 <c:set var="date" value="${article.date}"></c:set>
 <c:forEach var="article" items="${articleArrayList}" varStatus="status">
     <li class=timeline id="${article.id}" hidden>
@@ -53,5 +54,11 @@
         </div>
     </li>
 </c:forEach>
+--%>
+<h1>Hi</h1>
+<c:forEach var="article" items="${aritlceArrayList}">
+    <h3>${article.id}</h3>
+</c:forEach>
+
 </body>
 </html>

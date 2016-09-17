@@ -111,34 +111,34 @@
                         <div class="col-md-12">
                             <div class="teamEmblemButton col-md-2">
                                 <p>---- Select Amblem ----</p>
-                                <a href="#" onclick="teamClick(HH)">
+                                <a href="#" onclick="teamPicker(HH)">
                                     <img src="/resources/images/emblem_image/emblemB_HH.png"/>
                                 </a>
-                                <a href="#" onclick="teamClick(HT)">
+                                <a href="#" onclick="teamPicker(HT)">
                                     <img src="/resources/images/emblem_image/emblemB_HT.png"/>
                                 </a>
-                                <a href="#" onclick="teamClick(KT)">
+                                <a href="#" onclick="teamPicker(KT)">
                                     <img src="/resources/images/emblem_image/emblemB_KT.png"/>
                                 </a>
-                                <a href="#" onclick="teamClick(LG)">
+                                <a href="#" onclick="teamPicker(LG)">
                                     <img src="/resources/images/emblem_image/emblemB_LG.png"/>
                                 </a>
-                                <a href="#" onclick="teamClick(LT)">
+                                <a href="#" onclick="teamPicker(LT)">
                                     <img src="/resources/images/emblem_image/emblemB_LT.png"/>
                                 </a>
-                                <a href="#" onclick="teamClick(NC)">
+                                <a href="#" onclick="teamPicker(NC)">
                                     <img src="/resources/images/emblem_image/emblemB_NC.png"/>
                                 </a>
-                                <a href="#" onclick="teamClick(OB)">
+                                <a href="#" onclick="teamPicker(OB)">
                                     <img src="/resources/images/emblem_image/emblemB_OB.png"/>
                                 </a>
-                                <a href="#" onclick="teamClick(SK)">
+                                <a href="#" onclick="teamPicker(SK)">
                                     <img src="/resources/images/emblem_image/emblemB_SK.png"/>
                                 </a>
-                                <a href="#" onclick="teamClick(SS)">
+                                <a href="#" onclick="teamPicker(SS)">
                                     <img src="/resources/images/emblem_image/emblemB_SS.png"/>
                                 </a>
-                                <a href="#" onclick="teamClick(WO)">
+                                <a href="#" onclick="teamPicker(WO)">
                                     <img src="/resources/images/emblem_image/emblemB_WO.png"/>
                                 </a>
                             </div>
@@ -146,7 +146,6 @@
                                 <div class="teamArticle">
                                     <p>---- Print TeamArticle ----</p>
                                     <jsp:include page="teamArticle.jsp"/>
-                                    <!-- teamArticle.jsp -->
                                 </div>
                             </div>
                         </div><br/>

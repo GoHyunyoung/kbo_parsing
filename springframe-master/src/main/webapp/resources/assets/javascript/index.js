@@ -1995,35 +1995,40 @@ for(var i = 7; i <= 9; i++) {
 // BoxScore -> DatePicker
 function datePicker(pickedDate) {
     $.ajax({
-        url: '/gamePicker',
-        type: 'get',
-        data: 'gameDate='+pickedDate,
+        url:'/gamePicker',
+        type:'get',
+        data:'gameDate='+pickedDate,
         success: function(data) { $("ul.gamePicker").html(data); },
         error : function () { console.log("error"); }
     });
 }
-
 // BoxScore -> GamePicker
 function gamePicker(articleId) {
     $.ajax({
-        url: '/gamebox',
-        type: 'get',
-        data: 'articleId='+articleId,
+        url:'/gamebox',
+        type:'get',
+        data:'articleId='+articleId,
         success: function(data) { $(".boxscore").html(data); },
         error : function () { console.log("error"); }
     });
 }
 // TeamPage -> TeamClick
-function teamClick(teamName) {
+function teamPicker(teamName) {
     $.ajax({
-        url: '/teamArticle',
-        type: 'get',
-        data: 'teamName='+teamName,
+        url:'/teamArticle',
+        type:'get',
+        data:'teamName='+teamName,
         success: function(data) { $(".teamArticle").html(data); },
         error : function () { console.log("error"); }
     });
 }
 // Timeline -> show hidden video
-function plusVideo() {
-    $("#timeline-footer").toggle();
+function plusVideo(id) {
+    obj=document.getElementById(id);
+    if(obj.style.display == "none") {
+        obj.style.display="inline";
+    }
+    else {
+        obj.style.display="none";
+    }
 }
