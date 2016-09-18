@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>KBO Article Generator | Index</title>
+    <title>KBO Article Generator | TeamPage</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/resources/assets/bootstrap-3.3.4/css/bootstrap.min.css">
@@ -49,7 +49,6 @@
     <script type="text/javascript" src="/resources/assets/javascript/scroll.js"></script>
     <script type="text/javascript" src="/resources/assets/javascript/index.js"></script>
     <%--END INDEX_PAGE SCRIPT--%>
-
 </head>
 <jsp:include page="header.jsp"/>
 <!-- BEGIN PAGE CONTAINER -->
@@ -110,42 +109,45 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="teamEmblemButton col-md-2">
-                                <p>---- Select Amblem ----</p>
-                                <a href="#" onclick="teamPicker(HH)">
+                                <p>---- Select Emblem ----</p>
+                                <a href="#" onclick="teamPicker('HH')">
                                     <img src="/resources/images/emblem_image/emblemB_HH.png"/>
                                 </a>
-                                <a href="#" onclick="teamPicker(HT)">
+                                <a href="#" onclick="teamPicker('HT')">
                                     <img src="/resources/images/emblem_image/emblemB_HT.png"/>
                                 </a>
-                                <a href="#" onclick="teamPicker(KT)">
+                                <a href="#" onclick="teamPicker('KT')">
                                     <img src="/resources/images/emblem_image/emblemB_KT.png"/>
                                 </a>
-                                <a href="#" onclick="teamPicker(LG)">
+                                <a href="#" onclick="teamPicker('LG')">
                                     <img src="/resources/images/emblem_image/emblemB_LG.png"/>
                                 </a>
-                                <a href="#" onclick="teamPicker(LT)">
+                                <a href="#" onclick="teamPicker('LT')">
                                     <img src="/resources/images/emblem_image/emblemB_LT.png"/>
                                 </a>
-                                <a href="#" onclick="teamPicker(NC)">
+                                <a href="#" onclick="teamPicker('NC')">
                                     <img src="/resources/images/emblem_image/emblemB_NC.png"/>
                                 </a>
-                                <a href="#" onclick="teamPicker(OB)">
+                                <a href="#" onclick="teamPicker('OB')">
                                     <img src="/resources/images/emblem_image/emblemB_OB.png"/>
                                 </a>
-                                <a href="#" onclick="teamPicker(SK)">
+                                <a href="#" onclick="teamPicker('SK')">
                                     <img src="/resources/images/emblem_image/emblemB_SK.png"/>
                                 </a>
-                                <a href="#" onclick="teamPicker(SS)">
+                                <a href="#" onclick="teamPicker('SS')">
                                     <img src="/resources/images/emblem_image/emblemB_SS.png"/>
                                 </a>
-                                <a href="#" onclick="teamPicker(WO)">
+                                <a href="#" onclick="teamPicker('WO')">
                                     <img src="/resources/images/emblem_image/emblemB_WO.png"/>
                                 </a>
                             </div>
                             <div class="col-md-10">
+                                <p>---- Print TeamArticle ----</p>
                                 <div class="teamArticle">
-                                    <p>---- Print TeamArticle ----</p>
-                                    <jsp:include page="teamArticle.jsp"/>
+                                    <ul class="timeline">
+                                        <jsp:include page="teamArticle.jsp"/>
+                                        <!-- teamArticle.jsp -->
+                                    </ul>
                                 </div>
                             </div>
                         </div><br/>

@@ -16,7 +16,7 @@
 <c:set var="endIdx" value="${startIdx+count}"/>
 <c:set var="date" value="${article.date}"></c:set>
 <c:forEach var="article" items="${articleArrayList}" varStatus="status">
-    <li class=timeline id="${article.id}" hidden>
+    <li class="timeline" id="${article.id}" hidden>
         <div class="timeline-time">
             <c:choose>
                 <c:when test="${date==article.date}"></c:when>

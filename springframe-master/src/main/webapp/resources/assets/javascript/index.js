@@ -1941,7 +1941,7 @@ for(var i = 7; i <= 9; i++) {
                     '</span> </li> </a>');
             }
             else if (num % 7 == 2) {
-                ul.append('<a href="#"onclick="datePicker(20160'
+                ul.append('<a href="#" onclick="datePicker(20160'
                     + i + 0 + j +
                     ')"> <li class="day-sun"> <span>'
                     + day_week[num % 7] +
@@ -1970,7 +1970,7 @@ for(var i = 7; i <= 9; i++) {
                     '</span> </li> </a>');
             }
             else if (num % 7 == 2) {
-                ul.append('<a href="#"onclick="datePicker(20160'
+                ul.append('<a href="#" onclick="datePicker(20160'
                     + i + +j +
                     ')"> <li class="day-sun"> <span>'
                     + day_week[num % 7] +
@@ -2032,3 +2032,4 @@ function plusVideo(id) {
         obj.style.display="none";
     }
 }
+

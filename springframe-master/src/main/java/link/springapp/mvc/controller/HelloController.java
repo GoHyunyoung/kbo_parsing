@@ -179,10 +179,10 @@ public class HelloController {
         int articleCount = articleService.getArticleCount();
         ArrayList<Article> articleArrayList = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++) {
-            logger.info("for LOOP i = "+i);
+        for (int i = 0; i < 30; i++) {
             Article article = articleService.getArticle(articleCount-i);
-            if (article.getEmblem() == teamName) {
+            if (teamName.equals(articleService.getawayT(articleCount-i)) ||
+                    teamName.equals(articleService.gethomeT(articleCount-i)) ) {
                 articleArrayList.add(article);
             }
         }

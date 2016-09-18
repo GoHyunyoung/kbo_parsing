@@ -14,6 +14,15 @@ public class ArticleService {
         Article article = articleMapper.getArticle(id);
         return article;
     }
+
+    public String getawayT(int id) {
+        String awayT = articleMapper.getawayT(id);
+        return awayT;
+    }
+    public String gethomeT(int id) {
+        String homeT = articleMapper.gethomeT(id);
+        return homeT;
+    }
 //    public Article[] getArticleArray(int id){
 //        Article[] article = articleMapper.getArticleArray(id);
 //        return article;

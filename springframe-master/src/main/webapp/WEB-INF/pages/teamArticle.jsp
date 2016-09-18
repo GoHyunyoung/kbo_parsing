@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
   User: moonlight
@@ -5,36 +7,21 @@
   Time: 오후 9:23
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
-    <link href="/resources/assets/css/index.css" rel="stylesheet" type="text/css">
-    <!-- END THEME STYLES -->
-    <%--BEGIN INDEX_PAGE SCRIPT--%>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/resources/assets/javascript/scroll.js"></script>
-    <script type="text/javascript" src="/resources/assets/javascript/index.js"></script>
-    <%--END INDEX_PAGE SCRIPT--%>
 </head>
 <body>
-<%--
-<c:set var="date" value="${article.date}"></c:set>
+<c:set var="startIdx" value="0"/>
+<c:set var="count" value="${urlCountArr[0]}"/>
+<c:set var="endIdx" value="${startIdx+count}"/>
 <c:forEach var="article" items="${articleArrayList}" varStatus="status">
-    <li class=timeline id="${article.id}" hidden>
+    <li class="timeline" id="${article.id}" hidden>
         <div class="timeline-time">
-            <c:choose>
-                <c:when test="${date==article.date}"></c:when>
-                <c:otherwise>
             <span class="time" style='color: #303a41'>
                 ${article.date.substring(4,6)}월
                 ${article.date.substring(6,8)}일
                 ${article.date.substring(8,article.date.length())}
             </span>
-                </c:otherwise>
-            </c:choose>
-            <c:set var="date" value="${article.date}"></c:set>
         </div>
         <div class="timeline-icon"></div>
         <div class="timeline-body" data-name="${article.emblem}">
@@ -48,17 +35,30 @@
                 <br/>
                     ${article.conc}
             </div>
-            <div class="timeline-footer">
-                <a href="${article.url}"> <i class="m-icon-swapright m-icon-white"></i> 해당 경기 상세히 보러가기  </a>
+            <div class="hover2 effect2">
+                <div class="plusImage">
+                    <a onclick="plusVideo(${article.id}*1000)">
+                        <img src="/resources/images/arrow2.png"/>
+                    </a>
+                </div>
+            </div>
+
+            <div class="timeline-footer" id="${article.id*1000}" style="display:none;">
+                <c:if test="${count>0}">
+                    <c:forEach var="urlArrayList" begin="${startIdx}" end="${endIdx-1}" items="${criticalVOD_urlArrayList}">
+                        <iframe width="400px" height="250px" src="${urlArrayList.vodUrl}"></iframe>
+                    </c:forEach>
+                </c:if>
+                <c:set var="startIdx" value="${endIdx}"/>
+                <c:set var="count" value="${urlCountArr[status.index+1]}"/>
+                <c:set var="endIdx" value="${startIdx+count}"/>
+                <div></div>
+                <div align="right">
+                    <a href="${article.url}"> <i class="m-icon-swapright m-icon-white"></i><i>해당 경기 상세히 보러가기</i> </a>
+                </div>
             </div>
         </div>
     </li>
 </c:forEach>
---%>
-<h1>Hi</h1>
-<c:forEach var="article" items="${aritlceArrayList}">
-    <h3>${article.id}</h3>
-</c:forEach>
-
 </body>
 </html>

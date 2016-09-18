@@ -117,6 +117,7 @@
                         </div>
                         <div class="col-body">
                             <ul class="gamePicker">
+                                <!-- gamePicker.jsp -->
                                 <jsp:include page="gamePicker.jsp"/>
                             </ul>
                         </div>
@@ -124,6 +125,7 @@
                 </div>
                 <!------------------- Box Score -------------------------->
                 <div class="boxscore col-md-8">
+                    <!-- gamebox.jsp -->
                     <jsp:include page="gamebox.jsp"/>
                 </div>
             </div>
