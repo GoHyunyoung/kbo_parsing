@@ -115,7 +115,7 @@ def writeHead(Parser_KBO,Parser_DaumKBO,contextClassifier):
     return sentence
 
 
-# In[8]:
+# In[20]:
 
 def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
 #     문장뭉치
@@ -169,13 +169,7 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
                                 [u'을 기록하고 마운드를 내려올수 밖에 없었다.',u'을 끝으로 마운드를 물러났다.',u'로 선발투수의 역할을 제대로 하지 못하였다.',u'하며 팀의 불펜투수들에게 부담을 주었다.'u'기록하며 팀의 불펜진에 火을 질렀다.']
                )
             ]
-
-    #   선발투수 != 승리투수인 경우
-    
-    #     세이브투수에 관해...
-#     if Parser_KBO.boxScore['pitRecord']['']
-    
-    
+            
     else:
         #         퀄리티 스타트의 경우
         if int(Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_DaumKBO.seasonStat['winTeam']['StarterPitcher']][u'이닝'].split()[0]) >= 6 and int(Parser_KBO.boxScore['winTeam']['pitRecord'].ix[parser_DaumKBO.seasonStat['winTeam']['StarterPitcher']][u'실점']) <=3:
@@ -199,10 +193,25 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
                            )
             ]    
     
+    essentialSentence=''
+    #   선발투수 != 승리투수인 경우
+    
+    #     세이브투수에 관해...
+#     if Parser_KBO.boxScore['pitRecord']['']
+    
+    
+    #          패배투수에 관한 기사
+    #     패배팀의 선발투수 == 패배투수
+    losePitcherName=Parser_DaumKBO.winlosePitcher['loseTeam']['name']
+    if Parser_DaumKBO.winlosePitcher['loseTeam']['name']==Parser_DaumKBO.seasonStat['loseTeam']['StarterPitcher']:    
+        essentialSentence+=changeWithParam(u' 그리고 loseTeam_name의 선발 winlosePitcher_loseTeam_name선수가 INN이닝 H피안타 BB볼넷 SO탈삼진 R실점(E자책) ()',
+                                          [u'을 하며 1패를 추가했다.',u'을 기록하며 무너졌다.',u'으로 패배를 기록하며 winTeam_name 승리의 재물이 되었다.'])
+    
+    
 #     문장뽑기
     sentence1=sentence1Group[random.randint(0,len(sentence1Group)-1)]
     sentence2=sentence2Group[random.randint(0,len(sentence2Group)-1)]
-    
+
 #     문장만들기
 
     #------- BEGIN Intro1-------#
@@ -244,13 +253,28 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
     sentence2=sentence2.replace('ER',Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_DaumKBO.seasonStat['winTeam']['StarterPitcher']][u'자책'])
     sentence2=sentence2.replace('R',Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_DaumKBO.seasonStat['winTeam']['StarterPitcher']][u'실점'])
     sentence2=sentence2.replace('H',Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_DaumKBO.seasonStat['winTeam']['StarterPitcher']][u'피안타'])
-
+    #------- END Intro2-------#
     
-    #-------END Intro2-------#
-    return sentence1+sentence2
+    #------- BEGIN ESSESNTIAL-------#
+    sentence1=sentence1.replace('winTeam_name',Parser_KBO.boxScore['winTeam']['name'])
+    essentialSentence=essentialSentence.replace('winlosePitcher_loseTeam_name',Parser_DaumKBO.winlosePitcher['loseTeam']['name'])
+    essentialSentence=essentialSentence.replace('loseTeam_name',Parser_KBO.boxScore['loseTeam']['name'])
+    essentialSentence=essentialSentence.replace('ERA',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'평균자책점'])
+    essentialSentence=essentialSentence.replace('INN',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'이닝'])
+    essentialSentence=essentialSentence.replace('BB',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'4사구'])
+    essentialSentence=essentialSentence.replace('BN',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'타자'])
+    essentialSentence=essentialSentence.replace('NP',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'투구수'])
+    essentialSentence=essentialSentence.replace('SO',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'삼진'])            
+    essentialSentence=essentialSentence.replace('ER',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'자책'])
+    essentialSentence=essentialSentence.replace('R',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'실점'])
+    essentialSentence=essentialSentence.replace('H',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'피안타'])
+    essentialSentence=essentialSentence.replace('E',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'자책'])
+    #------- END ESSESNTIAL-------#
+
+    return sentence1+sentence2+essentialSentence
 
 
-# In[9]:
+# In[21]:
 
 def writeEnd(Parser_KBO,Parser_DaumKBO):
     
@@ -315,7 +339,7 @@ def writeEnd(Parser_KBO,Parser_DaumKBO):
     return sentence5
 
 
-# In[10]:
+# In[22]:
 
 # 결론작성
 def writeConc(Parser_KBO,Parser_DaumKBO,contextClassifier):
@@ -378,14 +402,6 @@ def writeConc(Parser_KBO,Parser_DaumKBO,contextClassifier):
                                            [u'끊어내기 위한 연습이 필요할 것이다.',u'잘라내기위한 노력이 필요할 것이다.']
                                           )
         
-    #          패배투수에 관한 기사
-    
-    #     패배팀의 선발투수 == 패배투수
-    losePitcherName=parser_DaumKBO.winlosePitcher['loseTeam']['name']
-    if parser_DaumKBO.winlosePitcher['loseTeam']['name']==parser_DaumKBO.seasonStat['loseTeam']['StarterPitcher']:    
-        essentialSentence+=changeWithParam(u' 그리고 loseTeam_name의 선발 winlosePitcher_loseTeam_name선수가 INN이닝 H피안타 BB볼넷 SO탈삼진 R실점(E자책) ()',
-                                          [u'을 하며 1패를 추가했다.',u'을 기록하며 무너졌다.',u'으로 패배를 기록하며 winTeam_name 승리의 재물이 되었다.'])
-        
     #     문장뽑기
     sentence1=sentence1Group[random.randint(0,len(sentence1Group)-1)]
     sentence2=sentence2Group[random.randint(0,len(sentence2Group)-1)]
@@ -411,7 +427,6 @@ def writeConc(Parser_KBO,Parser_DaumKBO,contextClassifier):
     
     essentialSentence=essentialSentence.replace('winlosePitcher_winTeam_winCount',str(Parser_DaumKBO.winlosePitcher['winTeam']['winCount']))
     essentialSentence=essentialSentence.replace('winlosePitcher_winTeam_loseCount',str(Parser_DaumKBO.winlosePitcher['winTeam']['loseCount']))
-    essentialSentence=essentialSentence.replace('winlosePitcher_loseTeam_name',Parser_DaumKBO.winlosePitcher['loseTeam']['name'])
     essentialSentence=essentialSentence.replace('winTeam_name',Parser_KBO.boxScore['winTeam']['name'])
     essentialSentence=essentialSentence.replace('loseTeam_name',Parser_KBO.boxScore['loseTeam']['name'])
     essentialSentence=essentialSentence.replace('home_name',Parser_KBO.boxScore['home']['name'])
@@ -422,16 +437,7 @@ def writeConc(Parser_KBO,Parser_DaumKBO,contextClassifier):
     essentialSentence=essentialSentence.replace('loseTeam_rank-1',str(Parser_DaumKBO.rank['loseTeam'][0]+1))
     essentialSentence=essentialSentence.replace('loseTeam_rank',str(Parser_DaumKBO.rank['loseTeam'][0]))
     essentialSentence=essentialSentence.replace('loseTeam_accumulation',str(abs(Parser_DaumKBO.accumulation['loseTeam'])))
-    essentialSentence=essentialSentence.replace('ERA',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'평균자책점'])
-    essentialSentence=essentialSentence.replace('INN',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'이닝'])
-    essentialSentence=essentialSentence.replace('BB',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'4사구'])
-    essentialSentence=essentialSentence.replace('BN',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'타자'])
-    essentialSentence=essentialSentence.replace('NP',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'투구수'])
-    essentialSentence=essentialSentence.replace('SO',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'삼진'])            
-    essentialSentence=essentialSentence.replace('ER',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'자책'])
-    essentialSentence=essentialSentence.replace('R',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'실점'])
-    essentialSentence=essentialSentence.replace('H',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'피안타'])
-    essentialSentence=essentialSentence.replace('E',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'자책'])
+
     
     if 'nextTeam' in essentialSentence:
         essentialSentence=essentialSentence.replace('nextTeam',nextTeam)
@@ -441,14 +447,14 @@ def writeConc(Parser_KBO,Parser_DaumKBO,contextClassifier):
     return Conclusion
 
 
-# In[11]:
+# In[23]:
 
 def getEmblem(Parser_KBO):
     emblem=TransformeTeamName.get(Parser_KBO.boxScore['winTeam']['name'])
     return emblem
 
 
-# In[12]:
+# In[24]:
 
 # 본문작성
 def writeMain(Parser_KBO,Parser_DaumKBO):
@@ -589,23 +595,23 @@ def writeMain(Parser_KBO,Parser_DaumKBO):
     return sentence1+sentence2+sentence3+sentence4
 
 
-# In[13]:
+# In[25]:
 
 tday=datetime.date.today()
 
 
-# In[14]:
+# In[26]:
 
 # yesterday
 tday=tday - datetime.timedelta(1)
 
 
-# In[15]:
+# In[27]:
 
 todayStr=str('%04d%02d%02d'%(tday.year,tday.month,tday.day))
 
 
-# In[17]:
+# In[28]:
 
 # 최신날짜
 startDate=todayStr
@@ -614,7 +620,7 @@ endDate=todayStr
 urlParserForKBO = UrlParserForKBO(startDate,endDate)
 
 
-# In[18]:
+# In[21]:
 
 # MySQL conf
 con=MySQLdb.connect(host='218.150.181.131',user='root',passwd='1234',db='link10th',charset='utf8', use_unicode=True)

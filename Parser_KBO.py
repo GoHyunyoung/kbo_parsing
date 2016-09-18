@@ -1,4 +1,3 @@
-
 # coding: utf-8
 
 # In[1]:
@@ -28,7 +27,6 @@ class Parser_KBO:
     [away/home/winTeam/loseTeam][status]: 팀전적[승,무,패]
     [away/home/winTeam/loseTeam][pitRecord] : 투수기록(Dataframe형태)
     [away/home/winTeam/loseTeam][batRecord] : 타자기록(Dataframe형태)
-
     situation : 경기상황
     ------- key list -------
     [away/home/winTeam/loseTeam][이닝][몇번째][player/act]
@@ -197,4 +195,3 @@ class Parser_KBO:
             data.append(tmp)
         self.rank = pd.DataFrame(data=data,columns=columns)
         self.rank.index=self.rank.pop(u'순위')
-
