@@ -11,7 +11,7 @@ void call_FacebookUpload(int sig);
 int main(void)
 {
 	signal(SIGALRM, call_UpdateDB);
-	alarm(11*60*60);
+	alarm(14*60*60+15*60);
 	while(1);
 
 	return 0;
