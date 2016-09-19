@@ -59,7 +59,7 @@
             <!-- BEGIN PAGE TITLE -->
             <div class="page-title">
                 <h1>TeamPage
-                    <small>My Team is BEST</small>
+                    <small>Select Your Favorite Team</small>
                 </h1>
             </div>
             <!-- END PAGE TITLE -->
@@ -108,8 +108,8 @@
                 <div class="portlet-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="teamEmblemButton col-md-2">
-                                <p>---- Select Emblem ----</p>
+                            <div class="teamEmblemButton">
+                                <h4>---- Select Emblem ----</h4>
                                 <a href="#" onclick="teamPicker('HH')">
                                     <img src="/resources/images/emblem_image/emblemB_HH.png"/>
                                 </a>
@@ -140,15 +140,15 @@
                                 <a href="#" onclick="teamPicker('WO')">
                                     <img src="/resources/images/emblem_image/emblemB_WO.png"/>
                                 </a>
+                                <br/><br/>
                             </div>
-                            <div class="col-md-10">
-                                <p>---- Print TeamArticle ----</p>
-                                <div class="teamArticle">
-                                    <ul class="timeline">
-                                        <jsp:include page="teamArticle.jsp"/>
-                                        <!-- teamArticle.jsp -->
-                                    </ul>
-                                </div>
+                            <div class="teamArticle">
+                                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                                <ul class="timeline">
+                                    <jsp:include page="teamArticle.jsp"/>
+                                    <!-- teamArticle.jsp -->
+                                </ul>
                             </div>
                         </div><br/>
                     </div>
