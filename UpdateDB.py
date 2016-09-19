@@ -128,14 +128,14 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
                         [u'열린',u'열렸던',u'치뤄진'],
                         [u'승부',u'경기',u'대결']
                        ),
-        changeWithParam(u'away_name와 home_name의 ()가 date stadium에서 있었던 오늘 away_name는 away_sum, home_name는 home_sum로 winTeam_name가 경기에서 context',
-                        [u'승부',u'경기',u'대결']
+        changeWithParam(u'away_name와 home_name의 () date stadium에서 있었던 오늘 away_name는 away_sum, home_name는 home_sum로 winTeam_name가 경기에서 context',
+                        [u'승부가',u'경기가',u'대결이']
                        ),
         changeWithParam(u'date stadium에서 있었던 away_name와 home_name과의 (), winTeam_name이 winTeam_sum loseTeam_name이 loseTeam_sum로 winTeam_name이 context',
                         [u'승부',u'경기',u'대결']
                        ),
-        changeWithParam(u'홈팀 home_name과 어웨이팀 away_name ()경기가 오늘 date 펼쳐졌다. stadium경기장에서 () 이 경기에서 winTeam_name이 winTeam_sum : loseTeam_sum으로 loseTeam_name을 context',
-                        [u'승부',u'경기',u'대결'],
+        changeWithParam(u'홈팀 home_name과 어웨이팀 away_name () 오늘 date 펼쳐졌다. stadium경기장에서 () 이 경기에서 winTeam_name이 winTeam_sum : loseTeam_sum으로 loseTeam_name을 context',
+                        [u'승부가',u'경기가',u'대결이'],
                         [u'열린',u'열렸던',u'치뤄진']
                        )
         ]
