@@ -12,7 +12,7 @@
 </head>
 <body>
 <c:forEach var="article" items="${articleArrayList}" varStatus="status">
-        <li class="timeline" id="${article.id}" hidden="">
+        <li class="timeline" hidden="">
             <div class="timeline-time">
                 <span class="time" style='color: #303a41'>
                     ${article.date.substring(4,6)}월
@@ -30,7 +30,7 @@
                     <br/>
                         ${article.conc}
                 </div>
-                <div class="timeline-footer" id="${article.id*1000}" style="display:none;">
+                <div class="timeline-footer" style="display:none;">
                     <div></div>
                     <div align="right">
                         <a href="${article.url}"> <i class="m-icon-swapright m-icon-white"></i><i>해당 경기 상세히 보러가기</i> </a>

@@ -18,6 +18,10 @@ Rounded Portlets
     line-height: 38px;
 }
 
+.paddingLeftNone {
+    padding-left : 0px;
+}
+
 .timeline li.timeline .timeline-body[data-name="SS"] {  background: #4186BB;  }
 .timeline li.timeline .timeline-body[data-name="HH"] {  background: #ED5F23;  }
 .timeline li.timeline .timeline-body[data-name="SK"] {  background: #E0002A;  }

@@ -2025,10 +2025,12 @@ function teamPicker(teamName) {
 // Timeline -> show hidden video
 function plusVideo(id) {
     obj=document.getElementById(id);
+
     if(obj.style.display == "none") {
         obj.style.display="inline";
     }
     else {
         obj.style.display="none";
     }
+    document.getElementById(id + 10000).style.display = 'none';
 }

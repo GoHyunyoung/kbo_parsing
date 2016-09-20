@@ -34,20 +34,25 @@
         <div class="timeline-body" data-name="${article.emblem}">
             <h2>${article.head}</h2>
             <div class="timeline-content">
-                <img class="timeline-img pull-left"
-                     src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.emblem)} alt="${article.emblem}">
-                    ${article.intro}
-            </div>
-                <div class="hover2 effect2">
-                    <div class="plusImage">
-                        <a onclick="plusVideo(${article.id} + 10000)">
-                            <img src="/resources/images/arrow2.png"/>
-                        </a>
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <img class="timeline-img"
+                        src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.emblem)} alt="${article.emblem}">
+                    </div>
+                    <div class="paddingLeftNone col-md-10">
+                        ${article.intro}
+                        <button onclick="plusVideo(${article.id} + 10000)" type="button" class="btn-xs btn-default" id="${article.id + 20000}">...</button>
                     </div>
                 </div>
+            </div>
             <div id="${article.id + 10000}" style="display:none;">
                 <div class="timeline-content">
-                    ${article.main}<br/>${article.conc}
+                    <div class="col-md-12">
+                        <div class="col-md-2"></div>
+                        <div class="paddingLeftNone col-md-10">
+                            ${article.main}<br/>${article.conc}
+                        </div>
+                    </div>
                 </div>
                 <div class="timeline-footer">
                     <c:if test="${count>0}">

@@ -43,7 +43,7 @@ public class HelloController {
         int articleCount = articleService.getArticleCount();
         ArrayList<CriticalVOD_Url> criticalVOD_urlArrayList = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             Article article = articleService.getArticle(articleCount-i);
             articleArrayList.add(article);
             urlCountArr[i]=criticalVOD_UrlService.getCriticalVOD_Url(article.getId()).size();
@@ -72,7 +72,7 @@ public class HelloController {
         logger.info("sequence="+sequence);
 
 //      lastIndex설정
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
 //          RECENT->OLD 글 순서
             int index=i;
             if (sequence.equals("DESC"))index*= -1;
@@ -103,7 +103,7 @@ public class HelloController {
         logger.info("searchDate="+searchDate);
 
 //      lastIndex설정
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
 //          RECENT->OLD 글 순서
             logger.info("for LOOP i = "+i);
             if(articleService.getArticle(searchResultMinId + i)==null)
