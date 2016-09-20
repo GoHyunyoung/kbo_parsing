@@ -22,8 +22,8 @@ class SerialParserForDaumKBO:
         page=urllib2.urlopen(url)
         html=BeautifulSoup(page)
         s=unicode(html)
-        date_index=s.find(str.format('<td class="time_date" rowspan="5">%d<span class="txt_day">'%(int(day))))
-        
+        # date_index=s.find(str.format('<td class="time_date" rowspan="5">%d<span class="txt_day">'%(int(day))))
+        date_index=s.find(str.format('%d<span class="txt_day">'%(int(day))))
 #         찾는 데이터가 없을때
         if date_index==-1:
             sys.stderr.write('******* Cannot found Game with date : %s awayTeam : %s data******* '%(date,awayTeam))
