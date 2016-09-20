@@ -13,8 +13,6 @@ src/main/resources/dev/config.properties
 src/main/resources/dev/log4j.xml
 src/main/resources/rebel.xml
 .ipynb_checkpoints/UrlParsing-checkpoint.ipynb
-/.ipynb_checkpoints
-/metronic_v3.3.0
-/springframe-master\src\main\resources
-./ppt
-./DecisionLearning
+./ipynb_checkpoints/*
+./ppt/*
+./DecisionLearning/*

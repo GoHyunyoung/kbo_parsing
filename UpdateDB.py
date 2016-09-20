@@ -150,7 +150,7 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
                                 [u'펼치며',u'던지며'],
                                 [u'퀄리티 스타트(QS)를 하였다.',u'퀄리티 스타트를 했다.',u'퀄리티 스타트를 기록하였다.',u'Quality Start를 기록했다.'],
                                 [u'이로써',u'그 결과, ',u'이로인해'],
-                                [u'챙겼다.',u'거두었다',u'가져갔다.']
+                                [u'챙겼다.',u'거두었다.',u'가져갔다.']
                 ) 
             ]
         elif int(Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_DaumKBO.seasonStat['winTeam']['StarterPitcher']][u'이닝'].split()[0]) >= 4:
@@ -160,7 +160,7 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
                                 [u'펼치며',u'던지며'],
                                 [u'승리를 리드하며 승리투수의 자리에 앉았다.',u'승리를 이끌었다.',u'승리투수로써 팀의 승리를 주도했다.'] if Parser_DaumKBO.seasonStat['winTeam']['StarterPitcherWinCount']>5 else [u'승리에 기여했다.',u'경기를 해나갔다.'],
                                 [u'이로써',u'그 결과, ',u'이로인해'],
-                                [u'챙겼다.',u'거두었다',u'가져갔다.']
+                                [u'챙겼다.',u'거두었다.',u'가져갔다.']
                 ) 
             ]
         else:
@@ -179,17 +179,17 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
                                 [u'펼치며',u'던지며'],
                                 [u'퀄리티 스타트(QS)를 하였다.'],
                                 [u'이로써',u'그 결과, ',u'이로인해'],
-                                [u'챙겼다.',u'거두었다',u'가져갔다.']
+                                [u'챙겼다.',u'거두었다.',u'가져갔다.']
                 ) 
             ]
         else :
             sentence2Group=[
-                changeWithParam(u' winTeam_name에서 승리투수로 활약한 winlosePitcher_winTeam_name선수가 INN이닝동안 NP개를 던지고 H피안타 BB볼넷 SO탈삼진 R실점의 ()를 () () () winlosePitcher_winTeam_winCount번째 승리(winlosePitcher_winTeam_loseCount패)를 ().',
+                changeWithParam(u' winTeam_name에서 승리투수로 활약한 winlosePitcher_winTeam_name선수가 INN이닝동안 NP개를 던지고 H피안타 BB볼넷 SO탈삼진 R실점의 ()를 () () () winlosePitcher_winTeam_winCount번째 승리(winlosePitcher_winTeam_loseCount패)를 ()',
                             [u'역투',u'호투',u'투구'],
                             [u'펼치며',u'던지며'],
                             [u'승리를 리드했다.',u'승리를 이끌었다.',u'팀의 승리를 주도했다.'],
                             [u'이로써',u'그 결과,',u'이로인해'],
-                            [u'챙겼다.',u'거두었다',u'가져갔다.']
+                            [u'챙겼다.',u'거두었다.',u'가져갔다.']
                            )
             ]    
     
@@ -204,7 +204,7 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
     #     패배팀의 선발투수 == 패배투수
     losePitcherName=Parser_DaumKBO.winlosePitcher['loseTeam']['name']
     if Parser_DaumKBO.winlosePitcher['loseTeam']['name']==Parser_DaumKBO.seasonStat['loseTeam']['StarterPitcher']:    
-        essentialSentence+=changeWithParam(u' 그리고 loseTeam_name의 선발 winlosePitcher_loseTeam_name선수가 INN이닝 H피안타 BB볼넷 SO탈삼진 R실점(E자책) ()',
+        essentialSentence+=changeWithParam(u'loseTeam_name의 선발 winlosePitcher_loseTeam_name선수는 INN이닝 H피안타 BB볼넷 SO탈삼진 R실점(E자책) ()',
                                           [u'을 하며 1패를 추가했다.',u'을 기록하며 무너졌다.',u'으로 패배를 기록하며 winTeam_name 승리의 재물이 되었다.'])
     
     
