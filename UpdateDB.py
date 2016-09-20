@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[61]:
 
 
 # pip install selenium
@@ -26,12 +26,12 @@ import sys
 import copy
 
 
-# In[2]:
+# In[62]:
 
 contextSentence = [' ','승리하였다. ','접전끝에 승리를 하였다. ','역전에 성공했다. ','완승을 하였다. ','무승부로 끝이났다. ','영봉승을 하였다. ']
 
 
-# In[3]:
+# In[63]:
 
 def getPositionName(position):
     if position==u'P':
@@ -62,7 +62,7 @@ def getPositionName(position):
         return u'대주자'
 
 
-# In[4]:
+# In[64]:
 
 def changeWithParam(sentence, *wordBox):
     '''
@@ -76,7 +76,7 @@ def changeWithParam(sentence, *wordBox):
     return sentence
 
 
-# In[5]:
+# In[65]:
 
 def getClassifier(Parser_KBO,Parser_DaumKBO):
     # DecisionTree - 서두
@@ -89,13 +89,13 @@ def getClassifier(Parser_KBO,Parser_DaumKBO):
     return clf_Intro.predict([x-y for x,y in zip(Parser_KBO.boxScore['home']['score'][:13],Parser_KBO.boxScore['away']['score'][:13])])[0]
 
 
-# In[6]:
+# In[66]:
 
 def writeDate(Parser_KBO):    
     return Parser_KBO.boxScore['date']
 
 
-# In[7]:
+# In[67]:
 
 def writeHead(Parser_KBO,Parser_DaumKBO,contextClassifier):
 #     문장뭉치
@@ -115,7 +115,7 @@ def writeHead(Parser_KBO,Parser_DaumKBO,contextClassifier):
     return sentence
 
 
-# In[20]:
+# In[98]:
 
 def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
 #     문장뭉치
@@ -160,13 +160,13 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
                                 [u'펼치며',u'던지며'],
                                 [u'승리를 리드하며 승리투수의 자리에 앉았다.',u'승리를 이끌었다.',u'승리투수로써 팀의 승리를 주도했다.'] if Parser_DaumKBO.seasonStat['winTeam']['StarterPitcherWinCount']>5 else [u'승리에 기여했다.',u'경기를 해나갔다.'],
                                 [u'이로써',u'그 결과, ',u'이로인해'],
-                                [u'챙겼다.',u'거두었다.',u'가져갔다.']
+                                [u'챙겼다. ',u'거두었다. ',u'가져갔다. ']
                 ) 
             ]
         else:
             sentence2Group=[
                 changeWithParam(u' winTeam_name 선발투수로 나온 winTeam_StarterPitcher선수가 INN이닝동안 NP개를 던지고 H피안타 BB볼넷 SO탈삼진 R실점()',
-                                [u'을 기록하고 마운드를 내려올수 밖에 없었다.',u'을 끝으로 마운드를 물러났다.',u'로 선발투수의 역할을 제대로 하지 못하였다.',u'하며 팀의 불펜투수들에게 부담을 주었다.'u'기록하며 팀의 불펜진에 火을 질렀다.']
+                                [u'을 기록하고 마운드를 내려올수 밖에 없었다. ',u'을 끝으로 마운드를 물러났다. ',u'로 선발투수의 역할을 제대로 하지 못하였다. ',u'하며 팀의 불펜투수들에게 부담을 주었다. 'u'기록하며 팀의 불펜진에 火을 질렀다. ']
                )
             ]
             
@@ -179,7 +179,7 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
                                 [u'펼치며',u'던지며'],
                                 [u'퀄리티 스타트(QS)를 하였다.'],
                                 [u'이로써',u'그 결과, ',u'이로인해'],
-                                [u'챙겼다.',u'거두었다.',u'가져갔다.']
+                                [u'챙겼다. ',u'거두었다. ',u'가져갔다. ']
                 ) 
             ]
         else :
@@ -189,17 +189,18 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
                             [u'펼치며',u'던지며'],
                             [u'승리를 리드했다.',u'승리를 이끌었다.',u'팀의 승리를 주도했다.'],
                             [u'이로써',u'그 결과,',u'이로인해'],
-                            [u'챙겼다.',u'거두었다.',u'가져갔다.']
+                            [u'챙겼다. ',u'거두었다. ',u'가져갔다. ']
                            )
             ]    
     
-    essentialSentence=''
+    essentialSentence=u''
     #   선발투수 != 승리투수인 경우
     
-    #     세이브투수에 관해...
-#     if Parser_KBO.boxScore['pitRecord']['']
-    
-    
+    #     세이브투수가 있는경우
+    if u'세' in Parser_KBO.boxScore['winTeam']['pitRecord'][u'결과'].values:
+        if int(Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_KBO.boxScore['winTeam']['pitRecord'][u'결과']==u'세'][u'삼진'])>0:
+            essentialSentence+=u'세이브 투수 winTeam_pitRecord_savePitcher_name선수가 winTeam_pitRecord_savePitcher_INN이닝에 등판해, winTeam_pitRecord_savePitcher_K탈삼진, winTeam_pitRecord_savePitcher_R실점으로 시즌 winTeam_pitRecord_savePitcher_saveCount번째 세이브를 챙겼다.' if int(Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_KBO.boxScore['winTeam']['pitRecord'][u'결과']==u'세'][u'자책'])!=0 else u'세이브 투수 winTeam_pitRecord_savePitcher_name가 winTeam_pitRecord_savePitcher_INN이닝, winTeam_pitRecord_savePitcher_R실점으로 시즌 winTeam_pitRecord_savePitcher_saveCount번째 세이브를 챙기며, 평균자책점을 winTeam_pitRecord_savePitcher_avgERA으로 낮췄다.'
+        
     #          패배투수에 관한 기사
     #     패배팀의 선발투수 == 패배투수
     losePitcherName=Parser_DaumKBO.winlosePitcher['loseTeam']['name']
@@ -256,8 +257,15 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
     #------- END Intro2-------#
     
     #------- BEGIN ESSESNTIAL-------#
-    sentence1=sentence1.replace('winTeam_name',Parser_KBO.boxScore['winTeam']['name'])
+    if u'세' in Parser_KBO.boxScore['winTeam']['pitRecord'][u'결과'].values:
+        essentialSentence=essentialSentence.replace('winTeam_pitRecord_savePitcher_name',Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_KBO.boxScore['winTeam']['pitRecord'][u'결과']==u'세'].index[0])
+        essentialSentence=essentialSentence.replace('winTeam_pitRecord_savePitcher_INN',Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_KBO.boxScore['winTeam']['pitRecord'][u'결과']==u'세'][u'이닝'][0])
+        essentialSentence=essentialSentence.replace('winTeam_pitRecord_savePitcher_K',Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_KBO.boxScore['winTeam']['pitRecord'][u'결과']==u'세'][u'삼진'][0])
+        essentialSentence=essentialSentence.replace('winTeam_pitRecord_savePitcher_R',Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_KBO.boxScore['winTeam']['pitRecord'][u'결과']==u'세'][u'실점'][0])
+        essentialSentence=essentialSentence.replace('winTeam_pitRecord_savePitcher_saveCount',Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_KBO.boxScore['winTeam']['pitRecord'][u'결과']==u'세'][u'세'][0])
+        essentialSentence=essentialSentence.replace('winTeam_pitRecord_savePitcher_avgERA',Parser_KBO.boxScore['winTeam']['pitRecord'].ix[Parser_KBO.boxScore['winTeam']['pitRecord'][u'결과']==u'세'][u'평균자책점'][0])
     essentialSentence=essentialSentence.replace('winlosePitcher_loseTeam_name',Parser_DaumKBO.winlosePitcher['loseTeam']['name'])
+    essentialSentence=essentialSentence.replace('winTeam_name',Parser_KBO.boxScore['winTeam']['name'])
     essentialSentence=essentialSentence.replace('loseTeam_name',Parser_KBO.boxScore['loseTeam']['name'])
     essentialSentence=essentialSentence.replace('ERA',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'평균자책점'])
     essentialSentence=essentialSentence.replace('INN',Parser_KBO.boxScore['loseTeam']['pitRecord'].ix[Parser_DaumKBO.winlosePitcher['loseTeam']['name']][u'이닝'])
@@ -274,7 +282,7 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
     return sentence1+sentence2+essentialSentence
 
 
-# In[21]:
+# In[94]:
 
 def writeEnd(Parser_KBO,Parser_DaumKBO):
     
@@ -339,7 +347,7 @@ def writeEnd(Parser_KBO,Parser_DaumKBO):
     return sentence5
 
 
-# In[22]:
+# In[70]:
 
 # 결론작성
 def writeConc(Parser_KBO,Parser_DaumKBO,contextClassifier):
@@ -447,14 +455,14 @@ def writeConc(Parser_KBO,Parser_DaumKBO,contextClassifier):
     return Conclusion
 
 
-# In[23]:
+# In[71]:
 
 def getEmblem(Parser_KBO):
     emblem=TransformeTeamName.get(Parser_KBO.boxScore['winTeam']['name'])
     return emblem
 
 
-# In[24]:
+# In[72]:
 
 # 본문작성
 def writeMain(Parser_KBO,Parser_DaumKBO):
@@ -595,29 +603,42 @@ def writeMain(Parser_KBO,Parser_DaumKBO):
     return sentence1+sentence2+sentence3+sentence4
 
 
-# In[25]:
+# In[73]:
 
 tday=datetime.date.today()
 
 
-# In[26]:
+# In[74]:
 
 # yesterday
 tday=tday - datetime.timedelta(1)
 
 
-# In[27]:
+# In[75]:
 
 todayStr=str('%04d%02d%02d'%(tday.year,tday.month,tday.day))
 
 
-# In[28]:
+# In[83]:
 
 # 최신날짜
-startDate=todayStr
+# startDate=todayStr
+startDate='20160919'
 # 예전날짜
-endDate=todayStr
+# endDate=todayStr
+endDate='20160919'
 urlParserForKBO = UrlParserForKBO(startDate,endDate)
+
+
+# In[99]:
+
+for url in urlParserForKBO.urlList:
+    print url
+    parser_KBO=Parser_KBO(url)
+    parser_DaumKBO=Parser_DaumKBO(parser_KBO.boxScore['date'],parser_KBO.boxScore['away']['name'])
+    contextClassifier=getClassifier(parser_KBO,parser_DaumKBO)
+    Intro=writeIntro(parser_KBO,parser_DaumKBO,contextClassifier)
+    print Intro
 
 
 # In[21]:
