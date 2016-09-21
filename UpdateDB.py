@@ -630,17 +630,6 @@ endDate='20160919'
 urlParserForKBO = UrlParserForKBO(startDate,endDate)
 
 
-# In[99]:
-
-for url in urlParserForKBO.urlList:
-    print url
-    parser_KBO=Parser_KBO(url)
-    parser_DaumKBO=Parser_DaumKBO(parser_KBO.boxScore['date'],parser_KBO.boxScore['away']['name'])
-    contextClassifier=getClassifier(parser_KBO,parser_DaumKBO)
-    Intro=writeIntro(parser_KBO,parser_DaumKBO,contextClassifier)
-    print Intro
-
-
 # In[21]:
 
 # MySQL conf
