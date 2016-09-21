@@ -55,7 +55,9 @@
                     </div>
                 </div>
                 <div class="timeline-footer">
-                    <c:if test="${count>0}">
+                    <div class="col-md-12">
+                    <div class="col-md-3"></div>
+                        <c:if test="${count>0}">
                     <c:forEach var="urlArrayList" begin="${startIdx}" end="${endIdx-1}" items="${criticalVOD_urlArrayList}">
                         <iframe width="400px" height="250px" src="${urlArrayList.vodUrl}"></iframe>
                     </c:forEach>
@@ -63,6 +65,7 @@
                     <c:set var="startIdx" value="${endIdx}"/>
                     <c:set var="count" value="${urlCountArr[status.index+1]}"/>
                     <c:set var="endIdx" value="${startIdx+count}"/>
+                    </div>
                     <div align="right">
                         <a href="${article.url}"> <i class="m-icon-swapright m-icon-white"></i><i>해당 경기 상세히 보러가기</i> </a>
                     </div>

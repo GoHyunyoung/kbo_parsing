@@ -12,14 +12,82 @@ Rounded Portlets
     line-height: 38px;
 }
 
-.timeline > .timeline-time span.time {
+.timeline > .teamTime {
+    display: block;
+    width: 15%;
+    text-align: right;
+    position: absolute;
+}
+
+.timeline > .teamTime span.time {
+    color: #303a41;
     font-weight: bold;
     font-size: 25px;
     line-height: 38px;
+    text-align: right;
 }
 
+.timeline > .timeBody {
+    margin: 0 5% 15px 25%;
+    color: #fff;
+    padding: 10px;
+    font-weight: 300;
+    position: relative;
+    border-radius: 5px;
+}
+.timeline .timeContent {
+    font-size: 14px;
+    font-weight: bold;
+}
+.timeline .timeBody[data-name="SS"] {  background: #4186BB;  }
+.timeline .timeBody[data-name="HH"] {  background: #ED5F23;  }
+.timeline .timeBody[data-name="SK"] {  background: #E0002A;  }
+.timeline .timeBody[data-name="HT"] {  background: #E70005;  }
+.timeline .timeBody[data-name="LG"] {  background: #C6064C;  }
+.timeline .timeBody[data-name="OB"] {  background: #EF868B;  }
+.timeline .timeBody[data-name="LT"] {  background: #F04E22;  }
+.timeline .timeBody[data-name="WO"] {  background: #9A304D;  }
+.timeline .timeBody[data-name="KT"] {  background: #868586;  }
+.timeline .timeBody[data-name="NC"] {  background: #2C5482;  }
+
+.timeline > .timeBody h2, .timeline > li .timeContent {
+    font-weight: bold;
+}
+.timeline > .timeBody h2 {
+    margin-top: 0px;
+    padding: 0 0 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 24px;
+}
 .paddingLeftNone {
     padding-left : 0px;
+}
+.timeline > .timeIcon {
+    width: 40px;
+    height: 40px;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 1.4em;
+    line-height: 40px;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    color: #fff;
+    background: #aaa;
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px #ccc;
+    text-align: center;
+    left: 20%;
+    top: 0;
+    margin: 5px 0 0 -25px;
+    padding-bottom: 3px;
+    padding-right: 1px;
+    padding-left: 2px;
+    -webkit-border-radius: 30px !important;
+    -moz-border-radius: 30px !important;
+    border-radius: 30px !important;
 }
 
 .timeline li.timeline .timeline-body[data-name="SS"] {  background: #4186BB;  }
@@ -452,7 +520,7 @@ a:hover, a:focus { text-decoration : none; }
 }
 
 .teamEmblemButton img:hover {
-    transition:all 0.5s;
+    transition:all 0.3s;
     transform: scale(1.25, 1.25);
 }
 

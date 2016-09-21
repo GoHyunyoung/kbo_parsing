@@ -109,7 +109,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="teamEmblemButton">
-                                <h4>---- Select Emblem ----</h4>
+                                <h4 class="bold"> Select Emblem </h4>
                                 <a href="#" onclick="teamPicker('HH')">
                                     <img src="/resources/images/emblem_image/emblemB_HH.png"/>
                                 </a>
@@ -140,7 +140,7 @@
                                 <a href="#" onclick="teamPicker('WO')">
                                     <img src="/resources/images/emblem_image/emblemB_WO.png"/>
                                 </a>
-                                <br/><br/>
+                                <br/><br/><br/>
                             </div>
                             <div class="teamArticle">
                                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

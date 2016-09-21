@@ -187,6 +187,7 @@ public class HelloController {
             }
         }
 
+        model.addAttribute("teamName", teamName);
         model.addAttribute("articleArrayList", articleArrayList);
         logger.info("-----END /teamArticle CONTROLLER-----");
         return "teamArticle";

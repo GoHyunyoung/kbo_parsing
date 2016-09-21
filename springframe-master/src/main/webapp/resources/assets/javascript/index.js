@@ -1925,11 +1925,11 @@ var ul = $('ul.datebox-content');
 var num = 0;
 var days_in_month = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
 var day_week = new Array('금','토','일','월','화','수','목');
-for(var i = 7; i <= 9; i++) {
+for(var i = 9; i <= 9; i++) {
     ul.append('<li class="month-dimmed"> <span class="year">2016</span> <div></div> <span class="month">'
         + i +
         '</span> </li>');
-    for(var j = 1; j<= days_in_month[i-1]; j++) {
+    for(var j = 13; j<= days_in_month[i-1]; j++) {
         if (j<10) {
             if (num % 7 == 1) {
                 ul.append('<a href="#" onclick="datePicker(20160'
