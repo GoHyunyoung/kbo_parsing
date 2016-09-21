@@ -14,7 +14,10 @@ public class ArticleService {
         Article article = articleMapper.getArticle(id);
         return article;
     }
-
+    public String getDate(int id) {
+        String date = articleMapper.getDate(id);
+        return date;
+    }
     public String getawayT(int id) {
         String awayT = articleMapper.getawayT(id);
         return awayT;

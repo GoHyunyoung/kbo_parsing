@@ -104,7 +104,48 @@
                         </div>
                         <div class="col-body">
                             <ul class="datebox-content">
-                            <!-------- in Javascript (index.js) --------->
+                                <!-------------- Article에 따른 동적 Date 출력 -------------->
+                                <c:forEach var="date" items="${dateArrayList}" varStatus="status">
+                                    <c:choose>
+                                        <c:when test="${temp == date}"></c:when>
+                                        <c:otherwise>
+                                            <c:choose>
+                                                <c:when test="${temp_month == date.substring(5,6)}"></c:when>
+                                                <c:otherwise>
+                                                    <li class="month-dimmed">
+                                                        <span class="year">${date.substring(0,4)}</span><br/>
+                                                        <span class="month">${date.substring(5,6)}</span>
+                                                    </li>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${'토' == date.substring(9,10)}">
+                                                    <a href="#" onclick="datePicker(${date.substring(0,8)})">
+                                                        <li class="day-sat">
+                                                            <span>${date.substring(9,10)} ${date.substring(6,8)}</span>
+                                                        </li>
+                                                    </a>
+                                                </c:when>
+                                                <c:when test="${'일' == date.substring(9,10)}">
+                                                    <a href="#" onclick="datePicker(${date.substring(0,8)})">
+                                                        <li class="day-sun">
+                                                            <span>${date.substring(9,10)} ${date.substring(6,8)}</span>
+                                                        </li>
+                                                    </a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="#" onclick="datePicker(${date.substring(0,8)})">
+                                                        <li class="day">
+                                                            <span>${date.substring(9,10)} ${date.substring(6,8)}</span>
+                                                        </li>
+                                                    </a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:set var="temp" value="${date}"></c:set>
+                                    <c:set var="temp_month" value="${date.substring(5,6)}"></c:set>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>

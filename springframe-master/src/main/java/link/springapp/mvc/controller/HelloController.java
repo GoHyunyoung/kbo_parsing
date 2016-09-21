@@ -120,7 +120,16 @@ public class HelloController {
 
     @RequestMapping(value = {"/boxscore"}, method = RequestMethod.GET)
     public String getGameData(ModelMap model) {
-        logger.info("-----/gamePicker CONTROLLER-----");
+        logger.info("-----/boxscore CONTROLLER-----");
+        int articleCount = articleService.getArticleCount();
+        ArrayList<String> dateArrayList = new ArrayList<>();
+
+        for(int i=0; i<articleCount; i++) {
+            String date = articleService.getDate(i);
+            dateArrayList.add(date);
+        }
+        model.addAttribute("dateArrayList", dateArrayList);
+
         return "boxscore";
     }
 
@@ -129,6 +138,7 @@ public class HelloController {
         int searchResultMinId = articleService.getSearchResultMinId(gameDate);
         logger.info("-----BEGIN /gamePicker CONTROLLER-----");
         ArrayList<Article> articleArrayList = new ArrayList<>();
+
         logger.info("----- WORKING 1 -----");
         logger.info("gameDate="+gameDate);
 
@@ -138,6 +148,7 @@ public class HelloController {
                 break;
             Article article = articleService.getArticle(searchResultMinId+i);
             articleArrayList.add(article);
+
         }
 
         logger.info("WORKING 2");

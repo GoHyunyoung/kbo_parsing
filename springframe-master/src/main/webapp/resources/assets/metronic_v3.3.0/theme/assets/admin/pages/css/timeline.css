@@ -13,7 +13,7 @@ Timeline UI Base
   content: '';
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: -13px;
   width: 10px;
   background: #ccc;
   left: 20%;

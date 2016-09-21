@@ -35,10 +35,12 @@ Rounded Portlets
     position: relative;
     border-radius: 5px;
 }
+
 .timeline .timeContent {
     font-size: 14px;
     font-weight: bold;
 }
+
 .timeline .timeBody[data-name="SS"] {  background: #4186BB;  }
 .timeline .timeBody[data-name="HH"] {  background: #ED5F23;  }
 .timeline .timeBody[data-name="SK"] {  background: #E0002A;  }

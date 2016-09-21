@@ -8,6 +8,9 @@ public interface ArticleMapper {
     @Select("SELECT * FROM Article WHERE id = #{ArticleId}")
     Article getArticle(@Param("ArticleId") int ArticleId);
 
+    @Select("SELECT date FROM Article WHERE id = #{ArticleId}")
+    String getDate(@Param("ArticleId") int ArticleId);
+
     @Select("SELECT awayT FROM Article WHERE id = #{ArticleId}")
     String getawayT(@Param("ArticleId") int ArticleId);
 
