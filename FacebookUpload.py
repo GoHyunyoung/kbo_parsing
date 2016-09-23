@@ -44,23 +44,45 @@ month=str.format('%02d'%(yesterday.month))
 day=str.format('%02d'%(yesterday.day))
 
 
-# In[7]:
+# In[9]:
+
+# year='YYYY'
+# month='MM'
+# day='DD'
+
+
+# In[10]:
 
 con=MySQLdb.connect(host='218.150.181.131',user='root',passwd='1234',db='link10th',charset='utf8', use_unicode=True)
+print u'>>> MySQL(for Facebook) Connected...'
 cursor=con.cursor()
 sql=str.format('SELECT * FROM link10th.Article WHERE Article.date like \'%s%s%s%%\''%(year,month,day))
-print sql
+# print sql
 cursor.execute(sql)
+print u'>>> select data from DB done'
 sqlResult=cursor.fetchall()
+print u'>>> fetch data from DB done'
 
+index=0
 for event in sqlResult:
+    index+=1
     HEAD=event[2]
-    MAIN=' '.join(event[3:7])
-
+    MAIN='\n'.join(event[3:7])
+    
     # POST on the MrWriter
     graph.post(path='/feed',message=HEAD+'\n'+MAIN,retry=10)
+    print u'>>> MrWriter_LinkLab(BOT) posted article[%d/%d]'%(index,len(sqlResult))
 
 con.commit()
+print u'>>>  all transaction(for Facebook) commit  done'
 cursor.close()
+print u'>>>  cursor(for Facebook) close  done'
 con.close()
+print u'>>> MySQL(for Facebook) Disonnected...'
+print
+
+
+# In[ ]:
+
+
 

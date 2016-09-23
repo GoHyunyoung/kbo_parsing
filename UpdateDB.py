@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[61]:
+# In[1]:
 
 
 # pip install selenium
@@ -26,12 +26,12 @@ import sys
 import copy
 
 
-# In[62]:
-
-contextSentence = [' ','승리하였다. ','접전끝에 승리를 하였다. ','역전에 성공했다. ','완승을 하였다. ','무승부로 끝이났다. ','영봉승을 하였다. ']
+# In[ ]:
 
 
-# In[63]:
+
+
+# In[2]:
 
 def getPositionName(position):
     if position==u'P':
@@ -62,7 +62,7 @@ def getPositionName(position):
         return u'대주자'
 
 
-# In[64]:
+# In[3]:
 
 def changeWithParam(sentence, *wordBox):
     '''
@@ -76,7 +76,18 @@ def changeWithParam(sentence, *wordBox):
     return sentence
 
 
-# In[65]:
+# In[4]:
+
+contextSentence = [u' ',
+                   changeWithParam('()',[u'승리하였다. ',u'승리를 거머쥐었다. ',u'승리를 가져갔다. ',u'승리를 챙겨갔다. ',u'1승을 챙겨갔다. ']),
+                   changeWithParam('()',[u'접전끝에 승리를 하였다. ',u'엎치락 뒤치락 끝에 승리를 가져갔다. ', u'팽팽한 싸움끝에 승리를 챙겨갔다. ']),
+                   changeWithParam('()',[u'역전에 성공했다. ',u'역전극을 만들어냈다. ', u'판을 뒤엎는데 성공했다. ',u'역전의 드라마를 성공시켰다. ']),
+                   changeWithParam('()',[u'완승을 하였다. ',u'큰 격차로 승리했다. ',u'완전히 게임을 압도했다. ',u'압도적인 승리을 보여주었다.']),
+                   u'무승부로 끝이났다. ',
+                   u'영봉승을 하였다.']
+
+
+# In[5]:
 
 def getClassifier(Parser_KBO,Parser_DaumKBO):
     # DecisionTree - 서두
@@ -89,13 +100,23 @@ def getClassifier(Parser_KBO,Parser_DaumKBO):
     return clf_Intro.predict([x-y for x,y in zip(Parser_KBO.boxScore['home']['score'][:13],Parser_KBO.boxScore['away']['score'][:13])])[0]
 
 
-# In[66]:
+# In[6]:
 
 def writeDate(Parser_KBO):    
     return Parser_KBO.boxScore['date']
 
 
-# In[67]:
+# In[7]:
+
+def getEmblem(Parser_KBO):
+    if Parser_KBO.boxScore['away']['score'][12]==Parser_KBO.boxScore['home']['score'][12]:
+        emblem=TransformeTeamName.get(Parser_KBO.boxScore['away']['name'])
+    else:
+        emblem=TransformeTeamName.get(Parser_KBO.boxScore['winTeam']['name'])
+    return emblem
+
+
+# In[8]:
 
 def writeHead(Parser_KBO,Parser_DaumKBO,contextClassifier):
 #     문장뭉치
@@ -115,7 +136,7 @@ def writeHead(Parser_KBO,Parser_DaumKBO,contextClassifier):
     return sentence
 
 
-# In[98]:
+# In[9]:
 
 def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
 #     문장뭉치
@@ -230,13 +251,13 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
     # Intro1 예외처리
     #'context' -> 무승부
     if Parser_KBO.boxScore['home']['sum']==Parser_KBO.boxScore['away']['sum']:
-        sentence1=sentence1.replace('context',contextSentence[5].decode('utf-8'))    
+        sentence1=sentence1.replace('context',contextSentence[5])    
     #'context' -> 영봉승
     elif Parser_KBO.boxScore['home']['sum']==0 or Parser_KBO.boxScore['away']['sum']==0:
-        sentence1=sentence1.replace('context',contextSentence[6].decode('utf-8'))    
+        sentence1=sentence1.replace('context',contextSentence[6])    
     #'context'-> 나머지의 경우
     else:
-        sentence1=sentence1.replace('context',contextSentence[contextClassifier].decode('utf-8'))
+        sentence1=sentence1.replace('context',contextSentence[contextClassifier])
     #------- END Intro1-------#
 
     #------- BEGIN Intro2-------#
@@ -282,190 +303,10 @@ def writeIntro(Parser_KBO,Parser_DaumKBO,contextClassifier):
     return sentence1+sentence2+essentialSentence
 
 
-# In[94]:
+# In[10]:
 
-def writeEnd(Parser_KBO,Parser_DaumKBO):
-    
-    teamrank = parser_KBO.rank
-    gab = []
-    gameN = []
-    upper=u''
-    down=u''
-    tmp=0
-    add=u''
-
-    winTeamName = parser_KBO.boxScore['winTeam']['name']
-    awayTeamName = parser_KBO.boxScore['home']['name']
-    teamPointer = int(parser_KBO.rank.loc[parser_KBO.rank[u'팀명']==winTeamName].index[0])-1
-    prevIndex = teamrank.index
-    l=len(teamrank)
-    teamrank.index=np.array(range(l))
-
-    for i in teamrank.index:    
-        gab.append(teamrank.loc[i,u'게임차'])
-#         print teamrank
-        gameN.append(int(teamrank.loc[i,u'승']) + int(teamrank.loc[i,u'패']) + int(teamrank.loc[i,u'무']))
-
-    for i in range(0,9):
-        upper = teamrank.loc[i,u'팀명']
-        down = teamrank.loc[i+1,u'팀명']
-        if((float(gab[i+1]) - float(gab[i])) <= 1 and gameN[i] < 144 and gameN[i+1] < 144):
-            tmp=(float(gab[i+1]) - float(gab[i]))
-            if(upper == winTeamName or down == winTeamName ):
-                add+=u' 내일 경기결과에 따라 순위 변동의 가능성이 보인다.'
-                break
-                
-        elif((float(gab[i+1]) - float(gab[i])) <= 3 and gameN[i]+6 < 144 and gameN[i+1]+6 < 144):
-            upper = teamrank.loc[i,u'팀명']
-            down = teamrank.loc[i+1,u'팀명']
-            tmp=(float(gab[i+1]) - float(gab[i]))
-            if(upper == winTeamName or down == winTeamName):
-                add+= u' 앞으로의 경기가 중요하게 되었다.'
-                break
-
-        if(float(gab[teamPointer]) - float(gab[4]) < 144 - gameN[teamPointer] and teamPointer > 4):
-            add+=changeWithParam(u' winTeam은 () () gap경기를 ()',
-                                       [u' 가을야구로',u'포스트 시즌으로'],
-                                       [u' 진출하기 위해서는', u'출전하기 위해서는'],
-                                       [u' 따내야 한다.',u'잡아야 한다.',u'승리해야 한다.']
-                                      )
-            break
-            
-            
-    teamrank.index=prevIndex     
-            
-            
-    sentence5=changeWithParam(u' upperTeam와 downTeam은 ()',
-                              [u' gabOfGame게임 차이가 되었다.',u' gabOfGame게임 차이로 좁혀졌다.',u' gabOfGame게임차로 줄어들었다.'] if tmp!=0 else [u'승차가 타이를 이루게 되었다.'])
-    sentence5+=add
-    sentence5=sentence5.replace('winTeam',Parser_KBO.boxScore['winTeam']['name'])        
-    sentence5=sentence5.replace('upperTeam',upper)
-    sentence5=sentence5.replace('downTeam',down)
-    sentence5=sentence5.replace('gabOfGame',str(tmp))
-    sentence5=sentence5.replace('gap',str(float(gab[teamPointer]) - float(gab[4])))
-    
-    return sentence5
-
-
-# In[70]:
-
-# 결론작성
-def writeConc(Parser_KBO,Parser_DaumKBO,contextClassifier):
-#     문장뭉치
-    sentence1Group=[
-    changeWithParam(u' () winTeam_name은 winTeam_win_lose_winCount승 winTeam_win_lose_drawCount무 winTeam_win_lose_loseCount패를 기록하게 되었다.',
-                    [u'이날의 승리로',u'오늘의 승리로',u'이로인해',u'오늘 열렸던 경기로',u'오늘 치뤄진 경기로']),
-#     changeWithParam(u' () () away_name은 away_win_lose_winCount승 away_win_lose_drawCount무 away_win_lose_loseCount패, home_name은 home_win_lose_winCount승 home_win_lose_drawCount무 home_win_lose_loseCount패를 기록하게 되었다.',
-#                     [u'이날의',u'오늘의',u'오늘 있었던',u'오늘 열렸던',u'오늘 치뤄진'],
-#                     [u'경기로',u'승부로',u'대결로'])
-    ]
-    
-    sentence2Group=[
-    changeWithParam(u' () loseTeam_name은 loseTeam_win_lose_winCount승 loseTeam_win_lose_drawCount무 loseTeam_win_lose_loseCount패를 기록하게 되었다.',
-#                     1:승리/2:접전/3:역전/4:완승 각 경우에 대한 다른 문장
-                    [u'패배의 아픔을 맛본',u'패배한'] if contextClassifier==1 else 
-                    [u'아쉽게 패배한',u'안타깝게 패배한',u'접전끝에 패배한'] if contextClassifier==2 else
-                    [u'역전을 당한',u'역전을 허용한'] if contextClassifier==3 else
-                    [u'완패한',u'큰 점수차로 패배한']
-    )]
-    
-    print Parser_KBO.rank
-    
-#     순위 변동,연승의 내용은 필수
-    essentialSentence=''
-    #      순위가 올라간경우
-    if parser_DaumKBO.rank['winTeam'][1]>0:
-        rankNum=Parser_KBO.rank.loc[Parser_KBO.rank[u'팀명'] == Parser_KBO.boxScore['winTeam']['name']]
-        prevIndex = rankNum.index
-        l=len(rankNum)
-        rankNum.index=np.array(range(l))
-        nextTeam=Parser_KBO.rank.ix[str(int(rankNum.index[0])+1)][u'팀명']
-        essentialSentence+=changeWithParam(u' winTeam_name은 리그winTeam_rank+1위에서 () winTeam_rank위로 nextTeam을 ()  ()',
-                                           [u'1순위 올라가',u'한 순위 올라간'],
-                                           [u'밟고',u'밀치고 올라가'],
-                                           [u'한순위 더 높이 안착하게 되었다.',u'팀의 순위가 상승하였다.']
-                                          )
-        rankNum.index=prevIndex
-    
-    #      순위가 내려간 경우
-    if parser_DaumKBO.rank['loseTeam'][1]<0:
-        essentialSentence+=changeWithParam(u' 한편, loseTeam_name은 리그 loseTeam_rank-1위에서 () loseTeam_rank위로 ()',
-                                           [u'1순위 내려가',u'한 순위 내려간'],
-                                           [u'안착하게 되었다.',u'팀의 순위가 하락하였다.']
-                                          )
-        
-    #     연승을 하게된 경우
-    if parser_DaumKBO.accumulation['winTeam'] > 1:
-        essentialSentence+=changeWithParam(u' () winTeam_name은 () () ()',
-                                           [u'또한'],
-                                           [u'이번 경기로',u'이번 승리로',u'오늘의 경기로'],
-                                           [u'winTeam_accumulation연승을',u'연속 winTeam_accumulation승을'],
-                                           [u'달려나가고 있다.',u'행진하고 있다.',u'이루고 있다.']
-                                          )
-    #     연패를 하게된 경우
-    if parser_DaumKBO.accumulation['loseTeam'] < -1:
-        essentialSentence+=changeWithParam(u' () loseTeam_name은 () loseTeam_accumulation연패를 ()',
-                                           [u'하지만',u'안타깝게도'],
-                                           [u'이번 패배로',u'오늘의 패배로'],
-                                           [u'끊어내기 위한 연습이 필요할 것이다.',u'잘라내기위한 노력이 필요할 것이다.']
-                                          )
-        
-    #     문장뽑기
-    sentence1=sentence1Group[random.randint(0,len(sentence1Group)-1)]
-    sentence2=sentence2Group[random.randint(0,len(sentence2Group)-1)]
-    
-    #     문장만들기
-    sentence1=sentence1.replace('winTeam_name',Parser_KBO.boxScore['winTeam']['name'])
-    sentence1=sentence1.replace('winTeam_win_lose_winCount',str(Parser_DaumKBO.win_lose['winTeam'][0]))
-    sentence1=sentence1.replace('winTeam_win_lose_loseCount',str(Parser_DaumKBO.win_lose['winTeam'][2]))
-    sentence1=sentence1.replace('winTeam_win_lose_drawCount',str(Parser_DaumKBO.win_lose['winTeam'][1]))
-    sentence1=sentence1.replace('away_name',Parser_KBO.boxScore['away']['name'])
-    sentence1=sentence1.replace('away_win_lose_winCount',str(Parser_DaumKBO.win_lose['away'][0]))
-    sentence1=sentence1.replace('away_win_lose_loseCount',str(Parser_DaumKBO.win_lose['away'][2]))
-    sentence1=sentence1.replace('away_win_lose_drawCount',str(Parser_DaumKBO.win_lose['away'][1]))
-    sentence1=sentence1.replace('home_name',Parser_KBO.boxScore['home']['name'])
-    sentence1=sentence1.replace('home_win_lose_winCount',str(Parser_DaumKBO.win_lose['home'][0]))
-    sentence1=sentence1.replace('home_win_lose_loseCount',str(Parser_DaumKBO.win_lose['home'][2]))
-    sentence1=sentence1.replace('home_win_lose_drawCount',str(Parser_DaumKBO.win_lose['home'][1]))
-    
-    sentence2=sentence2.replace('loseTeam_name',Parser_KBO.boxScore['loseTeam']['name'])
-    sentence2=sentence2.replace('loseTeam_win_lose_winCount',str(Parser_DaumKBO.win_lose['loseTeam'][0]))
-    sentence2=sentence2.replace('loseTeam_win_lose_loseCount',str(Parser_DaumKBO.win_lose['loseTeam'][2]))
-    sentence2=sentence2.replace('loseTeam_win_lose_drawCount',str(Parser_DaumKBO.win_lose['loseTeam'][1]))
-    
-    essentialSentence=essentialSentence.replace('winlosePitcher_winTeam_winCount',str(Parser_DaumKBO.winlosePitcher['winTeam']['winCount']))
-    essentialSentence=essentialSentence.replace('winlosePitcher_winTeam_loseCount',str(Parser_DaumKBO.winlosePitcher['winTeam']['loseCount']))
-    essentialSentence=essentialSentence.replace('winTeam_name',Parser_KBO.boxScore['winTeam']['name'])
-    essentialSentence=essentialSentence.replace('loseTeam_name',Parser_KBO.boxScore['loseTeam']['name'])
-    essentialSentence=essentialSentence.replace('home_name',Parser_KBO.boxScore['home']['name'])
-    essentialSentence=essentialSentence.replace('away_name',Parser_KBO.boxScore['away']['name'])  
-    essentialSentence=essentialSentence.replace('winTeam_rank+1',str(Parser_DaumKBO.rank['winTeam'][0]+1))
-    essentialSentence=essentialSentence.replace('winTeam_rank',str(Parser_DaumKBO.rank['winTeam'][0]))
-    essentialSentence=essentialSentence.replace('winTeam_accumulation',str(Parser_DaumKBO.accumulation['winTeam']))
-    essentialSentence=essentialSentence.replace('loseTeam_rank-1',str(Parser_DaumKBO.rank['loseTeam'][0]+1))
-    essentialSentence=essentialSentence.replace('loseTeam_rank',str(Parser_DaumKBO.rank['loseTeam'][0]))
-    essentialSentence=essentialSentence.replace('loseTeam_accumulation',str(abs(Parser_DaumKBO.accumulation['loseTeam'])))
-
-    
-    if 'nextTeam' in essentialSentence:
-        essentialSentence=essentialSentence.replace('nextTeam',nextTeam)
-    
-    Conclusion=sentence1+sentence2+essentialSentence
-    
-    return Conclusion
-
-
-# In[71]:
-
-def getEmblem(Parser_KBO):
-    emblem=TransformeTeamName.get(Parser_KBO.boxScore['winTeam']['name'])
-    return emblem
-
-
-# In[72]:
-
-# 본문작성
-def writeMain(Parser_KBO,Parser_DaumKBO):
+# Main1 작성
+def writeMain1(Parser_KBO,Parser_DaumKBO):
     criticalInning=sorted(Parser_DaumKBO.criticalInning['home']+Parser_DaumKBO.criticalInning['away'])
     importantBattingKeyword=[u'안타',u'홈런',u'루타']
 
@@ -603,54 +444,246 @@ def writeMain(Parser_KBO,Parser_DaumKBO):
     return sentence1+sentence2+sentence3+sentence4
 
 
-# In[73]:
+# In[11]:
+
+# Main2 작성
+def writeMain2(Parser_KBO,Parser_DaumKBO,contextClassifier):
+#     문장뭉치
+    sentence1Group=[
+    changeWithParam(u' () winTeam_name은 winTeam_win_lose_winCount승 winTeam_win_lose_drawCount무 winTeam_win_lose_loseCount패를 기록하게 되었다.',
+                    [u'이날의 승리로',u'오늘의 승리로',u'이로인해',u'오늘 열렸던 경기로',u'오늘 치뤄진 경기로']),
+#     changeWithParam(u' () () away_name은 away_win_lose_winCount승 away_win_lose_drawCount무 away_win_lose_loseCount패, home_name은 home_win_lose_winCount승 home_win_lose_drawCount무 home_win_lose_loseCount패를 기록하게 되었다.',
+#                     [u'이날의',u'오늘의',u'오늘 있었던',u'오늘 열렸던',u'오늘 치뤄진'],
+#                     [u'경기로',u'승부로',u'대결로'])
+    ]
+    
+    sentence2Group=[
+    changeWithParam(u' () loseTeam_name은 loseTeam_win_lose_winCount승 loseTeam_win_lose_drawCount무 loseTeam_win_lose_loseCount패를 기록하게 되었다.',
+#                     1:승리/2:접전/3:역전/4:완승 각 경우에 대한 다른 문장
+                    [u'패배의 아픔을 맛본',u'패배한'] if contextClassifier==1 else 
+                    [u'아쉽게 패배한',u'안타깝게 패배한',u'접전끝에 패배한'] if contextClassifier==2 else
+                    [u'역전을 당한',u'역전을 허용한'] if contextClassifier==3 else
+                    [u'완패한',u'큰 점수차로 패배한']
+    )]
+    
+#     print Parser_KBO.rank
+    
+#     순위 변동,연승의 내용은 필수
+    essentialSentence=''
+    #      순위가 올라간경우
+    if parser_DaumKBO.rank['winTeam'][1]>0:
+        rankNum=Parser_KBO.rank.loc[Parser_KBO.rank[u'팀명'] == Parser_KBO.boxScore['winTeam']['name']]
+        prevIndex = rankNum.index
+        l=len(rankNum)
+        rankNum.index=np.array(range(l))
+        nextTeam=Parser_KBO.rank.ix[str(int(rankNum.index[0])+1)][u'팀명']
+        essentialSentence+=changeWithParam(u' winTeam_name은 리그winTeam_rank+1위에서 () winTeam_rank위로 nextTeam을 ()  ()',
+                                           [u'1순위 올라가',u'한 순위 올라간'],
+                                           [u'밟고',u'밀치고 올라가'],
+                                           [u'한순위 더 높이 안착하게 되었다.',u'팀의 순위가 상승하였다.']
+                                          )
+        rankNum.index=prevIndex
+    
+    #      순위가 내려간 경우
+    if parser_DaumKBO.rank['loseTeam'][1]<0:
+        essentialSentence+=changeWithParam(u' 한편, loseTeam_name은 리그 loseTeam_rank-1위에서 () loseTeam_rank위로 ()',
+                                           [u'1순위 내려가',u'한 순위 내려간'],
+                                           [u'안착하게 되었다.',u'팀의 순위가 하락하였다.']
+                                          )
+        
+    #     연승을 하게된 경우
+    if parser_DaumKBO.accumulation['winTeam'] > 1:
+        essentialSentence+=changeWithParam(u' () winTeam_name은 () () ()',
+                                           [u'또한'],
+                                           [u'이번 경기로',u'이번 승리로',u'오늘의 경기로'],
+                                           [u'winTeam_accumulation연승을',u'연속 winTeam_accumulation승을'],
+                                           [u'달려나가고 있다.',u'행진하고 있다.',u'이루고 있다.']
+                                          )
+    #     연패를 하게된 경우
+    if parser_DaumKBO.accumulation['loseTeam'] < -1:
+        essentialSentence+=changeWithParam(u' () loseTeam_name은 () loseTeam_accumulation연패를 ()',
+                                           [u'하지만',u'안타깝게도'],
+                                           [u'이번 패배로',u'오늘의 패배로'],
+                                           [u'끊어내기 위한 연습이 필요할 것이다.',u'잘라내기위한 노력이 필요할 것이다.']
+                                          )
+        
+    #     문장뽑기
+    sentence1=sentence1Group[random.randint(0,len(sentence1Group)-1)]
+    sentence2=sentence2Group[random.randint(0,len(sentence2Group)-1)]
+    
+    #     문장만들기
+    sentence1=sentence1.replace('winTeam_name',Parser_KBO.boxScore['winTeam']['name'])
+    sentence1=sentence1.replace('winTeam_win_lose_winCount',str(Parser_DaumKBO.win_lose['winTeam'][0]))
+    sentence1=sentence1.replace('winTeam_win_lose_loseCount',str(Parser_DaumKBO.win_lose['winTeam'][2]))
+    sentence1=sentence1.replace('winTeam_win_lose_drawCount',str(Parser_DaumKBO.win_lose['winTeam'][1]))
+    sentence1=sentence1.replace('away_name',Parser_KBO.boxScore['away']['name'])
+    sentence1=sentence1.replace('away_win_lose_winCount',str(Parser_DaumKBO.win_lose['away'][0]))
+    sentence1=sentence1.replace('away_win_lose_loseCount',str(Parser_DaumKBO.win_lose['away'][2]))
+    sentence1=sentence1.replace('away_win_lose_drawCount',str(Parser_DaumKBO.win_lose['away'][1]))
+    sentence1=sentence1.replace('home_name',Parser_KBO.boxScore['home']['name'])
+    sentence1=sentence1.replace('home_win_lose_winCount',str(Parser_DaumKBO.win_lose['home'][0]))
+    sentence1=sentence1.replace('home_win_lose_loseCount',str(Parser_DaumKBO.win_lose['home'][2]))
+    sentence1=sentence1.replace('home_win_lose_drawCount',str(Parser_DaumKBO.win_lose['home'][1]))
+    
+    sentence2=sentence2.replace('loseTeam_name',Parser_KBO.boxScore['loseTeam']['name'])
+    sentence2=sentence2.replace('loseTeam_win_lose_winCount',str(Parser_DaumKBO.win_lose['loseTeam'][0]))
+    sentence2=sentence2.replace('loseTeam_win_lose_loseCount',str(Parser_DaumKBO.win_lose['loseTeam'][2]))
+    sentence2=sentence2.replace('loseTeam_win_lose_drawCount',str(Parser_DaumKBO.win_lose['loseTeam'][1]))
+    
+    essentialSentence=essentialSentence.replace('winlosePitcher_winTeam_winCount',str(Parser_DaumKBO.winlosePitcher['winTeam']['winCount']))
+    essentialSentence=essentialSentence.replace('winlosePitcher_winTeam_loseCount',str(Parser_DaumKBO.winlosePitcher['winTeam']['loseCount']))
+    essentialSentence=essentialSentence.replace('winTeam_name',Parser_KBO.boxScore['winTeam']['name'])
+    essentialSentence=essentialSentence.replace('loseTeam_name',Parser_KBO.boxScore['loseTeam']['name'])
+    essentialSentence=essentialSentence.replace('home_name',Parser_KBO.boxScore['home']['name'])
+    essentialSentence=essentialSentence.replace('away_name',Parser_KBO.boxScore['away']['name'])  
+    essentialSentence=essentialSentence.replace('winTeam_rank+1',str(Parser_DaumKBO.rank['winTeam'][0]+1))
+    essentialSentence=essentialSentence.replace('winTeam_rank',str(Parser_DaumKBO.rank['winTeam'][0]))
+    essentialSentence=essentialSentence.replace('winTeam_accumulation',str(Parser_DaumKBO.accumulation['winTeam']))
+    essentialSentence=essentialSentence.replace('loseTeam_rank-1',str(Parser_DaumKBO.rank['loseTeam'][0]+1))
+    essentialSentence=essentialSentence.replace('loseTeam_rank',str(Parser_DaumKBO.rank['loseTeam'][0]))
+    essentialSentence=essentialSentence.replace('loseTeam_accumulation',str(abs(Parser_DaumKBO.accumulation['loseTeam'])))
+
+    
+    if 'nextTeam' in essentialSentence:
+        essentialSentence=essentialSentence.replace('nextTeam',nextTeam)
+    
+    Main2=sentence1+sentence2+essentialSentence
+    
+    return Main2
+
+
+# In[12]:
+
+def writeEnd(Parser_KBO,Parser_DaumKBO):
+    
+    teamrank = parser_KBO.rank
+    gab = []
+    gameN = []
+    upper=u''
+    down=u''
+    tmp=0
+    add=u''
+
+    winTeamName = parser_KBO.boxScore['winTeam']['name']
+    awayTeamName = parser_KBO.boxScore['home']['name']
+    teamPointer = int(parser_KBO.rank.loc[parser_KBO.rank[u'팀명']==winTeamName].index[0])-1
+    prevIndex = teamrank.index
+    l=len(teamrank)
+    teamrank.index=np.array(range(l))
+
+    for i in teamrank.index:    
+        gab.append(teamrank.loc[i,u'게임차'])
+#         print teamrank
+        gameN.append(int(teamrank.loc[i,u'승']) + int(teamrank.loc[i,u'패']) + int(teamrank.loc[i,u'무']))
+
+    for i in range(0,9):
+        upper = teamrank.loc[i,u'팀명']
+        down = teamrank.loc[i+1,u'팀명']
+        if((float(gab[i+1]) - float(gab[i])) <= 1 and gameN[i] < 144 and gameN[i+1] < 144):
+            tmp=(float(gab[i+1]) - float(gab[i]))
+            if(upper == winTeamName or down == winTeamName ):
+                add+=u' 내일 경기결과에 따라 순위 변동의 가능성이 보인다.'
+                break
+                
+        elif((float(gab[i+1]) - float(gab[i])) <= 3 and gameN[i]+6 < 144 and gameN[i+1]+6 < 144):
+            upper = teamrank.loc[i,u'팀명']
+            down = teamrank.loc[i+1,u'팀명']
+            tmp=(float(gab[i+1]) - float(gab[i]))
+            if(upper == winTeamName or down == winTeamName):
+                add+= u' 앞으로의 경기가 중요하게 되었다.'
+                break
+
+        if(float(gab[teamPointer]) - float(gab[4]) < 144 - gameN[teamPointer] and teamPointer > 4):
+            add+=changeWithParam(u' winTeam은 () () gap경기를 ()',
+                                       [u' 가을야구로',u'포스트 시즌으로'],
+                                       [u' 진출하기 위해서는', u'출전하기 위해서는'],
+                                       [u' 따내야 한다.',u'잡아야 한다.',u'승리해야 한다.']
+                                      )
+            break
+            
+            
+    teamrank.index=prevIndex     
+            
+            
+    sentence5=changeWithParam(u' upperTeam와 downTeam은 ()',
+                              [u' gabOfGame게임 차이가 되었다.',u' gabOfGame게임 차이로 좁혀졌다.',u' gabOfGame게임차로 줄어들었다.'] if tmp!=0 else [u'승차가 타이를 이루게 되었다.'])
+    sentence5+=add
+    sentence5=sentence5.replace('winTeam',Parser_KBO.boxScore['winTeam']['name'])        
+    sentence5=sentence5.replace('upperTeam',upper)
+    sentence5=sentence5.replace('downTeam',down)
+    sentence5=sentence5.replace('gabOfGame',str(tmp))
+    sentence5=sentence5.replace('gap',str(float(gab[teamPointer]) - float(gab[4])))
+    
+    return sentence5
+
+
+# In[13]:
 
 tday=datetime.date.today()
 
 
-# In[74]:
+# In[14]:
 
 # yesterday
 tday=tday - datetime.timedelta(1)
 
 
-# In[75]:
+# In[15]:
 
 todayStr=str('%04d%02d%02d'%(tday.year,tday.month,tday.day))
 
 
-# In[83]:
+# In[16]:
 
 # 최신날짜
-# startDate=todayStr
-startDate='20160919'
+startDate=todayStr
+# startDate='YYYYMMDD'
 # 예전날짜
-# endDate=todayStr
-endDate='20160919'
+endDate=todayStr
+# endDate='YYYYMMDD'
 urlParserForKBO = UrlParserForKBO(startDate,endDate)
+print u'>>> urlParserForKBO done'
 
 
-# In[21]:
+# In[17]:
 
 # MySQL conf
 con=MySQLdb.connect(host='218.150.181.131',user='root',passwd='1234',db='link10th',charset='utf8', use_unicode=True)
-
+print u'>>> MySQL(for UpdateDB) Connected...'
+index=0
 for url in urlParserForKBO.urlList:
+    index+=1
+    print u'>>> Start parsing data [%d/%d]...'%(index,len(urlParserForKBO.urlList))
     print url
-    parser_KBO=Parser_KBO(url)
-    parser_DaumKBO=Parser_DaumKBO(parser_KBO.boxScore['date'],parser_KBO.boxScore['away']['name'])
-    
 #     try:
+    parser_KBO=Parser_KBO(url)
+    print u'>>> parser_KBO done'
+    parser_DaumKBO=Parser_DaumKBO(parser_KBO.boxScore['date'],parser_KBO.boxScore['away']['name'])
+    print u'>>> Parser_DaumKBO done'
     date=writeDate(parser_KBO)
     contextClassifier=getClassifier(parser_KBO,parser_DaumKBO)
     Head=writeHead(parser_KBO,parser_DaumKBO,contextClassifier)
+    print u'>>> Head done'
+
+    emblem=getEmblem(parser_KBO)
     Intro=writeIntro(parser_KBO,parser_DaumKBO,contextClassifier)
-    Main=writeMain(parser_KBO,parser_DaumKBO)
-    Conc=writeConc(parser_KBO,parser_DaumKBO,contextClassifier)
+    print u'>>> Intro done'
+
+    Main1=writeMain1(parser_KBO,parser_DaumKBO)
+    print u'>>> Main1 done'
+
+    Main2=writeMain2(parser_KBO,parser_DaumKBO,contextClassifier)
+    print u'>>> Main2 done'
+
     End=writeEnd(parser_KBO,parser_DaumKBO)
+    print u'>>> End done'
+
     emblem=getEmblem(parser_KBO)
     homeT=TransformeTeamName.get(parser_KBO.boxScore['home']['name'])
+    print url,u'>>> homeT done'
     awayT=TransformeTeamName.get(parser_KBO.boxScore['away']['name'])
+    print u'>>> awayT done'
+
     A1=parser_KBO.boxScore['away']['score'][0]
     A2=parser_KBO.boxScore['away']['score'][1]
     A3=parser_KBO.boxScore['away']['score'][2]
@@ -686,17 +719,18 @@ for url in urlParserForKBO.urlList:
     HB=parser_KBO.boxScore['home']['score'][15]
 #     except:
 #         sys.stderr.write(unicode.format(u'********** 날짜 : %s %s와 %s의 경기 파싱오류 ********** '%(parser_KBO.boxScore['date'],parser_KBO.boxScore['away']['name'],parser_KBO.boxScore['home']['name'])))
-    
+
     #교정부분
     checkInstance=String_checker(Intro)
     Intro=checkInstance.reSentence()
-    checkInstance=String_checker(Main)
-    Main=checkInstance.reSentence()
-    checkInstance=String_checker(Conc)
-    Conc=checkInstance.reSentence()
+    checkInstance=String_checker(Main1)
+    Main1=checkInstance.reSentence()
+    checkInstance=String_checker(Main2)
+    Main2=checkInstance.reSentence()
     checkInstance=String_checker(End)
     End=checkInstance.reSentence()
-    
+    print u'>>> Sentence_Checker done'
+
     cursor=con.cursor()
     #-------BEGIN Article TABLE-------#
     sql='''
@@ -713,7 +747,7 @@ for url in urlParserForKBO.urlList:
     %s,%s,%s,%s,%s,%s,%s,%s
     )
     '''
-    placeholder=[date,Head,Intro,Main,Conc,End,url,emblem,
+    placeholder=[date,Head,Intro,Main1,Main2,End,url,emblem,
                  TransformeTeamName.get(parser_KBO.boxScore['home']['name']),
                  TransformeTeamName.get(parser_KBO.boxScore['away']['name']),
                  parser_KBO.boxScore['away']['score'][0],
@@ -765,9 +799,11 @@ for url in urlParserForKBO.urlList:
                  parser_DaumKBO.batRecord['home']['GDP'],
                  parser_DaumKBO.batRecord['home']['LOB']                 
                  ]
+
     cursor.execute(sql,placeholder)
+    print u'>>>  insert into Article  done'
     #-------END Article TABLE-------#
-    
+
     #-------BEGIN CriticalVOD_Url TABLE-------#
     for url in parser_DaumKBO.criticalInningVOD_Url: 
         sql="""      
@@ -775,14 +811,13 @@ for url in urlParserForKBO.urlList:
         VALUES(getArticleId(%s,%s),%s);      
         """  
         placeholder=[int(parser_KBO.boxScore['date'][:8]),parser_KBO.boxScore['away']['name'],url]
-        print sql
-        print placeholder
         cursor.execute(sql,placeholder)
+    print u'>>>  insert into CriticalVOD_Url  done'
     #-------END CriticalVOD_Url TABLE-------#
-    
+
     #-------BEGIN winlosePitcher TABLE ------#
     parser_DaumKBO.winlosePitcher['winTeam']['winCount']
-    
+
     sql="""
     INSERT INTO winlosePitcher(Article_Id,winPlayerName,winPlayerWinCount,winPlayerLoseCount,winPlayerERA,winPlayerFaceUrl,
     losePlayerName,losePlayerWinCount,losePlayerLoseCount,losePlayerERA,losePlayerFaceUrl)
@@ -792,14 +827,31 @@ for url in urlParserForKBO.urlList:
                  parser_DaumKBO.winlosePitcher['winTeam']['name'],parser_DaumKBO.winlosePitcher['winTeam']['winCount'],parser_DaumKBO.winlosePitcher['winTeam']['loseCount'],parser_DaumKBO.winlosePitcher['winTeam']['ERA'],parser_DaumKBO.winlosePitcher['winTeam']['faceUrl'],
                  parser_DaumKBO.winlosePitcher['loseTeam']['name'],parser_DaumKBO.winlosePitcher['loseTeam']['winCount'],parser_DaumKBO.winlosePitcher['loseTeam']['loseCount'],parser_DaumKBO.winlosePitcher['loseTeam']['ERA'],parser_DaumKBO.winlosePitcher['loseTeam']['faceUrl']
                 ]
-    print sql
-    print placeholder
     cursor.execute(sql,placeholder)
-    #-------END winlosePitcherTABLE-------#
-    
-    
-#     MySQL disconnect
+    print u'>>>  insert into winlosePitcher  done'
+    #-------END winlosePitcher TABLE-------#
+
     con.commit()
+    print u'>>>  all transaction commit  done'
     cursor.close()
+    print u'>>>  cursor close  done'
+
+    
+#     except Exception:
+#         print '-------------------------------------------------------------------------------------------------------'
+#         print '                         Exception Occured                        '
+#         print Exception.message
+#         if parser_KBO.boxScore['away']['score'][12]==parser_KBO.boxScore['home']['score'][12]:
+#             print'>>> AWAY와 HOME 동점'
+#         print '-------------------------------------------------------------------------------------------------------'
+    print
 con.close()
+print u'>>> MySQL Disonnected...'
+print
+print
+
+
+# In[ ]:
+
+
 
