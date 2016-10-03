@@ -22,10 +22,10 @@
             <!-- GamePickerBox -->
             <a href="#">
                 <li class="gamePickerBox" data-name="${article.emblem}" onclick="gamePicker(${article.id})">
-                    <img class="left-img" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.awayT)} alt="${article.awayT}">
+                    <img class="left-img" src="/resources/images/emblem_image/emblemB_${article.awayT}.png" alt="${article.awayT}">
                     <span>${article.head.substring(3,5)}</span> <span>: </span>
                     <span>${article.head.substring(article.head.length() -2)}</span>
-                    <img class="right-img" src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.homeT)} alt="${article.homeT}">
+                    <img class="right-img" src="/resources/images/emblem_image/emblemB_${article.homeT}.png" alt="${article.homeT}">
                 </li>
             </a>
             <c:set var="date" value="${article.date}"></c:set>

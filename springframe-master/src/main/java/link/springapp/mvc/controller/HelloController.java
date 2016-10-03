@@ -99,6 +99,9 @@ public class HelloController {
 
         logger.info("-----BEGIN /search CONTROLLER-----");
         ArrayList<Article> articleArrayList = new ArrayList<>();
+        ArrayList<CriticalVOD_Url> UrlArrayList = new ArrayList<>();
+        ArrayList<CriticalVOD_Url> criticalVOD_urlArrayList = new ArrayList<>();
+        int[] urlCountArr= new int[10];
         logger.info("----- WORKING 1 -----");
         logger.info("searchDate="+searchDate);
 
@@ -110,10 +113,15 @@ public class HelloController {
                 break;
             Article article = articleService.getArticle(searchResultMinId+i);
             articleArrayList.add(article);
+            urlCountArr[i]=criticalVOD_UrlService.getCriticalVOD_Url(article.getId()).size();
+            for(CriticalVOD_Url instance:criticalVOD_UrlService.getCriticalVOD_Url(article.getId()))
+                criticalVOD_urlArrayList.add(instance);
         }
-
         logger.info("WORKING 2");
         model.addAttribute("articleArrayList", articleArrayList);
+        model.addAttribute("criticalVOD_urlArrayList", criticalVOD_urlArrayList);
+        model.addAttribute("UrlArrayList", UrlArrayList);
+        model.addAttribute("urlCountArr",urlCountArr);
         logger.info("-----END /search CONTROLLER-----");
         return "search";
     }

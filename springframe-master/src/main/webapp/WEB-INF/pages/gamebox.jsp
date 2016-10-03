@@ -26,14 +26,14 @@
             </div>
         </div>
         <div class="emblem-left col-md-2">
-            <a><img src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.awayT)} alt="${article.awayT}"></a>
+            <a><img src="/resources/images/emblem_image/emblemB_${article.awayT}.png" alt="${article.awayT}"></a>
         </div>
         <div class="scorepoint col-md-4">
             <span>${article.head.substring(3,5)} </span> <span>: </span>
             <span>${article.head.substring(article.head.length() -2)}</span>
         </div>
         <div class="emblem-right col-md-2">
-            <a><img src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.homeT)} alt="${article.homeT}"></a>
+            <a><img src="/resources/images/emblem_image/emblemB_${article.homeT}.png" alt="${article.homeT}"></a>
         </div>
         <div class="col-md-2">
             <div class="stat-right">

@@ -37,7 +37,7 @@
                 <div class="col-md-12">
                     <div class="col-md-2">
                         <img class="timeline-img"
-                        src=${String.format("/resources/images/emblem_image/emblemB_%s.png",article.emblem)} alt="${article.emblem}">
+                        src="/resources/images/emblem_image/emblemB_${article.emblem}.png" alt="${article.emblem}">
                     </div>
                     <div class="paddingLeftNone col-md-10">
                         ${article.intro}

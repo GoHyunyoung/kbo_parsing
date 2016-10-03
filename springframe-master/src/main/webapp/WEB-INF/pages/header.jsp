@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script type="text/javascript" src="../../resources/assets/javascript/searchResult.js"></script>
+    <script type="text/javascript" src="/resources/assets/javascript/searchResult.js"></script>
 </head>
 
 <body>
